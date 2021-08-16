@@ -8,10 +8,10 @@
 
 ### Tran Quang Huy s3680599
 
-### DUong Minh Duc Anh s3618640
+### Duong Minh Duc Anh s3618640
 
-### ...
+### Mai Viet Cuong
 
-### ...
+### Truong Quynh Anh
 
-### ...
+### Luke
