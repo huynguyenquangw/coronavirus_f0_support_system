@@ -1,0 +1,27 @@
+{
+    "name": "coronavirus_f0_support_system",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "nodemon --inspect src/index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://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@github.com/huynguyenquangw/coronavirus_f0_support_system.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/huynguyenquangw/coronavirus_f0_support_system/issues"
+    },
+    "homepage": "https://github.com/huynguyenquangw/coronavirus_f0_support_system#readme",
+    "dependencies": {
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "morgan": "^1.10.0",
+        "nodemon": "^2.0.12"
+    }
+}
