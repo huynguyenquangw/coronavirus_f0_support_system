@@ -2,6 +2,48 @@ const Doctors = require('../models/DoctorModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+//Search, filter, sort and paginate
+class APIfeatures {
+    constructor(query, queryString) {
+        this.query = query
+        this.queryString = queryString
+    }
+
+    filter() {
+        const queryObj = { ...this.queryString } // = req.query
+
+        const excludedFields = ['page', 'sort', 'limit']
+        excludedFields.forEach(ex => delete (queryObj[ex]))
+
+        let queryStr = JSON.stringify(queryObj)
+        queryStr = queryStr.replace(/\b(gte|gt|lt|lte|regex)\b/g, match => '$' + match)
+
+        this.query.find(JSON.parse(queryStr))
+        return this
+    }
+
+    sort() {
+        if (this.queryString.sort) {
+            const sortBy = this.queryString.sort.split(',').join(' ')
+
+            this.query = this.query.sort(sortBy)
+        }
+        else {
+            this.query = this.query.sort('-createdAt')
+        }
+
+        return this
+    }
+
+    paginate() {
+        const page = this.queryString.page * 1 || 1
+        const limit = this.queryString.limit * 1 || 1
+        const skip = (page - 1) * limit
+        this.query = this.query.skip(skip).limit(limit)
+        return this
+    }
+}
+
 const DoctorCtrl = {
     register: async (req, res) => {
         try {
@@ -110,8 +152,16 @@ const DoctorCtrl = {
     },
     getAllDoctor: async (req, res) => {
         try {
-            const doctors = await Doctors.find().select('-password')
-            res.json(doctors)
+            const features = new APIfeatures(Doctors.find().select('-password'), req.query)
+                .filter().sort().paginate()
+
+            const doctors = await features.query
+
+            res.json({
+                status: "Success",
+                results: doctors.length,
+                data: doctors
+            })
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
@@ -156,15 +206,12 @@ const DoctorCtrl = {
             })
 
             res.json({ msg: `Information of Dr.${name} has been updated.` })
-
-
-
+            
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
     }
 }
-
 
 const createAccessToken = (doctor) => {
     return jwt.sign(doctor, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: '1d' })

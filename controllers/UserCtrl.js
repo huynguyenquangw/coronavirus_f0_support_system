@@ -2,6 +2,46 @@ const Users = require('../models/UserModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+//Search, filter, sort and paginate
+class APIfeatures {
+    constructor(query, queryString) {
+        this.query = query
+        this.queryString = queryString
+    }
+
+    filter() {
+        const queryObj = { ...this.queryString }
+
+        const excludedFields = ['page', 'sort', 'limit']
+        excludedFields.forEach(ex => delete (queryObj[ex]))
+
+        let queryStr = JSON.stringify(queryObj)
+        queryStr = queryStr.replace(/\b(gte|gt|lt|lte|regex)\b/g, match => '$' + match)
+
+        this.query.find(JSON.parse(queryStr))
+
+        return this
+    }
+
+    sort() {
+        if (this.queryString.sort) {
+            const sortBy = this.queryString.sort.split(',').join(' ')
+
+            this.query = this.query.sort(sortBy)
+        } else {
+            this.query = this.query.sort('-createdAt')
+        }
+        return this
+    }
+
+    paginate() {
+        const page = this.queryString.page * 1 || 1
+        const limit = this.queryString.limit * 1 || 1
+        const skip = (page - 1) * limit
+        this.query = this.query.skip(skip).limit(limit)
+        return this
+    }
+}
 
 const userCtrl = {
     register: async (req, res) => {
@@ -118,9 +158,57 @@ const userCtrl = {
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
+    },
+    getAllPatient: async (req, res) => {
+        try {
+            const features = new APIfeatures(Users.find({ role: 0 }).select('-password'), req.query)
+                .filter().sort().paginate()
+
+            const patients = await features.query
+
+            res.json({
+                status: 'Success',
+                results: patients.length,
+                data: patients
+            })
+        } catch (error) {
+            return res.status(500).json({ msg: error.message })
+        }
+    },
+    updatePatientByID: async (req, res) => {
+        try {
+            const { name, email, password, district, city, phone } = req.body
+
+            const patient = await Users.findOne({ email })
+            if (patient) return res.status(400).json({ msg: "The email is already existed." })
+
+            if (password.length < 6)
+                return res.status(400).json({ msg: 'Password mus be at least 6 character longs.' })
+
+            if (phone.length !== 10)
+                return res.status(400).json({ msg: 'Phone has 10 numbers.' })
+
+            if (isNaN(phone))
+                return res.status(400).json({ msg: 'Phone only contains number.' })
+
+            const passwordHash = await bcrypt.hash(password, 10)
+
+            await Users.findByIdAndUpdate({ _id: req.params.id }, {
+                name,
+                email,
+                password: passwordHash,
+                district,
+                city,
+                phone
+            })
+
+            res.json({ msg: `Information of Pt.${name} has been updated.` })
+
+        } catch (error) {
+            return res.status(500).json({ msg: error.message })
+        }
     }
 }
-
 
 const createAccessToken = (user) => {
     return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: '1d' })
