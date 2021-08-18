@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const CitySchema = mongoose.Schema(
     {
@@ -17,12 +17,7 @@ const CitySchema = mongoose.Schema(
             required: true,
             unique: true
         },
-        districts:[
-            // {
-            //     type: mongoose.Schema.Types.ObjectId,
-            //     ref: "District"
-            // }
-        ]
+        districts : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Districts' }]
     }, 
     {
         timestamps: true

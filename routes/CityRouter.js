@@ -6,7 +6,7 @@ router.post('/add', cityCtrl.addCity);
 
 //Get all city
 router.get('/', cityCtrl.getAllCities);
-// router.get('/get/:id', cityCtrl.getCityByID);
+router.get('/get/:id', cityCtrl.getCityByID);
 // router.get('/get/:name', cityCtrl.getCityByName)
 
 
@@ -15,6 +15,6 @@ router.get('/', cityCtrl.getAllCities);
 // router.delete('/delete/:id', auth, authAdmin, cityCtrl.deleteDoctorByID)
 
 //Update doctor by id
-router.put('/update/:id', cityCtrl.updateCityDistricts)
+// router.put('/update/:id', cityCtrl.updateCityDistricts)
 
 module.exports = router;

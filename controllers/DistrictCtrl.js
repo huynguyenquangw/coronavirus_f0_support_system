@@ -1,86 +1,58 @@
 const Cities = require('../models/CityModel');
-const Cities = require('../models/DistrictModel');
+const Districts = require('../models/DistrictModel');
+const mongoose = require('mongoose');
 
-const CityCtrl = {
-    addDistrictByCityID: async (req, res) => {
+const DistrictCtrl = {
+    addDistrict: async (req, res) => {
         try {
-            const { city_id, name} = req.body
+            const { cityID, name} = req.body
 
-            const cityName = await Cities.findOne({ name })
-            if (cityName) return res.status(400).json({ msg: "The city name is already existed!" })
+            const district = await Districts.findOne({ name })
+            if (district) return res.status(400).json({ msg: "The district name is already existed!" })
+            
+            const city = await Cities.findById(cityID)
+            if (!city) return res.status(400).json({ msg: "City does not exist." })
 
-            const cityAbr = await Cities.findOne({ abbreviation })
-            if (cityAbr) return res.status(400).json({ msg: "The city abbreviation is already used!" })
+            // res.json(city);
+            
+            // Story.findOne({_id: cityID}).populate('city', 'name age').exec(function(err, story) {
+            //     console.log('Story title: ', story.title);
+            //     console.log('Story creator', story.person.name);
+            // });
+            
+            // return res.status(400).json({ msg: `OK + ${city.name}` })
 
-            const cityCode = await Cities.findOne({ postcode })
-            if (cityCode) return res.status(400).json({ msg: "The city postcode is already used!" })
-
-            const newCity = new Cities({
+            const newDistrict = new Districts({
                 name,
-                abbreviation,
-                postcode,
-
+                city: city._id
             })
 
             //Save to MongoDB
-            await newCity.save()
+            await newDistrict.save()
 
             res.json({
-                msg: `The city named ${name} has been successfully created.`,
-                abbreviation,
-                postcode
+                msg: `Successfully created district ${name}.`,
+                name
             })
 
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
     },
-    getAllCities: async (req, res) => {
-        try {
-            const cities = await Cities.find()
-            if (!cities) return res.status(400).json({ msg: "NOT found!" })
 
-            res.json(cities)
-        } catch (error) {
-            return res.status(500).json({ msg: error.message })
-        }
-    },
-    getCityByID: async (req, res) => {
+    /**
+     * Get all district
+     */
+    getAllDistricts: async (req, res) => {
         try {
-            const city = await Cities.findById(req.city.id)
-            if (!city) return res.status(400).json({ msg: `The city ${req.city.id} does not exist!` })
+            const districts = await Districts.find()
+            if (!districts) return res.status(400).json({ msg: "NOT found!" })
 
-            res.json(city)
-        } catch (error) {
-            return res.status(500).json({ msg: error.message })
-        }
-    },
-    getCityByName: async (req, res) => {
-        try {
-            const city = await Cities.findByName(req.city.name)
-            if (!city) return res.status(400).json({ msg: `The city named ${req.city.name} does not exist!` })
-
-            res.json(city)
-        } catch (error) {
-            return res.status(500).json({ msg: error.message })
-        }
-    },
-    deleteCityByID: async (req, res) => {
-        try {
-            await Cities.findByIdAndDelete(req.params.id)
-            res.json({ msg: `City ${req.params.id} has been deleted.` })
-        } catch (error) {
-            return res.status(500).json({ msg: error.message })
-        }
-    },
-    deleteCityByName: async (req, res) => {
-        try {
-            await Cities.findByNameAndDelete(req.params.name)
-            res.json({ msg: `City ${req.params.name} has been deleted.` })
+            res.json(districts)
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
     },
 }
 
-module.exports = CityCtrl;
+module.exports = DistrictCtrl;
