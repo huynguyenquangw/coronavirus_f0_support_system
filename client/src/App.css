@@ -1,3 +1,5 @@
+* {background-color: #F4FCFF}
+
 .App {
   text-align: center;
 }
@@ -28,6 +30,112 @@
   color: #61dafb;
 }
 
+#right{
+  float: right;
+}
+
+.hp1{
+  font-family: Nunito;
+font-style: normal;
+  color: #0076DA;
+  font-size: 20px;
+}
+
+.hp2{
+  font-family: Nunito;
+font-style: normal;
+font-weight: 800;
+font-size: 40px;
+line-height: 52px;
+
+color: #002341;
+}
+
+.hp3{
+  font-family: Nunito;
+font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 129.4%;
+/* or 26px */
+
+
+color: #98A8B5;
+}
+
+.reg1{
+  text-align: center;
+  font-size: 40px;
+  font-weight: 800;
+}
+.reg2{
+  padding-top: 2em;
+ border-bottom: 5px solid #0076DA;
+ width: 30%;
+ margin: auto;
+ 
+}
+.no1{
+  width: 48%;
+  background-color: white;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.no2{
+  float: right;
+  width: 48%;
+  padding: 12px 20px;
+  background-color: white;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.no3{
+ 
+  width: 100%;
+  padding: 12px 20px;
+  background-color: white;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #0076DA;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+
+#bt1{
+  border-right-width:7px ;
+  border-left-width:7px ;
+}
+
+#bt2{
+  border-right-width:5em ;
+  border-left-width:5em ;
+}
+
+
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,3 +144,5 @@
     transform: rotate(360deg);
   }
 }
+
+
