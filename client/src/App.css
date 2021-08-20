@@ -121,8 +121,15 @@ input[type=submit] {
   cursor: pointer;
 }
 
-
-
+#nav1{
+  font-weight: 600;
+}
+a:link {
+  text-decoration: none;
+  color: #aaa;
+  font-weight: 800;
+  text-transform: uppercase;
+}
 #bt1{
   border-right-width:7px ;
   border-left-width:7px ;
