@@ -130,6 +130,13 @@ a:link {
   font-weight: 800;
   text-transform: uppercase;
 }
+a:hover {
+  text-decoration: none;
+  color: #0076DA;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
 #bt1{
   border-right-width:7px ;
   border-left-width:7px ;
