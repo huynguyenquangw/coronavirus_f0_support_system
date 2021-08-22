@@ -150,11 +150,14 @@ const userCtrl = {
     },
     getUser: async (req, res) => {
         try {
-            const user = await Users.findById(req.user.id).select('-password').populate({
-                path: "district", 
-                populate : {
-                    path : 'city'
-                }})
+            const user = await Users
+                .findById(req.user.id)
+                .select('-password')
+                .populate({
+                    path: "district", 
+                    populate : {
+                        path : 'city'
+                    }})
             if (!user) return res.status(400).json({ msg: 'User does not exist.' })
 
             res.json(user)
