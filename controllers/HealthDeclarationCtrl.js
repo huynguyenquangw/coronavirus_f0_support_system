@@ -121,12 +121,12 @@ const HealthDeclarationCtrl = {
             }).populate({ path: "doctor_id" }), req.query)
                 .filter().sort().paginate()
 
-            const medicineforms = await features.query
+            const healthform = await features.query
 
             res.json({
                 status: 'Success',
-                results: medicineforms.length,
-                data: medicineforms
+                results: healthform.length,
+                data: healthform
             })
         } catch (error) {
             return res.status(500).json({ msg: error.message })
