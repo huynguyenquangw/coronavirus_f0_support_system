@@ -16,6 +16,7 @@ router.get('/', HealthDeclarationCtrl.getAllHealthDeclaration)
 //Update Health Declaration by id
 router.put('/update/:id', auth, authAdmin,  HealthDeclarationCtrl.updateHealthDeclarationByID)
 
-//Delete by id
+//Delete by Health Declaration id
+router.delete('/delete/:id', auth, authAdmin, HealthDeclarationCtrl.deleteHealthDeclarationByID)
 
 module.exports = router

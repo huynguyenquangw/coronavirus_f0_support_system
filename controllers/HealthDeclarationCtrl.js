@@ -94,6 +94,7 @@ const HealthDeclarationCtrl = {
         }
     },
 
+    // Update Health Declaration
     updateHealthDeclarationByID: async (req, res) => {
         try {
             const { user_id, doctor_id, fever, cough, breathing, sorethroat, phlegm,
@@ -112,6 +113,7 @@ const HealthDeclarationCtrl = {
         }
     },
 
+    //Get All
     getAllHealthDeclaration: async (req, res) => {
         try {
             const features = new APIfeatures(HealthDeclaration.find().populate({
@@ -126,6 +128,16 @@ const HealthDeclarationCtrl = {
                 results: medicineforms.length,
                 data: medicineforms
             })
+        } catch (error) {
+            return res.status(500).json({ msg: error.message })
+        }
+    },
+    
+    //Delete by ID
+    deleteHealthDeclarationByID: async (req, res) => {
+        try {
+            await HealthDeclaration.findByIdAndDelete(req.params.id)
+            res.json({ msg: `Health Declaration ${req.params.id} has been deleted.` })
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
