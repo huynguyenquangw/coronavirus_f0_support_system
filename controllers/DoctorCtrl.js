@@ -197,8 +197,8 @@ const DoctorCtrl = {
 
             if (!certificate) return res.status(400).json({ msg: "No certificate provide. " })
 
-            if (password.length < 6)
-                return res.status(400).json({ msg: 'Password mus be at least 6 character longs.' })
+            // if (password.length < 6)
+            //     return res.status(400).json({ msg: 'Password mus be at least 6 character longs.' })
 
             if (phone.length !== 10)
                 return res.status(400).json({ msg: 'Phone has 10 numbers.' })

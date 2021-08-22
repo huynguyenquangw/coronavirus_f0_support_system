@@ -139,15 +139,19 @@ const userCtrl = {
             jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET_KEY, (err, user) => {
                 if (err) return res.status(400).json({ msg: "Please Login or Register." })
 
-                const accesstoken = createAccessToken({ id: user.id })
+                const accessToken = createAccessToken({ id: user.id })
 
-                res.json({ user, accesstoken })
+                res.json({ user, accessToken })
             })
 
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
     },
+
+    /**
+     * Get 1 user
+     */ 
     getUser: async (req, res) => {
         try {
             const user = await Users
@@ -166,6 +170,10 @@ const userCtrl = {
             return res.status(500).json({ msg: error.message })
         }
     },
+
+    /**
+     * Get all patients
+     */ 
     getAllPatient: async (req, res) => {
         try {
             const features = new APIfeatures(Users.find({ role: 0 }).select('-password'), req.query)
@@ -182,15 +190,19 @@ const userCtrl = {
             return res.status(500).json({ msg: error.message })
         }
     },
+
+    /**
+     * Get all patients
+     */ 
     updatePatientByID: async (req, res) => {
         try {
-            const { name, email, password, district, city, phone } = req.body
+            const { name, email, password, district, phone } = req.body
 
-            const patient = await Users.findOne({ email })
-            if (patient) return res.status(400).json({ msg: "The email is already existed." })
+            // const patient = await Users.findOne({ email })
+            // if (patient) return res.status(400).json({ msg: "The email is already existed." })
 
-            if (password.length < 6)
-                return res.status(400).json({ msg: 'Password mus be at least 6 character longs.' })
+            // if (password.length < 6)
+            //     return res.status(400).json({ msg: 'Password mus be at least 6 character longs.' })
 
             if (phone.length !== 10)
                 return res.status(400).json({ msg: 'Phone has 10 numbers.' })
@@ -198,14 +210,13 @@ const userCtrl = {
             if (isNaN(phone))
                 return res.status(400).json({ msg: 'Phone only contains number.' })
 
-            const passwordHash = await bcrypt.hash(password, 10)
+            // const passwordHash = await bcrypt.hash(password, 10)
 
             await Users.findByIdAndUpdate({ _id: req.params.id }, {
                 name,
                 email,
-                password: passwordHash,
+                // password: passwordHash,
                 district,
-                city,
                 phone
             })
 
