@@ -7,15 +7,20 @@ const DistrictSchema = mongoose.Schema(
             required: true,
             unique: true
         },
+        abbreviation: {
+            type: String,
+        },
+        postcode: {
+            type: Number,
+        },
         city: {
-            type: mongoose.Schema.Types.ObjectId, 
-            ref: 'Cities',
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Cities",
             required: true
         },
-    },
-    {
-        timestamps: true
-    }
+    },{
+    timestamps: true
+}
 )
 
 module.exports = mongoose.model("Districts", DistrictSchema)

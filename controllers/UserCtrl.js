@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const userCtrl = {
     register: async (req, res) => {
         try {
-            const { name, email, password, role, district, city, phone } = req.body
+            const { name, email, password, role, district, phone } = req.body
 
             const user = await Users.findOne({ email })
             if (user) return res.status(400).json({ msg: 'The email is already existed.' })
@@ -31,7 +31,7 @@ const userCtrl = {
                 password: passwordHash,
                 role,
                 district,
-                city,
+                // city,
                 phone
             })
 
@@ -110,7 +110,11 @@ const userCtrl = {
     },
     getUser: async (req, res) => {
         try {
-            const user = await Users.findById(req.user.id).select('-password')
+            const user = await Users.findById(req.user.id).select('-password').populate({
+                path: "district", 
+                populate : {
+                    path : 'city'
+                }})
             if (!user) return res.status(400).json({ msg: 'User does not exist.' })
 
             res.json(user)

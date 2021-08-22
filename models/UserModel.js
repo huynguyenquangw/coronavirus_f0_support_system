@@ -20,14 +20,9 @@ const UserSchema = new mongoose.Schema({
         default: 0
     },
     district: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    city: {
-        type: String,
-        required: true,
-        trim: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Districts",
+        required: true
     },
     phone: {
         type: String,

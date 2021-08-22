@@ -1,27 +1,23 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const CitySchema = mongoose.Schema(
     {
         name: {
             type: String,
             required: true,
-            unique: true
+            unique: true,
         },
         abbreviation: {
             type: String,
-            required: true,
-            unique: true
+            unique: true,
         },
         postcode: {
-            type: String,
+            type: Number,
             required: true,
-            unique: true
+            unique: true,
         },
-        districts : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Districts' }]
-    }, 
-    {
-        timestamps: true
-    }
-)
+    },{
+    timestamps: true
+});
 
-module.exports = mongoose.model("Cities", CitySchema)
+module.exports = mongoose.model("Cities", CitySchema);

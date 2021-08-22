@@ -100,7 +100,14 @@ const DoctorCtrl = {
     },
     getDoctor: async (req, res) => {
         try {
-            const doctor = await Doctors.findById(req.doctor.id).select('-password')
+            const doctor = await Doctors
+            .findById(req.doctor.id)
+            .select('-password')
+            .populate({
+                path: "district", 
+                populate : {
+                    path : 'city'
+                }})
             if (!doctor) return res.status(400).json({ msg: "User does not exist." })
 
             res.json(doctor)
@@ -110,7 +117,14 @@ const DoctorCtrl = {
     },
     getAllDoctor: async (req, res) => {
         try {
-            const doctors = await Doctors.find().select('-password')
+            const doctors = await Doctors
+            .find()
+            // .select('-password')
+            .populate({
+                path: "district", 
+                populate : {
+                    path : 'city'
+                }})
             res.json(doctors)
         } catch (error) {
             return res.status(500).json({ msg: error.message })
@@ -126,30 +140,34 @@ const DoctorCtrl = {
     },
     updateDoctorByID: async (req, res) => {
         try {
-            const { name, email, password, district, city, phone, certificate, experience } = req.body
+            const { name, district, phone, certificate, experience } = req.body
 
-            const doctor = await Doctors.findOne({ email })
-            if (doctor) return res.status(400).json({ msg: "The email is already existed." })
+            // const doctor = await Doctors.findOne({ email })
+            // if (doctor) return res.status(400).json({ msg: "The email is already existed." })
 
             if (!certificate) return res.status(400).json({ msg: "No certificate provide. " })
 
-            if (password.length < 6)
-                return res.status(400).json({ msg: 'Password mus be at least 6 character longs.' })
+            // if (password.length < 6)
+            //     return res.status(400).json({ msg: 'Password mus be at least 6 character longs.' })
 
             if (phone.length !== 10)
                 return res.status(400).json({ msg: 'Phone has 10 numbers.' })
 
+            if (!district)
+                return res.status(400).json({ msg: 'District is required.' })
+
+            if (!experience)
+                return res.status(400).json({ msg: 'Experience has 10 numbers.' })
+
             if (isNaN(phone))
                 return res.status(400).json({ msg: 'Phone only contains number.' })
 
-            const passwordHash = await bcrypt.hash(password, 10)
+            // const passwordHash = await bcrypt.hash(password, 10)
 
             await Doctors.findOneAndUpdate({ _id: req.params.id }, {
                 name,
-                email,
-                password: passwordHash,
+                // password: passwordHash,
                 district,
-                city,
                 phone,
                 certificate,
                 experience

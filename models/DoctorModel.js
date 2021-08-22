@@ -20,14 +20,8 @@ const DoctorSchema = mongoose.Schema({
         default: 2
     },
     district: {
-        type: String,
-        trim: true,
-        default: ''
-    },
-    city: {
-        type: String,
-        trim: true,
-        default: ''
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Districts",
     },
     phone: {
         type: String,
