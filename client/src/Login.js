@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure()
 export default function Login() {
     const history = useHistory()
     const endPoint = "http://localhost:3000"
