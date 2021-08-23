@@ -5,12 +5,11 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
-import { wait } from '@testing-library/dom';
  
 toast.configure()
  export default function Register(){
     const history = useHistory()
-     const endPoint = "http://localhost:3000/user/register" 
+     const endPoint = "http://localhost:3000" 
      const [confirmPass, setConfirmPass] = useState('');
 
      const [user,setUser] = useState({
@@ -24,12 +23,13 @@ toast.configure()
       // chay Loading effect 
      const [loading,setLoading]=useState(false)
 
+     //On change for user
      const onChangeValue = e =>{
          const {name,value} = e.target
          setUser({...user,[name]:value})
      }
 
-
+     //Register check
      const registerSubmit = async e => {
          e.preventDefault()
          if(user.password !== confirmPass){
@@ -37,7 +37,7 @@ toast.configure()
          }else{
             try {
             setLoading(true)
-            await axios.post(endPoint,{...user})
+            await axios.post(endPoint+"/user/register",{...user})
             localStorage.setItem('isLogin',true)
             console.log(`User ${user.email} has been successfully registered !`)
             toast(`User ${user.email} has been successfully registered !`)
