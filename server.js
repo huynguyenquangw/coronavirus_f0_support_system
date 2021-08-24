@@ -17,6 +17,10 @@ app.use(fileUpload({
 app.use('/user', require('./routes/UserRouter'))
 app.use('/doctor', require('./routes/DoctorRouter'))
 app.use('/api', require('./routes/UploadToCloudinary')) //Cloudinary
+app.use('/city', require('./routes/CityRouter'))
+app.use('/district', require('./routes/DistrictRouter'))
+app.use('/form', require('./routes/MedicineFormRouter'))
+app.use('/medicine', require('./routes/MedicineRouter'))
 
 
 //connect to mongoDB
