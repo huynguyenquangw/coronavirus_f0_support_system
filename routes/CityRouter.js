@@ -1,20 +1,15 @@
-const router = require('express').Router();
-const cityCtrl = require('../controllers/CityCtrl');
+const router = require("express").Router();
+const cityCtrl = require("../controllers/CityCtrl");
+const auth = require("../middleware/auth");
+const authAdmin = require("../middleware/authAdmin");
 
 //Add new city
-router.post('/add', cityCtrl.addCity);
+router.post("/", auth, authAdmin, cityCtrl.addCity);
 
 //Get all city
-router.get('/', cityCtrl.getAllCities);
-router.get('/get/:id', cityCtrl.getCityByID);
-// router.get('/get/:name', cityCtrl.getCityByName)
+router.get("/", cityCtrl.getAllCities);
 
-
-
-//Delete doctor by id
-// router.delete('/delete/:id', auth, authAdmin, cityCtrl.deleteDoctorByID)
-
-//Update doctor by id
-// router.put('/update/:id', cityCtrl.updateCityDistricts)
+//Delete city by id
+router.delete("/delete/:id", auth, authAdmin, cityCtrl.deleteCityByID);
 
 module.exports = router;

@@ -1,21 +1,23 @@
-const router = require('express').Router();
-const medicineFormCtrl = require('../controllers/MedicineFormCtrl');
-const authDoctor = require('../middleware/authDoctor')
+const router = require("express").Router();
+const medicineFormCtrl = require("../controllers/MedicineFormCtrl");
+const authDoctor = require("../middleware/authDoctor");
+const auth = require("../middleware/auth");
+const authAdmin = require("../middleware/authAdmin");
 
-//Add new 
-router.post('/', authDoctor, medicineFormCtrl.addMedicineForm);
+//Add new
+router.post("/", authDoctor, medicineFormCtrl.addMedicineForm);
 
 //Get all
-router.get('/', medicineFormCtrl.getAllMedicineForms);
-// router.get('/get/:id', MedicineFormCtrl.getCityByID);
-// router.get('/get/:name', MedicineFormCtrl.getCityByName)
+router.get("/", auth, authAdmin, medicineFormCtrl.getAllMedicineForms);
 
+// Delete form by id
+router.delete(
+  "/delete/:id",  
+  authDoctor,
+  medicineFormCtrl.deleteMedicineFormByID,
+);
 
-
-//Delete doctor by id
-// router.delete('/delete/:id', auth, authAdmin, MedicineFormCtrl.deleteDoctorByID)
-
-//Update doctor by id
-// router.put('/update/:id', MedicineFormCtrl.updateCityDistricts)
+// Update form by id
+router.put("/update/:id", authDoctor, medicineFormCtrl.updateMedicineFormByID);
 
 module.exports = router;

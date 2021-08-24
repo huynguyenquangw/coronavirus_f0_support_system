@@ -1,27 +1,30 @@
-const router = require('express').Router()
-const doctorCtrl = require('../controllers/DoctorCtrl')
-const authDoctor = require('../middleware/authDoctor')
-const auth = require('../middleware/auth')
-const authAdmin = require('../middleware/authAdmin')
+const router = require("express").Router();
+const doctorCtrl = require("../controllers/DoctorCtrl");
+const authDoctor = require("../middleware/authDoctor");
+const auth = require("../middleware/auth");
+const authAdmin = require("../middleware/authAdmin");
 
 //Authentication and Authorization
-router.post('/register', auth, authAdmin, doctorCtrl.register)
+router.post("/register", auth, authAdmin, doctorCtrl.register);
 
-router.post('/login', doctorCtrl.login)
+router.post("/login", doctorCtrl.login);
 
-router.get('/logout', doctorCtrl.logout)
+router.get("/logout", doctorCtrl.logout);
 
-router.get('/refresh_token', doctorCtrl.refreshToken)
+router.get("/refresh_token", doctorCtrl.refreshToken);
 
-router.get('/info', authDoctor, doctorCtrl.getDoctor)
+router.get("/info", authDoctor, doctorCtrl.getDoctor);
 
 //Get all doctor
-router.get('/', doctorCtrl.getAllDoctor)
+router.get("/", doctorCtrl.getAllDoctor);
 
 //Delete doctor by id
-router.delete('/delete/:id', auth, authAdmin, doctorCtrl.deleteDoctorByID)
+router.delete("/delete/:id", auth, authAdmin, doctorCtrl.deleteDoctorByID);
 
-//Update doctor by id
-router.put('/update/:id', authDoctor, doctorCtrl.updateDoctorByID)
+//Update doctor by token
+router.put("/update", authDoctor, doctorCtrl.updateDoctorByID);
 
-module.exports = router
+//Update patient password by token
+router.put("/updatepw", authDoctor, doctorCtrl.updateDoctorPasswordByID);
+
+module.exports = router;
