@@ -8,7 +8,7 @@ router.post('/add', auth, HealthDeclarationCtrl.add)
 
 
 //Get Health Declaration by id
-//router.get('/info', auth, HealthDeclarationCtrl.getHealthDeclaration)
+router.get('/info/:id', auth, HealthDeclarationCtrl.getHealthDeclaration)
 
 //Get all Health declarations
 router.get('/', HealthDeclarationCtrl.getAllHealthDeclaration)
