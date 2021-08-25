@@ -21,6 +21,8 @@ app.use('/city', require('./routes/CityRouter'))
 app.use('/district', require('./routes/DistrictRouter'))
 app.use('/form', require('./routes/MedicineFormRouter'))
 app.use('/medicine', require('./routes/MedicineRouter'))
+app.use('/health', require('./routes/HealthDeclarationRouter'))
+app.use('/pharmacy', require('./routes/PharmacyRouter'))
 
 
 //connect to mongoDB

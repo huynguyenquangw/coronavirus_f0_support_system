@@ -84,7 +84,8 @@ const HealthDeclarationCtrl = {
     // Get a Health Declaration by ID
     getHealthDeclaration: async (req, res) => {
         try {
-            const healthdeclaration = await HealthDeclaration.findById(req.healthdeclaration.id)
+           // const healthdeclaration = await HealthDeclaration.findById(req.healthdeclaration.id)
+           const healthdeclaration = await HealthDeclaration.findById(req.params.id)
             if (!healthdeclaration) return res.status(400).json({ msg: 'Health Declaration does not exist.' })
 
             res.json(healthdeclaration)
@@ -94,6 +95,7 @@ const HealthDeclarationCtrl = {
         }
     },
 
+    // Update Health Declaration
     updateHealthDeclarationByID: async (req, res) => {
         try {
             const { user_id, doctor_id, fever, cough, breathing, sorethroat, phlegm,
@@ -112,6 +114,7 @@ const HealthDeclarationCtrl = {
         }
     },
 
+    //Get All Health Declaration
     getAllHealthDeclaration: async (req, res) => {
         try {
             const features = new APIfeatures(HealthDeclaration.find().populate({
@@ -119,13 +122,23 @@ const HealthDeclarationCtrl = {
             }).populate({ path: "doctor_id" }), req.query)
                 .filter().sort().paginate()
 
-            const medicineforms = await features.query
+            const healthform = await features.query
 
             res.json({
                 status: 'Success',
-                results: medicineforms.length,
-                data: medicineforms
+                results: healthform.length,
+                data: healthform
             })
+        } catch (error) {
+            return res.status(500).json({ msg: error.message })
+        }
+    },
+    
+    //Delete by ID
+    deleteHealthDeclarationByID: async (req, res) => {
+        try {
+            await HealthDeclaration.findByIdAndDelete(req.params.id)
+            res.json({ msg: `Health Declaration ${req.params.id} has been deleted.` })
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
