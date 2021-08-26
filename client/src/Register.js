@@ -1,5 +1,5 @@
 import Navbar from './Navbar';
-import {useState } from 'react';
+import {useEffect, useState } from 'react';
 import { useHistory } from 'react-router'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -17,17 +17,31 @@ toast.configure()
         email:'',
         password: '',
         district:'',
-        city:'',
         phone:''
      })
       // chay Loading effect 
      const [loading,setLoading]=useState(false)
+     const [district,setDistrict]=useState([])
 
      //On change for user
      const onChangeValue = e =>{
          const {name,value} = e.target
          setUser({...user,[name]:value})
      }
+
+     const getDistrict = async e =>{
+        try {
+            const resp = await axios.get(`${endPoint}/district`)
+            setDistrict(resp.data)
+        } catch (error) {
+            toast(error.response.data.msg)
+        }
+
+     }
+
+     useEffect(()=>{
+        getDistrict()
+     })
 
      //Register check
      const registerSubmit = async e => {
@@ -82,8 +96,13 @@ toast.configure()
                             <input type="text"  class="no1" id="phone" name="phone"  placeholder="Phone.." value = {user.phone} onChange = {onChangeValue} />
                             <input type="text"  class="no2" id="email" name="email"  placeholder="Email.."  value = {user.email} onChange = {onChangeValue}/>
                             <br />
-                            <input type="text"  class="no1" id="district" name="district"  placeholder="District.."value = {user.district} onChange = {onChangeValue} />
-                            <input type="text"  class="no2" id="city" name="city"  placeholder="City.." value = {user.city} onChange = {onChangeValue}/>
+                            {/* <input type="text"  class="no3" id="district" name="district"  placeholder="District.."value = {user.district} onChange = {onChangeValue} /> */}
+                            <select name="district" id="district" class="no3" value = {user.district} onChange = {onChangeValue} >
+
+                                {district.map(i=>
+                                    <option value={i._id}>{i.name}</option>
+                                    )}
+                            </select>
                             <br />
                             <input type="text"  class="no3" id="password" name="password"  placeholder="Password.."value = {user.password} onChange = {onChangeValue} />
                             <br />
