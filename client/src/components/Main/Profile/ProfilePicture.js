@@ -2,6 +2,7 @@ import React,{ useState } from 'react'
 import styled from 'styled-components'
 import profile from '../../../assets/images/profile.svg'
 import photoEdit from '../../../assets/icons/profile-picture-edit.svg'
+import { ToastContainer, toast } from 'react-toastify';
 
 const Container=styled.div`
     input{
@@ -34,6 +35,7 @@ const PhotoAction=styled.img`
         width: 3rem;
     }
 `
+toast.configure()
 
 function ProfilePicture() {
 
@@ -42,18 +44,25 @@ function ProfilePicture() {
     const [publicId, setPublicId] = useState("");
 
     let data = new FormData()
-    const endPoint = "http://localhost:3000/api/destroy"
+    const endPoint = "http://localhost:3000/api/upload"
     
-    const uploadImage = () => {
-        data.append(endPoint, image)
-        fetch("http://localhost:3000/api/upload", {
+    const uploadImage = (e) => {
+        const file = e.target.files[0]
+        
+        let data = new FormData()
+        data.append("file", file)
+
+        fetch(endPoint, {
             method: 'POST',
             body: data
         })
         .then(resp => resp.json())
         .then(data => {
+            console.log(data)
         setUrl(data.url)
+        localStorage.setItem("userProfilePicture", data.url)
         setPublicId(data.public_id)
+
         })
         .catch(err => console.log(err))
     }    
@@ -71,12 +80,22 @@ function ProfilePicture() {
 
     }    
 
-    let DisplayPhoto = (url == "" ? profile : url )
+    
+    let userProfilePicture = localStorage.getItem("userProfilePicture")
+    let DisplayPhoto = ""
+    if (userProfilePicture !== ""){
+        toast('New profile picture is being uploaded')
+        DisplayPhoto = userProfilePicture
+    }else{
+        DisplayPhoto = profile
+    }
 
     let PhotoCSS = {
-        background: 'url(' + DisplayPhoto + ')',
-        backgroundSize: 'cover' ,
+        backgroundImage: 'url(' + DisplayPhoto + ')',
+        backgroundSize: 'cover'
     };
+
+
 
     return (
         
@@ -90,8 +109,8 @@ function ProfilePicture() {
             <input 
             id="photo-upload" 
             type="file" 
-            onChange= {e=> {setImage(e.target.files[0]);uploadImage();
-            }}></input>
+            onChange= {uploadImage}></input>
+
         </Container>
     )    
 }

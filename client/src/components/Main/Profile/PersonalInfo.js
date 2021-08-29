@@ -19,8 +19,6 @@ function PersonalInfo() {
                 <label htmlFor="name">Phone</label>
                 <input id="phone" type="text" placeholder="Full Name" value={InfoData.phone}></input>
             </Field>
-            
-            
         </Container>
     )
 }

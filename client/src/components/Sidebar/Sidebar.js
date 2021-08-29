@@ -31,6 +31,10 @@ const Logo = styled.img`
     max-width: 12rem;
 `
 
+const LogOut = () =>{
+    localStorage.clear();
+}
+
 function Sidebar({active}) {
 
     return (
@@ -42,7 +46,7 @@ function Sidebar({active}) {
         <Menu/>
         
         <Item>
-            <h2 style={{color: "#616161"}}>Log out</h2>
+            <h2 style={{color: "#616161", cursor:"pointer"}} onClick={LogOut}>Log out</h2>
         </Item>
     </Container>
     )
