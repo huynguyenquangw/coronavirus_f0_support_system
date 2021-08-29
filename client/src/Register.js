@@ -59,7 +59,7 @@ toast.configure()
             setLoading(false)
             //Change url to profile page
             // setTimeout( window.location.replace('/'), 10000)
-            history.push('/')
+            history.push('/user/profile')
    
 
          } catch (error) {

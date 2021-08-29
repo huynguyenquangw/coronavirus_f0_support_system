@@ -3,6 +3,7 @@ import './bootstrap.css';
 import HomePage from './HomePage';
 import Register from './Register';
 import Login from './Login'
+import TestProfile from './TestProfile';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
             </Route>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/user/profile">
+              <TestProfile />
             </Route>
           </Switch>
         </div>
