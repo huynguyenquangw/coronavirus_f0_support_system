@@ -1,44 +1,37 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function TestProfile() {
+    const [info,setInfo] = useState([])
 
     const endPoint = "http://localhost:3000"
 
-    const refreshToken = async () =>{
-        try {
-            const  response =  axios.get(`http://localhost:3000/user/refresh_token`)
-            await response
-           console.log(response)
-        } catch (error) {
-            alert(error.response.data.msg)
-        }
-           
-    }
 
     const getInfo = async () => {
         const response = await axios.get(`${endPoint}/user/info`, {
             headers: {
                 "Authorization": localStorage.getItem("token")
             }
-        })
-        console.log(response)
+        }) 
+        console.log(response.data )
+        setInfo(response.data)
+
     }
 
-    useEffect(() => {
-        if(localStorage.getItem('isLogin')){
-            refreshToken()
-        }
+    useEffect(() => {        
+        getInfo()
         
-        // getInfo()
-    })
+    },[])
 
-
+    console.log(info)
+    
 
     return (
         <div>
 
             <p>this is test profile page</p>
+            {info.name} <br />
+            {info.email}
         </div>
     )
 }

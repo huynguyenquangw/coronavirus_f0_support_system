@@ -33,14 +33,14 @@ export default function Login() {
             const response = await axios.post(endPoint + "/user/login", { ...user })
             console.log(response)
             console.log(response.data.accessToken)
-            // localStorage.setItem('token', response.data.accessToken)
+            localStorage.setItem('token', response.data.accessToken)
             localStorage.setItem('isLogin', true)
             toast(`User ${user.email} has been successfully login !`)
             setLoading(false)
             //Change url to profile page
             // setTimeout( window.location.replace('/'), 10000)
-            // history.push('/user/profile')
-            window.location.replace('/')
+            history.push('/user/profile')
+            // window.location.replace('/')
 
 
         } catch (error) {
