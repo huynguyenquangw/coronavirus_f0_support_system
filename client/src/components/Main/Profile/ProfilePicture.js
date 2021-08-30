@@ -37,50 +37,63 @@ const PhotoAction=styled.img`
 `
 function ProfilePicture() {
 
-    const [image, setImage ] = useState("");
     const [ url, setUrl ] = useState("");
     const [publicId, setPublicId] = useState("");
-    
-    let data = new FormData()
+
     const endPoint = "http://localhost:3000/api"
-    
-    const uploadImage = (e) => {
-        const file = e.target.files[0]
-        
-        let data = new FormData()
-        data.append("file", file)
-
-        fetch(endPoint + "/upload", {
-            method: 'POST',
-            body: data
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            console.log(data)
-        setUrl(data.url)
-        localStorage.setItem("userProfilePicture", data.url)
-        setPublicId(data.public_id)
-
-        })
-        .catch(err => console.log(err))
-    }    
-
-    const deleteImage = () => {
-        fetch(endPoint, {
-            method: 'POST',
-            body: data
-        })
-        .then(resp => resp.json())
-        .then(data => {
-        setUrl("")
-        })
-        .catch(err => console.log(err))
-
-    }    
-
-    
     let userProfilePicture = localStorage.getItem("userProfilePicture")
+
+    const editImage = (e) =>{
+        if (localStorage.getItem("userProfilePicture")){
+            let dataDelete = new FormData()
+            dataDelete.append("public_id", userProfilePicture)
+
+            fetch(endPoint + "/destroy", {
+                method: 'POST',
+                body: dataDelete
+            })
+            .then(resp => resp.json())
+            .then(data => {
+            
+            })
+            .catch(err => console.log(err))
+            localStorage.removeItem("userProfilePicture")
+
+
+        }   const file = e.target.files[0]
+            
+            let dataUpload = new FormData()
+            dataUpload.append("file", file)
+    
+            fetch(endPoint + "/upload", {
+                method: 'POST',
+                body: dataUpload
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data)
+            setUrl(data.url)
+            localStorage.setItem("userProfilePicture", data.url)
+            setPublicId(data.public_id)
+            })
+            .catch(err => console.log(err))
+    }
+
+    // const upload = (e) => {
+    //     const file = e.target.files[0]
+
+    //     axios.get(endPoint+"/upload", {
+    //         body: {
+    //             "file": file
+    //         }
+    //     })
+    //         .then(response => {setUrl(response.url)})
+    //         .catch(error => console.log(error));
+    // }
+  
+
     let DisplayPhoto = ""
+
     if (userProfilePicture){
         DisplayPhoto = userProfilePicture
     }else{
@@ -92,6 +105,7 @@ function ProfilePicture() {
         backgroundSize: 'cover'
     };
 
+    console.log(publicId)
 
 
     return (
@@ -106,7 +120,7 @@ function ProfilePicture() {
             <input 
             id="photo-upload" 
             type="file" 
-            onChange= {uploadImage}></input>
+            onChange= {editImage}></input>
 
         </Container>
     )    

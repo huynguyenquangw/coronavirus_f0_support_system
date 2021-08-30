@@ -16,7 +16,6 @@ const PatientInfoFunction = () => {
 
     const getInfo = () => {
         if (localStorage.getItem("isLogin")) {
-            console.log("dzo")
             axios.get("http://localhost:3000/user/info", {
                 headers: {
                     "Authorization": localStorage.getItem("token")

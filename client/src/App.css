@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap');
 :root {
     --shadow-green: 0px 0px 1rem rgba(30, 222, 125, 0.3);
     --shadow-blue: 0px 0px 1rem rgba(23, 123, 208, 0.3);
@@ -78,6 +78,10 @@ h1 {
 
 h2 {
     font-size: 1rem;
+}
+
+a {
+    text-decoration: none;
 }
 
 .App {

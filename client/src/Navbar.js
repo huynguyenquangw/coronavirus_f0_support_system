@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import LogoImg from './assets/images/logo.svg'
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
 
 
 const Container = styled.div`
@@ -9,10 +8,16 @@ const Container = styled.div`
     flex: row nowrap;
     justify-content: space-between;
     width: 100%;
+    max-width: 75rem;
+    margin: auto;
     max-height: 9rem;
 
     >*{
         flex-basis: 30%;
+    }
+
+    a{
+        text-decoration: none;
     }
 `
 const Logo = styled.img`
@@ -72,7 +77,7 @@ const ButtonContainer = styled.div`
 export default function Navbar() {
 
     return (
-        <Container className="Navbar">
+        <Container>
             <div>
                 <Logo src={LogoImg} alt="logo" />
             </div>
