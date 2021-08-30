@@ -29,9 +29,7 @@ const DoctorSchema = mongoose.Schema({
         default: ''
     },
     certificate: {
-        type: Object,
-        trim: true,
-        default: {}
+        type: Object
     },
     experience: {
         type: String,
