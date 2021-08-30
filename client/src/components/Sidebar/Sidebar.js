@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Menu from './Menu/Menu'
+import { Link } from 'react-router-dom';
 
 // import assets
 import logo from '../../assets/images/logo.svg'
@@ -31,24 +32,26 @@ const Logo = styled.img`
     max-width: 12rem;
 `
 
-const LogOut = () =>{
+const LogOut = () => {
     localStorage.clear();
 }
 
-function Sidebar({active}) {
+function Sidebar({ active }) {
 
     return (
-    <Container>
-        <Item>
-            <Logo src={logo}/>
-        </Item>
+        <Container>
+            <Item>
+                <Logo src={logo} />
+            </Item>
 
-        <Menu/>
-        
-        <Item>
-            <h2 style={{color: "#616161", cursor:"pointer"}} onClick={LogOut}>Log out</h2>
-        </Item>
-    </Container>
+            <Menu />
+
+            <Item>
+                <Link to="/login">
+                    <h2 style={{ color: "#616161", cursor: "pointer" }} onClick={LogOut}>Log out</h2>
+                </Link>
+            </Item>
+        </Container>
     )
 }
 

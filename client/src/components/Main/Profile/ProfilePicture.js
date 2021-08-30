@@ -35,16 +35,14 @@ const PhotoAction=styled.img`
         width: 3rem;
     }
 `
-toast.configure()
-
 function ProfilePicture() {
 
     const [image, setImage ] = useState("");
     const [ url, setUrl ] = useState("");
     const [publicId, setPublicId] = useState("");
-
+    
     let data = new FormData()
-    const endPoint = "http://localhost:3000/api/upload"
+    const endPoint = "http://localhost:3000/api"
     
     const uploadImage = (e) => {
         const file = e.target.files[0]
@@ -52,7 +50,7 @@ function ProfilePicture() {
         let data = new FormData()
         data.append("file", file)
 
-        fetch(endPoint, {
+        fetch(endPoint + "/upload", {
             method: 'POST',
             body: data
         })
@@ -83,8 +81,7 @@ function ProfilePicture() {
     
     let userProfilePicture = localStorage.getItem("userProfilePicture")
     let DisplayPhoto = ""
-    if (userProfilePicture !== ""){
-        toast('New profile picture is being uploaded')
+    if (userProfilePicture){
         DisplayPhoto = userProfilePicture
     }else{
         DisplayPhoto = profile

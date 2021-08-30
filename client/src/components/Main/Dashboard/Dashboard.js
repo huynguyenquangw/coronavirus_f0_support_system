@@ -23,9 +23,9 @@ const CardContainer=styled.div`
 
 function Dashboard(props) {
     return (
-        <Container>
-                        
-        </Container>
+        <div>
+            <h1 style={{fontSize: "10em"}}>Dashboard</h1>
+        </div>
     )
 }
 

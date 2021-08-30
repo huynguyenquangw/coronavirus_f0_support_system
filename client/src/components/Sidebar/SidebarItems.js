@@ -14,30 +14,45 @@ import dashboard from '../../assets/icons/dashboard.svg'
 import dashboardActive from '../../assets/icons/dashboard-active.svg'
 import dashboardBlue from '../../assets/icons/dashboard-blue.svg'
 
+import Dashboard from '../Main/Dashboard/Dashboard'
+import DoctorChat from '../Main/Doctor Chat/Doctor Chat'
+import HealthStatus from '../Main/Health Status/Health Status'
+import Prescriptions from '../Main/Prescriptions/Prescriptions'
+import Profile from '../Main/Profile/Profile'
+
+const SourceUrl = "/patient"
 
 const SidebarItems = [
 
         {title: 'Dashboard', 
+        component: Dashboard,
         icon: dashboard, 
         icon_active: dashboardActive, icon_blue: dashboardBlue,
-        link: '/'},
+        link: '' },
 
         {title: 'Profile', 
+        component: Profile,
         icon: profile , 
         icon_active: profileActive, icon_blue: profileBlue,
-        link:'/profile'},
+        link: '/profile'},
 
         {title: 'Health Status', 
+        component: HealthStatus,
         icon: health , icon_active: healthActive , icon_blue: healthBlue,
         link:'/health'},
 
         {title: 'Prescriptions', 
+        component: Prescriptions,
         icon: prescriptions , icon_active: prescriptionsActive , icon_blue: prescriptionsBlue,
-        link:'/prescriptions'},
+        link: '/prescriptions'},
         
         {title: 'Doctor Chat', 
+        component: DoctorChat,
         icon: chat , icon_active: chatActive , icon_blue: chatBlue,
-        link:'/chat'}        
+        link:  '/chat'}        
     ];
 
+    for (let i = 0; i<SidebarItems.length;i++) {
+        SidebarItems[i].link = SourceUrl + SidebarItems[i].link
+    }
 export default SidebarItems;
