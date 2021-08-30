@@ -31,8 +31,8 @@ export default function Login() {
         try {
             setLoading(true)
             const response = await axios.post(endPoint + "/user/login", { ...user })
-            console.log(response)
-            console.log(response.data.accessToken)
+            // console.log(response)
+            // console.log(response.data.accessToken)
             localStorage.setItem('token', response.data.accessToken)
             localStorage.setItem('isLogin', true)
             toast(`User ${user.email} has been successfully login !`)
@@ -56,31 +56,28 @@ export default function Login() {
     return (
         <div>
             <Navbar />
-            <div class='row'>
-                <div class='col-sm-3'>
+
+            <div class="grid-container2">
+                <div class="item1"></div>
+                <div class="item2">   <div class='reg1'>
+                    Login as a patient account
                 </div>
-                {/* the form  */}
-                <div class='col-sm-6'>
-                    <div class='reg1'>
-                        Login as a patient account
-                    </div>
                     <div class='reg2'>
                     </div>
                     <br />
                     <div>
                         <form onSubmit={loginSubmit}>
-                            <input type="text" class="no3" id="email" name="email" value={user.email} onChange={onChangeValue} placeholder="Email.." />
+                            <input type="email" class="no3" id="email" name="email" value={user.email} onChange={onChangeValue} placeholder="Email.." />
                             <br />
                             <input type="text" class="no3" id="password" name="password" value={user.password} onChange={onChangeValue} placeholder="Password.." />
                             <br />
                             <input type="submit" value="Log In" />
                         </form>
-                    </div>
-                </div>
+                    </div></div>
+                <div class="item3"></div>
 
-                <div class='col-sm-3'>
-                </div>
             </div>
+      
         </div>
 
     )

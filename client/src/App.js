@@ -1,5 +1,6 @@
 import './App.css';
-import './bootstrap.css';
+// import './bootstrap.css';
+
 import HomePage from './HomePage';
 import Register from './Register';
 import Login from './Login'
