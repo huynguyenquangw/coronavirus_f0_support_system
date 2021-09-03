@@ -3,15 +3,21 @@ import React, { useEffect } from 'react'
 export default function Test(props) {
 
     const getrf = async () => {
-        const res = await fetch('http://localhost:3000/user/refresh_token', {
+        return await fetch('http://localhost:3000/user/refresh_token', {
             credentials: 'include'
         })
-        const data = await res.json()
-        console.log(data);
+            .then(res => res.json())
     }
+    // const getrf = async () => {
+    //     const res = await fetch('http://localhost:3000/user/refresh_token', {
+    //         credentials: 'include'
+    //     })
+    //     const data = await res.json()
+    //     console.log(data);
+    // }
 
     const login = async () => {
-        fetch('http://localhost:3000/user/login', {
+        await fetch('http://localhost:3000/user/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -20,10 +26,11 @@ export default function Test(props) {
             }),
             credentials: 'include'
         })
-            .then(res => res.json())
-            .then(data => console.log(data))
-        localStorage.setItem('login', true)
-        window.location.reload()
+            .then(getrf)
+            .then(console.log)
+            .catch(console.error)
+        // localStorage.setItem('login', true)
+        // window.location.reload()
     }
 
     const logout = async () => {
@@ -37,7 +44,7 @@ export default function Test(props) {
     }
 
     useEffect(() => {
-        if (localStorage.getItem('login')) getrf()
+        // if (localStorage.getItem('login')) getrf()
     }, [])
 
     return (
