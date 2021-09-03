@@ -37,7 +37,7 @@ function MenuItem({title,icon,link,active}) {
     
     return ( 
         <Container active={active}>            
-            <Icon src={icon}/>
+            {<Icon src={icon}/>}
             <Link to={link}>
                 <Item active={active}>{title}</Item>
             </Link>

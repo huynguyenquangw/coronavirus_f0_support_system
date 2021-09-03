@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import ProfilePicture from './ProfilePicture'
 import PersonalInfo from './PersonalInfo'
 import HomeAddress from './HomeAddress'
-import {Container, Row, Header} from '../../../css-template/DashboardMain'
+import {Container, Row, Header} from '../../css-template/DashboardMain'
 
 function Profile(props) {
 

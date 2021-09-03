@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useLocation } from 'react-router-dom';
-import Sidebar from './Sidebar/Sidebar'
-import SidebarItems from './Sidebar/SidebarItems'
+import Sidebar from './sidebar/Sidebar'
+import PatientSidebarItems from './sidebar/PatientSidebarItems'
+import AdminSidebarItems from './sidebar/AdminSidebarItems'
 
 const Container = styled.div`
     width: 100vw;
@@ -50,30 +51,41 @@ const HeadingContainer = styled.div`
 
 function Layout(props) {
     const location = useLocation();
-    let HeadingTitle =""
-    let HeadingIcon =""
+    let HeadingTitle = ""
+    let HeadingIcon = ""
 
-    for (let i = 0; i<SidebarItems.length;i++) {
-        if(SidebarItems[i].link === location.pathname){
-            HeadingTitle = SidebarItems[i].title;
-            HeadingIcon = SidebarItems[i].icon_blue;
+    if (location.pathname.startsWith("/patient")) {
+        for (let i = 0; i < PatientSidebarItems.length; i++) {
+            if (PatientSidebarItems[i].link === location.pathname) {
+                HeadingTitle = PatientSidebarItems[i].title;
+                HeadingIcon = PatientSidebarItems[i].icon_blue;
+            }
+        }
+    }
+
+    if (location.pathname.startsWith("/admin")) {
+        for (let i = 0; i < AdminSidebarItems.length; i++) {
+            if (AdminSidebarItems[i].link === location.pathname) {
+                HeadingTitle = AdminSidebarItems[i].title;
+                HeadingIcon = AdminSidebarItems[i].icon_blue;
+            }
         }
     }
 
     return (
         <Container>
-            <Sidebar/>
+            <Sidebar />
 
             <Spacer></Spacer>
 
             <MainContainer>
 
                 <HeadingContainer>
-                    <img src={HeadingIcon}/>
+                    <img src={HeadingIcon} />
                     <h1>{HeadingTitle}</h1>
                 </HeadingContainer>
                 {props.children}
-                
+
             </MainContainer>
 
         </Container>

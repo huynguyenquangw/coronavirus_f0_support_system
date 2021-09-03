@@ -3,15 +3,15 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Layout from '../Layout'
 
-import PatientSidebarItems from '../sidebar/PatientSidebarItems'
+import AdminSidebarItems from '../sidebar/AdminSidebarItems'
 
 function PatientRoutes() {
 
     const AllRoute = []
 
 
-    for (let i = 0; i < PatientSidebarItems.length; i++) {
-        AllRoute.push(<Route key={PatientSidebarItems[i].icon} path={PatientSidebarItems[i].link} exact component={PatientSidebarItems[i].component} />)
+    for (let i = 0; i < AdminSidebarItems.length; i++) {
+        AllRoute.push(<Route key={AdminSidebarItems[i].icon} path={AdminSidebarItems[i].link} exact component={AdminSidebarItems[i].component} />)
     }
 
     return (

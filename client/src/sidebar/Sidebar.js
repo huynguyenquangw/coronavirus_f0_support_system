@@ -4,7 +4,7 @@ import Menu from './Menu/Menu'
 import { Link } from 'react-router-dom';
 
 // import assets
-import logo from '../../assets/images/logo.svg'
+import logo from '../assets/images/logo.svg'
 
 const Container =styled.div`
     background-color: #FFFFFF;

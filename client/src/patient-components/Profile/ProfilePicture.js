@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import profile from '../../../assets/images/profile.svg'
-import photoEdit from '../../../assets/icons/profile-picture-edit.svg'
+import profile from '../../assets/images/profile.svg'
+import photoEdit from '../../assets/icons/profile-picture-edit.svg'
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 

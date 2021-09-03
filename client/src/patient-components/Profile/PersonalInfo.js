@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {GetPatientInfo, PatientInfo} from './PatientInfo'
-import {Container , Field} from "../../../css-template/Input"
+import {Container , Field} from "../../css-template/Input"
 
 
 function PersonalInfo() {
