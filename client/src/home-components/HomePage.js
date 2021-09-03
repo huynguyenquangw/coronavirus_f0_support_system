@@ -1,8 +1,7 @@
 import Navbar from "./Navbar"
-import DoctorPhoto from './assets/images/doctor.png'
+import DoctorPhoto from '../assets/images/doctor.png'
 import styled from "styled-components"
 import { Link } from 'react-router-dom';
-
 
 export default function HomePage() {
 
@@ -77,15 +76,15 @@ export default function HomePage() {
             <Main>
                 <Text>
 
-                    <Text1 class='hp1'>
+                    <Text1 className='hp1'>
                         <b>Signs of COVID ?</b>
                     </Text1>
-                    <Text2 class='hp2'>
+                    <Text2 className='hp2'>
                         Get direct doctor support and prescriptions
                         delivered right from home
                     </Text2>
 
-                    <Text3 class='hp3'>
+                    <Text3 className='hp3'>
                         Register an account, logged your symptoms and let one of our
                         professional doctors in your area take care of you.
                     </Text3>

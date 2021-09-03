@@ -5,7 +5,7 @@ function HealthStatus(props) {
 
     return (
         <div>
-            <h1 style={{fontSize: "10em"}}>Health</h1>
+            
         </div>
     )
 }

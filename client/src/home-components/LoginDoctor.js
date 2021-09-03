@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 toast.configure()
-export default function Login() {
+export default function LoginDoctor() {
     const history = useHistory()
     const endPoint = "http://localhost:3000"
     const [user, setUser] = useState({
@@ -57,27 +57,27 @@ export default function Login() {
         <div>
             <Navbar />
 
-            <div class="grid-container2">
-                <div class="item1"></div>
-                <div class="item2">   <div class='reg1'>
+            <div className="grid-container2">
+                <div className="item1"></div>
+                <div className="item2">   <div className='reg1'>
                     Login as a patient account
                 </div>
-                    <div class='reg2'>
+                    <div className='reg2'>
                     </div>
                     <br />
-                    <div>
+                    <div style={{width: "70%", margin: "auto"}}>
                         <form onSubmit={loginSubmit}>
-                            <input type="email" class="no3" id="email" name="email" value={user.email} onChange={onChangeValue} placeholder="Email.." />
+                            <input type="email" className="no3" id="email" name="email" value={user.email} onChange={onChangeValue} placeholder="Email.." />
                             <br />
-                            <input type="text" class="no3" id="password" name="password" value={user.password} onChange={onChangeValue} placeholder="Password.." />
+                            <input type="text" className="no3" id="password" name="password" value={user.password} onChange={onChangeValue} placeholder="Password.." />
                             <br />
-                            <input type="submit" value="Log In" />
+                            <input type="submit" value="Log In" className="button blue"/>
                         </form>
                     </div></div>
-                <div class="item3"></div>
+                <div className="item3"></div>
 
             </div>
-      
+
         </div>
 
     )

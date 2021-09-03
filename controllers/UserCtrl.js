@@ -212,38 +212,19 @@ const userCtrl = {
   /**
    * Update patient info by ID
    */
-  updatePatientByID: async (req, res) => {
+   updatePatientByID: async (req, res) => {
     try {
-      const { name, email, district, phone } = req.body;
-
-      const patient = await Users.findOne({ email });
-      if (patient)
-        return res.status(400).json({ msg: "The email is already existed." });
-
-      // if (password.length < 6)
-      //   return res
-      //     .status(400)
-      //     .json({ msg: "Password mus be at least 6 character longs." });
-
-      if (phone.length !== 10)
-        return res.status(400).json({ msg: "Phone has 10 numbers." });
+      const { name, img, district, phone } = req.body;
 
       if (isNaN(phone))
         return res.status(400).json({ msg: "Phone only contains number." });
 
-      // const passwordHash = await bcrypt.hash(password, 10);
-
       const user = await Users.findByIdAndUpdate(
-        {_id: req.user.id},
-        // await Users.findByIdAndUpdate(
-        // )
-        // { _id: req.params.id },
+        { _id: req.user.id },
         {
           name,
-          email,
-          // password: passwordHash,
+          img,
           district,
-          // city,
           phone,
         },
       );

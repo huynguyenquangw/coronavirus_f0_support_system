@@ -47,7 +47,7 @@ function Sidebar({ active }) {
             <Menu />
 
             <Item>
-                <Link to="/login">
+                <Link to="/login-patient">
                     <h2 style={{ color: "#616161", cursor: "pointer" }} onClick={LogOut}>Log out</h2>
                 </Link>
             </Item>

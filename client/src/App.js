@@ -1,10 +1,14 @@
 import './App.css';
-import HomePage from './HomePage';
-import Register from './Register';
-import Login from './Login'
-import TestProfile from './TestProfile';
-import PatientRoutes from './PatientRoutes';
+import HomePage from './home-components/HomePage';
+import Register from './home-components/Register';
+import Login from './home-components/LoginPatient'
+import PatientRoutes from './dashboard-routes/PatientRoutes';
+import LoginPortal from './home-components/LoginPortal';
+import LoginPatient from './home-components/LoginPatient';
+import LoginDoctor from './home-components/LoginDoctor';
+
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Test from './Test';
 
 function App() {
   return (
@@ -21,14 +25,20 @@ function App() {
             <Route path="/register">
               <Register />
             </Route>
-            <Route path="/login">
-              <Login />
+            <Route path="/login-portal">
+              <LoginPortal />
             </Route>
-            <Route path="/user/profile">
-              <TestProfile />
+            <Route path="/login-patient">
+              <LoginPatient />
+            </Route>
+            <Route path="/login-doctor">
+              <Login />
             </Route>
             <Route path="/patient">
               <PatientRoutes />
+            </Route>
+            <Route path="/test">
+              <Test />
             </Route>
           </Switch>
         </div>

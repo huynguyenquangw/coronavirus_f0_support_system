@@ -1,15 +1,9 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import './App.css';
 
-import Dashboard from './components/Main/Dashboard/Dashboard'
-import DoctorChat from './components/Main/Doctor Chat/Doctor Chat'
-import HealthStatus from './components/Main/Health Status/Health Status'
-import Prescriptions from './components/Main/Prescriptions/Prescriptions'
-import Profile from './components/Main/Profile/Profile'
-import Layout from './components/Layout'
+import Layout from '../patient-components/Layout'
 
-import SidebarItems from './components/Sidebar/SidebarItems'
+import SidebarItems from '../patient-components/Sidebar/SidebarItems'
 
 function PatientRoutes() {
 

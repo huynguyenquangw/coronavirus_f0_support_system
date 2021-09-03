@@ -96,40 +96,40 @@ export default function Register() {
     return (
         <div>
             <Navbar />
-            <div class="grid-container2">
-                <div class="item1"></div>
-                <div class="item2">
-                    <div class='reg1'>
+            <div className="grid-container2">
+                <div className="item1"></div>
+                <div className="item2">
+                    <div className='reg1'>
                         Register a patient account
                     </div>
-                    <div class='reg2'>
+                    <div className='reg2 green'>
                     </div>
                     <br />
                     <div>
                         <form onSubmit={registerSubmit}>
-                            <input type="text" class="no3" id="name" name="name" placeholder="Name.." value={user.name} onChange={onChangeValue} />
-                            {/* <input type="text"  class="no2" id="lname" name="lastname" placeholder="Last name.." /> */}
+                            <input type="text" className="no3" id="name" name="name" placeholder="Name.." value={user.name} onChange={onChangeValue} />
+                            {/* <input type="text"  className="no2" id="lname" name="lastname" placeholder="Last name.." /> */}
                             <br />
-                            <input type="text" class="no1" id="phone" name="phone" placeholder="Phone.." value={user.phone} onChange={onChangeValue} />
-                            <input type="email" class="no2" id="email" name="email" placeholder="Email.." value={user.email} onChange={onChangeValue} />
+                            <input type="text" className="no1" id="phone" name="phone" placeholder="Phone.." value={user.phone} onChange={onChangeValue} />
+                            <input type="email" className="no2" id="email" name="email" placeholder="Email.." value={user.email} onChange={onChangeValue} />
                             <br />
-                            {/* <input type="text"  class="no3" id="district" name="district"  placeholder="District.."value = {user.district} onChange = {onChangeValue} /> */}
-                            <select name="district" id="district" class="no3" value={user.district} onChange={onChangeValue} >
+                            {/* <input type="text"  className="no3" id="district" name="district"  placeholder="District.."value = {user.district} onChange = {onChangeValue} /> */}
+                            <select name="district" id="district" className="no3" value={user.district} onChange={onChangeValue} >
                                     <option > Options </option>
                                 {district.map(i =>
                                     <option value={i._id}>{i.name}</option>
                                 )}
                             </select>
                             <br />
-                            <input type="text" class="no3" id="password" name="password" placeholder="Password.." value={user.password} onChange={onChangeValue} />
+                            <input type="text" className="no3" id="password" name="password" placeholder="Password.." value={user.password} onChange={onChangeValue} />
                             <br />
-                            <input type="text" class="no3" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password.." value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} />
+                            <input type="text" className="no3" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password.." value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} />
                             <br />
-                            <input type="submit" value="Register" />
+                            <input type="submit" value="Register" className="button green" />
                         </form>
                     </div>
                 </div>
-                <div class="item3"></div>
+                <div className="item3"></div>
 
             </div>
         </div>
