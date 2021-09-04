@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import Sidebar from './sidebar/Sidebar'
 import PatientSidebarItems from './sidebar/PatientSidebarItems'
 import AdminSidebarItems from './sidebar/AdminSidebarItems'
+import DoctorSidebarItems from './sidebar/DoctorSidebarItems'
 
 const Container = styled.div`
     width: 100vw;
@@ -57,6 +58,15 @@ function Layout(props) {
             if (PatientSidebarItems[i].link === location.pathname) {
                 HeadingTitle = PatientSidebarItems[i].title;
                 HeadingIcon = PatientSidebarItems[i].icon_blue;
+            }
+        }
+    }
+
+    if (location.pathname.startsWith("/doctor")) {
+        for (let i = 0; i < DoctorSidebarItems.length; i++) {
+            if (DoctorSidebarItems[i].link === location.pathname) {
+                HeadingTitle = DoctorSidebarItems[i].title;
+                HeadingIcon = DoctorSidebarItems[i].icon_blue;
             }
         }
     }

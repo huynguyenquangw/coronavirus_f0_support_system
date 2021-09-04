@@ -2,6 +2,7 @@ import './App.css';
 import HomePage from './home-components/HomePage';
 import Register from './home-components/Register';
 import PatientRoutes from './dashboard-routes/PatientRoutes';
+import DoctorRoutes from './dashboard-routes/DoctorRoutes';
 import AdminRoutes from './dashboard-routes/AdminRoutes'
 import LoginPortal from './home-components/LoginPortal';
 import LoginPatient from './home-components/LoginPatient';
@@ -40,6 +41,9 @@ function App() {
             </Route>
             <Route path="/patient">
               <PatientRoutes />
+            </Route>
+            <Route path="/doctor">
+              <DoctorRoutes />
             </Route>
             <Route path="/admin">
               <AdminRoutes />
