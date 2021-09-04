@@ -39,7 +39,22 @@ export default function LoginPatient() {
             setLoading(false)
             //Change url to profile page
             // setTimeout( window.location.replace('/'), 10000)
-            history.push('/patient/profile')
+            axios.get("http://localhost:3000/user/info", {
+                headers: {
+                    "Authorization": localStorage.getItem("token")
+                }
+            }).then(response => {
+                console.log(response.data.role)
+                if( response.data.role === 0){
+                    history.push('/patient')
+                }else {
+                    history.push('/admin')
+                }
+            })
+            // console.log(check)
+
+
+            // history.push('/patient/profile')
             // window.location.replace('/')
 
 
