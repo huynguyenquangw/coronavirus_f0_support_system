@@ -1,5 +1,4 @@
 const Pharmacy = require('../models/PharmacyModel')
-const bcrypt = require('bcrypt')
 
 //Search, filter, sort and paginate
 class APIfeatures {
@@ -49,27 +48,21 @@ const PharmacyCtrl = {
     add: async (req, res) => {
 
         try {
-            const { brand, district, city, availability, image } = req.body
+            const { brand, district, image } = req.body
 
-            // const user = await Users.findById(req.user.id)
-            // if (!user) return res.status(400).json({ msg: "The user does not exist." })
-
-            // const doctor = await Doctors.findById({ _id: doctor_id })
-            // if (!doctor) return res.status(400).json({ msg: "The doctor does not exist." })
-            
             // Objectid of User is automatically filled in when the user logs in
-            const newPharmacy = new Pharmacy(
-                {
-                    brand, district, city, availability, image
-                }
-            )
+            const newPharmacy = new Pharmacy({
+                brand,
+                district,
+                image
+            })
+
             //Save to MongoDB
             await newPharmacy.save()
 
             res.json({
                 msg: `Pharmacy has been added!`,
             })
-
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
@@ -78,14 +71,21 @@ const PharmacyCtrl = {
     // Get all Pharmacy
     getAllPharmacy: async (req, res) => {
         try {
-            const features = new APIfeatures(Pharmacy.find(), req.query)
-                .filter().sort().paginate()
-            const pharmacylocation = await features.query
+            const features = new APIfeatures(Pharmacy.find().populate({
+                path: "district",
+                select: "-createdAt -updatedAt -__v",
+                populate: {
+                    path: "city",
+                    select: "-createdAt -updatedAt -__v",
+                },
+            }), req.query).filter().sort().paginate()
+
+            const pharmacies = await features.query
 
             res.json({
                 status: 'Success',
-                results: pharmacylocation.length,
-                data: pharmacylocation
+                results: pharmacies.length,
+                data: pharmacies
             })
         } catch (error) {
             return res.status(500).json({ msg: error.message })
@@ -95,11 +95,10 @@ const PharmacyCtrl = {
     // Update Pharmacy by ID
     updatePharmacyByID: async (req, res) => {
         try {
-            const { brand, district, city, availability, image } = req.body
-
+            const { brand, district, availability, image } = req.body
 
             await Pharmacy.findByIdAndUpdate({ _id: req.params.id }, {
-                brand, district, city, availability, image
+                brand, district, availability, image
             })
 
             res.json({ msg: `Pharmacy at Brand:${brand} , has been updated!` })
@@ -108,11 +107,19 @@ const PharmacyCtrl = {
             return res.status(500).json({ msg: error.message })
         }
     },
-     // Get a Pharmacy by ID
-     getPharmacy: async (req, res) => {
+
+    // Get a Pharmacy by ID
+    getPharmacy: async (req, res) => {
         try {
-           // const healthdeclaration = await HealthDeclaration.findById(req.healthdeclaration.id)
-           const pharmacy = await Pharmacy.findById(req.params.id)
+            // const healthdeclaration = await HealthDeclaration.findById(req.healthdeclaration.id)
+            const pharmacy = await Pharmacy.findById(req.params.id).populate({
+                path: "district",
+                select: "-createdAt -updatedAt -__v",
+                populate: {
+                    path: "city",
+                    select: "-createdAt -updatedAt -__v",
+                },
+            });
             if (!pharmacy) return res.status(400).json({ msg: 'Pharmacy does not exist.' })
 
             res.json(pharmacy)
@@ -121,8 +128,9 @@ const PharmacyCtrl = {
             return res.status(500).json({ msg: error.message })
         }
     },
-     //Delete by ID
-     deletePharmacyByID: async (req, res) => {
+
+    //Delete by ID
+    deletePharmacyByID: async (req, res) => {
         try {
             await Pharmacy.findByIdAndDelete(req.params.id)
             res.json({ msg: `Pharmacy ${req.params.id} has been deleted.` })
@@ -130,7 +138,5 @@ const PharmacyCtrl = {
             return res.status(500).json({ msg: error.message })
         }
     }
-
-
 }
 module.exports = PharmacyCtrl

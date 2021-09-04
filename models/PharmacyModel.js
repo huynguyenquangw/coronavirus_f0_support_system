@@ -6,22 +6,19 @@ const PharmacySchema = new mongoose.Schema({
         required: true,
     },
     district: {
-        type: String,
-        required: true,
-    },
-    city: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Districts",
         required: true
     },
     availability: {
         type: Boolean,
- 
+        default: true
     },
     image: {
         type: Object,
-        default: ''
+        require: true
     }
-   
+
 }, {
     timestamps: true
 })

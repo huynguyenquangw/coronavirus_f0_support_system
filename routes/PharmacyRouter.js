@@ -4,19 +4,18 @@ const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
 
 //Add a Pharmacy
-router.post('/add', authAdmin, PharmacyCtrl.add)
-
+router.post('/', auth, authAdmin, PharmacyCtrl.add)
 
 //Get Pharmacy by id
-router.get('/info/:id', authAdmin,  PharmacyCtrl.getPharmacy)
+router.get('/:id', PharmacyCtrl.getPharmacy)
 
 //Get all Pharmacy
 router.get('/', PharmacyCtrl.getAllPharmacy)
 
 //Update Pharmacy by id
-router.put('/update/:id',  authAdmin,  PharmacyCtrl.updatePharmacyByID)
+router.put('/update/:id', auth, authAdmin, PharmacyCtrl.updatePharmacyByID)
 
 //Delete by Pharmacy id
-router.delete('/delete/:id',  authAdmin, PharmacyCtrl.deletePharmacyByID)
+router.delete('/delete/:id', auth, authAdmin, PharmacyCtrl.deletePharmacyByID)
 
 module.exports = router
