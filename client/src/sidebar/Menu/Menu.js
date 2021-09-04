@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import MenuItem from './MenuItem'
 import { useLocation } from 'react-router-dom';
 import PatientSidebarItems from '../PatientSidebarItems';
+import DoctorSidebarItems from '../DoctorSidebarItems'
 import AdminSidebarItems from '../AdminSidebarItems'
 
 const Container = styled.div`
@@ -41,6 +42,31 @@ function Menu() {
             }
         }
     }
+
+    if (location.pathname.startsWith("/doctor")){
+        for (let i = 0; i<DoctorSidebarItems.length;i++) {
+
+            if(DoctorSidebarItems[i].link === location.pathname){
+                SidebarItemsRender.push(
+                    <MenuItem 
+                    key={DoctorSidebarItems[i].title}
+                    title ={DoctorSidebarItems[i].title} 
+                    icon={DoctorSidebarItems[i].icon_active} 
+                    link={DoctorSidebarItems[i].link} 
+                    active/>
+                )
+            }else{
+                SidebarItemsRender.push(
+                    <MenuItem 
+                    key={DoctorSidebarItems[i].title}
+                    title ={DoctorSidebarItems[i].title} 
+                    icon={DoctorSidebarItems[i].icon} 
+                    link={DoctorSidebarItems[i].link}/>
+                )
+            }
+        }
+    }
+
     if (location.pathname.startsWith("/admin")){
         for (let i = 0; i<AdminSidebarItems.length;i++) {
 
