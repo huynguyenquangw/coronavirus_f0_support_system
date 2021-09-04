@@ -17,9 +17,7 @@ const MainContainer = styled.div`
     width: 80%;
     max-width: 60rem;
 
-    *{
-        display: block;
-    }
+   
 `
 
 const Spacer = styled.div`
