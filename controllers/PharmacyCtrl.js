@@ -50,7 +50,6 @@ const PharmacyCtrl = {
         try {
             const { brand, district, image } = req.body
 
-            // Objectid of User is automatically filled in when the user logs in
             const newPharmacy = new Pharmacy({
                 brand,
                 district,
