@@ -27,5 +27,14 @@ table {
     border-bottom: 3px solid #88A7C1;
   }
 
+  .del{
+    border: none;
+    padding: 10px;
+    background-color: #88A7C1;
+    color: white;
+    font-weight: 700;
+    border-radius: 10%;
+  }
+
 
 
