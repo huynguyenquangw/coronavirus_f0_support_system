@@ -1,6 +1,6 @@
 import React from 'react'
 
-function HealthStatus(props) {
+function PatientStatus(props) {
     console.log("healthhealthhealthhealth")
 
     return (
@@ -10,4 +10,4 @@ function HealthStatus(props) {
     )
 }
 
-export default HealthStatus
+export default PatientStatus

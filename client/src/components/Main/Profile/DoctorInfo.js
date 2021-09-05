@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const PatientInfo = {}
+const DoctorInfo = {}
 
-const PatientInfoFunction = () => {
+const DoctorInfoFunction = () => {
 
     const [info, setInfo] = useState([])
 
@@ -21,19 +21,22 @@ const PatientInfoFunction = () => {
                     "Authorization": localStorage.getItem("token")
                 }
             })
-                .then(response => setInfo(response.data))
+                .then(response => {
+                    setInfo(response.data)
+
+                })
                 .catch(error => console.log(error));
         }
     }
 
 
 
-    PatientInfo.name = info.name
-    PatientInfo.email = info.email
-    PatientInfo.phone = info.phone
-    PatientInfo.district = info.district?.name
-    PatientInfo.city = info.district?.city.name
-    PatientInfo.postcode = info.district?.city.postcode
+    DoctorInfo.name = info.name
+    DoctorInfo.email = info.email
+    DoctorInfo.phone = info.phone
+    DoctorInfo.district = info.district?.name
+    DoctorInfo.city = info.district?.city.name
+    DoctorInfo.postcode = info.district?.city.postcode
 
 
 
@@ -41,4 +44,4 @@ const PatientInfoFunction = () => {
 
 
 
-export { PatientInfoFunction, PatientInfo }
+export { DoctorInfoFunction, DoctorInfo }

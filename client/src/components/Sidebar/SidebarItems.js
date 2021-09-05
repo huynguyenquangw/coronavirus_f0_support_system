@@ -16,11 +16,11 @@ import dashboardBlue from '../../assets/icons/dashboard-blue.svg'
 
 import Dashboard from '../Main/Dashboard/Dashboard'
 import DoctorChat from '../Main/Doctor Chat/Doctor Chat'
-import HealthStatus from '../Main/Health Status/Health Status'
+import PatientStatus from '../Main/Patient Status/Patient Status'
 import Prescriptions from '../Main/Prescriptions/Prescriptions'
 import Profile from '../Main/Profile/Profile'
 
-const SourceUrl = "/patient"
+const SourceUrl = "/doctor"
 
 const SidebarItems = [
 
@@ -36,10 +36,10 @@ const SidebarItems = [
         icon_active: profileActive, icon_blue: profileBlue,
         link: '/profile'},
 
-        {title: 'Health Status', 
-        component: HealthStatus,
+        {title: 'Patient Status', 
+        component: PatientStatus,
         icon: health , icon_active: healthActive , icon_blue: healthBlue,
-        link:'/health'},
+        link:'/patient'},
 
         {title: 'Prescriptions', 
         component: Prescriptions,

@@ -4,14 +4,14 @@ import './App.css';
 
 import Dashboard from './components/Main/Dashboard/Dashboard'
 import DoctorChat from './components/Main/Doctor Chat/Doctor Chat'
-import HealthStatus from './components/Main/Health Status/Health Status'
+import PatientStatus from './components/Main/Patient Status/Patient Status'
 import Prescriptions from './components/Main/Prescriptions/Prescriptions'
 import Profile from './components/Main/Profile/Profile'
 import Layout from './components/Layout'
 
 import SidebarItems from './components/Sidebar/SidebarItems'
 
-function PatientRoutes() {
+function DoctorRoutes() {
 
     const AllRoute = []
 
@@ -32,4 +32,4 @@ function PatientRoutes() {
     )
 }
 
-export default PatientRoutes
+export default DoctorRoutes

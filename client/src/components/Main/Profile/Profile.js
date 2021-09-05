@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import ProfilePicture from './ProfilePicture'
 import PersonalInfo from './PersonalInfo'
 import HomeAddress from './HomeAddress'
+import Certificate from './Certificate'
 
 function Profile(props) {
 
@@ -39,6 +40,10 @@ const Header=styled.h2`
             <Row>
                 <Header>PERSONAL INFORMATION</Header>
                 <PersonalInfo/>
+            </Row>
+            <Row>
+                <Header>Certificate</Header>
+                <Certificate/>
             </Row>
             <Row>
                 <Header>HOME ADDRESS</Header>
