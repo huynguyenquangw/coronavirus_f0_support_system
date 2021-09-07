@@ -2,11 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import Menu from './Menu/Menu'
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router'
 
 // import assets
 import logo from '../assets/images/logo.svg'
+import { Logout } from '../api/PatientAPI';
 
-const Container =styled.div`
+const Container = styled.div`
     background-color: #FFFFFF;
     box-shadow: var(--shadow-green);
     position: fixed;
@@ -32,11 +34,14 @@ const Logo = styled.img`
     max-width: 12rem;
 `
 
-const LogOut = () => {
-    localStorage.clear();
-}
+
 
 function Sidebar({ active }) {
+    const history = useHistory()
+    const Out = async () => {
+        await Logout()
+        history.push("/login-portal")
+    }
 
     return (
         <Container>
@@ -47,9 +52,9 @@ function Sidebar({ active }) {
             <Menu />
 
             <Item>
-                <Link to="/login-patient">
-                    <h2 style={{ color: "#616161", cursor: "pointer" }} onClick={LogOut}>Log out</h2>
-                </Link>
+
+                <h2 style={{ color: "#616161", cursor: "pointer" }} onClick={Out}>Log out</h2>
+
             </Item>
         </Container>
     )
