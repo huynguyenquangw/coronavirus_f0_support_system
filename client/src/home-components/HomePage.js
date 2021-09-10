@@ -3,6 +3,7 @@ import DoctorPhoto from '../assets/images/doctor.png'
 import styled from "styled-components"
 import { Link } from 'react-router-dom';
 
+
 export default function HomePage() {
 
     const Main = styled.div`
@@ -70,6 +71,9 @@ export default function HomePage() {
     font-size: 1.2rem;
     line-height: 1.4rem;
 `
+
+   
+
     return (
         <div>
             <Navbar />
@@ -89,7 +93,7 @@ export default function HomePage() {
                         professional doctors in your area take care of you.
                     </Text3>
 
-                    
+
                     <Link to="/register" id="register">Register as a patient</Link>
                 </Text>
                 <Image>

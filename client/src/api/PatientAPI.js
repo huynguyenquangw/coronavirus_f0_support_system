@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-
-const endPoint = 'http://localhost:3000/user'
+import { endPoint } from "./API"
 
 export var token = ""
 
 export var info = []
 
 export function Logout() {
-    return fetch('http://localhost:3000/user/logout')
+    return fetch(endPoint + '/user/logout')
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data)
+        })
         .then(localStorage.clear())
         .then(info.length = 0)
         .then(token = "")
@@ -17,7 +18,7 @@ export function Logout() {
 export function Login(email, password) {
 
     const getrf = async () => {
-        return await fetch(endPoint + "/refresh_token", {
+        return await fetch(endPoint + "/user/refresh_token", {
             credentials: 'include'
         })
             .then(resp => resp.json())
@@ -27,7 +28,7 @@ export function Login(email, password) {
             })
     }
 
-    return fetch(endPoint + "/login", {
+    return fetch(endPoint + "/user/login", {
 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -45,7 +46,7 @@ export function Login(email, password) {
 }
 
 export function GetPatientInfo() {
-    return fetch(endPoint + "/info", {
+    return fetch(endPoint + "/user/info", {
         method: 'GET',
         headers: {
             'Authorization': token,
@@ -69,12 +70,11 @@ export function UpdatePatientInfo(data) {
         },
         body: JSON.stringify({
             "name": data.name ? data.name : info.name,
-            "email": data.email ? data.email : info.email,
             "district": data.district ? data.district : info.district,
             "phone": data.phone ? data.phone : info.phone,
             "img": {
                 "url": data.img?.url ? data.img?.url : info.img?.url,
-                "public_id": data.img?.publicId ? data.name : info.img?.publicId
+                "public_id": data.img?.public_id ? data.img?.public_id : info.img?.public_id
             }
         })
     })
@@ -82,6 +82,7 @@ export function UpdatePatientInfo(data) {
         .then(data => {
             console.log(data)
         })
+        .then(GetPatientInfo())
 
 }
 

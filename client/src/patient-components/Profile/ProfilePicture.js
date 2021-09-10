@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react'
 import styled from 'styled-components'
 import profile from '../../assets/images/profile.svg'
 import photoEdit from '../../assets/icons/profile-picture-edit.svg'
-import { info } from '../../api/PatientAPI'
+import { info, GetPatientInfo, UpdatePatientInfo } from '../../api/PatientAPI'
 import axios from 'axios';
 
 
@@ -42,15 +42,16 @@ const PhotoAction = styled.img`
     }
 `
 function ProfilePicture() {
-    const [picture, setPicture] = info.img?.url ? info.img?.url : "";
-    const [url, setUrl] = useState("");
-    const [publicId, setPublicId] = useState("");
+
+    var picture = info.img?.url ? info.img?.url : ""
+    var publicId = info.img?.public_id ? info.img?.public_id : ""
+
+    const [display, setDisplay] = useState(picture)
 
     const endPoint = "http://localhost:3000"
 
-    const editImage = (e) => {
-        if (picture) {
-
+    const editImage = async (e) => {
+        if (picture !== "") {
             //delete
             let dataDelete = new FormData()
             dataDelete.append("public_id", publicId)
@@ -67,60 +68,46 @@ function ProfilePicture() {
         let dataUpload = new FormData()
         dataUpload.append("file", file)
 
-        axios.post(endPoint + "/api/upload", dataUpload)
+        await axios.post(endPoint + "/api/upload", dataUpload)
             .then(response => {
                 console.log(response.data)
-                // window.location.reload()
-                setUrl(response.data.url)
-                setPublicId(response.data.public_id)
-                setPicture(response.data.url)
-                PhotoContainer.forceUpdate()
+                console.log(response.data.url)
+                console.log(response.data.public_id)
+                picture = response.data.url
+                publicId = response.data.public_id
+                setDisplay(picture)
             })
             .catch(error => console.log(error.request));
-
+        await updateImage()
     }
 
-    const updateImage = () => {
+    const updateImage = async () => {
 
-        fetch(endPoint + "/user/update", {
-            method: 'PUT',
-            headers: {
-                "Authorization": localStorage.getItem("token"),
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "name": "Huy",
-                "email": "entaimagi@gmail.com",
-                "district": "6125505773f4275ea38c9b81",
-                "phone": "1234567890",
-                "img": {
-                    "url": url,
-                    "public_id": publicId
-                }
-            })
-        })
-            .then(resp => resp.json())
-            .then(data => {
-                console.log(data)
-            })
-            .catch(err => console.log(err))
+        const data = {
+            "img":{
+                "url": picture,
+                "public_id": publicId
+            }
+            
+        }
+
+        await UpdatePatientInfo(data)
     }
 
     return (
 
         <Container>
-            <PhotoContainer style={{ backgroundImage: `url(${picture ? picture : profile})` }}>
+            <PhotoContainer style={{ backgroundImage: `url(${display !== "" ? display : profile})` }}>
                 <ActionContainer htmlFor="photo-upload">
                     <PhotoAction src={photoEdit} />
                 </ActionContainer>
             </PhotoContainer>
-        
+
             <input
                 id="photo-upload"
                 type="file"
                 onChange={editImage}></input>
-                
-            <button onClick={updateImage}>Update</button>
+
 
         </Container>
     )

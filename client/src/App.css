@@ -92,6 +92,7 @@ a {
     border-radius: 0.4rem;
     transition: 0.1s;
     text-align: center;
+    cursor: pointer;
 }
 
 .button:hover {

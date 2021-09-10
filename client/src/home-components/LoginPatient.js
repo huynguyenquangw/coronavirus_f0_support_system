@@ -1,9 +1,8 @@
 import Navbar from "./Navbar"
 import { useState } from 'react';
 import { useHistory } from 'react-router'
-import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import { info, token, GetPatientInfo, Login } from "../api/PatientAPI";
+import { info, GetPatientInfo, Login } from "../api/PatientAPI";
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -24,17 +23,20 @@ export default function LoginPatient() {
         setUser({ ...user, [name]: value })
     }
 
-    
+
     //Register check
     const loginSubmit = async e => {
         e.preventDefault()
-    
+
 
         try {
+
             setLoading(true)
+
             await Login(user.email, user.password)
-            console.log(token)
+
             await GetPatientInfo()
+            console.log(info)
 
             // const response = await axios.post(endPoint + "/user/login", { ...user })
 
@@ -42,16 +44,17 @@ export default function LoginPatient() {
 
             toast(`User ${user.email} has been successfully login !`)
             setLoading(false)
-                
-                if (info.role === 0) {
-                    history.push('/patient')
-                }
-                if (info.role === 1) {
-                    history.push('/admin')
-                }
-            } catch (error) {
-                setLoading(false)
+
+            if (info.role === 0) {
+                history.push('/patient')
             }
+            if (info.role === 1) {
+                history.push('/admin')
+            }
+
+        } catch (error) {
+            setLoading(false)
+        }
 
 
     }
