@@ -11,14 +11,15 @@ export function Logout() {
             console.log(data)
         })
         .then(localStorage.clear())
-        .then(info = "")
+        .then(info.length = 0)
         .then(token = "")
+        .then(console.log(token))
 }
 
 export function Login(email, password) {
 
     const getrf = async () => {
-        return await fetch(endPoint + "/user/refresh_token", {
+        return await fetch(endPoint + "/doctor/refresh_token", {
             credentials: 'include'
         })
             .then(resp => resp.json())
@@ -28,7 +29,7 @@ export function Login(email, password) {
             })
     }
 
-    return fetch(endPoint + "/user/login", {
+    return fetch(endPoint + "/doctor/login", {
 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

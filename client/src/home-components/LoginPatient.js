@@ -22,8 +22,6 @@ export default function LoginPatient() {
         const { name, value } = e.target
         setUser({ ...user, [name]: value })
     }
-
-
     //Register check
     const loginSubmit = async e => {
         e.preventDefault()
@@ -32,11 +30,10 @@ export default function LoginPatient() {
         try {
 
             setLoading(true)
-
+            
             await Login(user.email, user.password)
 
             await GetPatientInfo()
-            console.log(info)
 
             // const response = await axios.post(endPoint + "/user/login", { ...user })
 
@@ -44,7 +41,7 @@ export default function LoginPatient() {
 
             toast(`User ${user.email} has been successfully login !`)
             setLoading(false)
-
+            
             if (info.role === 0) {
                 history.push('/patient')
             }
@@ -54,6 +51,7 @@ export default function LoginPatient() {
 
         } catch (error) {
             setLoading(false)
+            toast(error.response.data.msg)
         }
 
 
