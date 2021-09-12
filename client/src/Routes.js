@@ -9,6 +9,7 @@ import LoginPortal from './home-components/LoginPortal';
 import LoginPatient from './home-components/LoginPatient';
 import LoginDoctor from './home-components/LoginDoctor';
 import LoginAdmin from './home-components/LoginAdmin'
+import Home from './chat/Home'
 
 import { useContext } from 'react';
 import {GlobalState} from './GlobalState'
@@ -50,9 +51,9 @@ function Routes() {
             <Route path="/admin">
               {admin ? <AdminRoutes /> : <LoginPortal/>}
             </Route>
-            {/* <Route path="/chathome">
+            <Route path="/chathome">
               <Home />
-            </Route> */}
+            </Route>
           </Switch>
         </div>
       </Router>
