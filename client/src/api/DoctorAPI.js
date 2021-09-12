@@ -1,89 +1,42 @@
-import { endPoint } from "./API"
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
-export var token = ""
+function DoctorAPI(doctorToken) {
 
-export var info = []
+    const [doctor, setDoctor] = useState(false)
 
-export function Logout() {
-    return fetch(endPoint + '/user/logout')
-        .then(resp => resp.json())
-        .then(data => {
-            console.log(data)
-        })
-        .then(localStorage.clear())
-        .then(info.length = 0)
-        .then(token = "")
-        .then(console.log(token))
-}
+    const [callbackDoctor, setCallbackDoctor] = useState(false)
+    const [doctorInfo, setDoctorInfo] = useState([])
 
-export function Login(email, password) {
-
-    const getrf = async () => {
-        return await fetch(endPoint + "/doctor/refresh_token", {
-            credentials: 'include'
-        })
-            .then(resp => resp.json())
-            .then(data => {
-                console.log(data)
-                token = data.accesstoken
+    const getDoctorInfo = async () => {
+        try {
+            const response = await axios.get("http://localhost:3000/doctor/info", {
+                headers: {
+                    Authorization: doctorToken
+                }
             })
+            setDoctorInfo(response.data)
+            setDoctor(true)            
+        } catch (error) {
+            alert(error.response.data.msg)
+        }
+
     }
 
-    return fetch(endPoint + "/doctor/login", {
-
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            email: email,
-            password: password
-        }),
-        credentials: 'include'
-    }).then(res => res.json())
-        .then(console.log)
-        .then(getrf)
-        .catch(console.error)
-
-
-}
-
-export function GetPatientInfo() {
-    return fetch(endPoint + "/user/info", {
-        method: 'GET',
-        headers: {
-            'Authorization': token,
-            'Content-Type': 'application/json'
-        }
-    }).then(resp => resp.json())
-        .then(data => {
-            console.log(data)
-            info = data
-            console.log(info)
-        })
-}
-
-export function UpdatePatientInfo(data) {
-
-    return fetch(endPoint + "/user/update", {
-        method: 'PUT',
-        headers: {
-            "Authorization": token,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "name": data.name ? data.name : info.name,
-            "district": data.district ? data.district : info.district,
-            "phone": data.phone ? data.phone : info.phone,
-            "img": {
-                "url": data.img?.url ? data.img?.url : info.img?.url,
-                "public_id": data.img?.public_id ? data.img?.public_id : info.img?.public_id
+    useEffect(
+        () => {
+            if (doctorToken) {
+                getDoctorInfo()
             }
-        })
-    })
-        .then(resp => resp.json())
-        .then(data => {
-            console.log(data)
-        })
-        .then(GetPatientInfo())
 
+        }, [doctorToken, callbackDoctor]
+    )
+
+    return {
+        doctorInfo: [doctorInfo, setDoctorInfo],
+        callbackDoctor: [callbackDoctor, setCallbackDoctor],
+        doctor: [doctor, setDoctor]
+    }
 }
 
+export default DoctorAPI

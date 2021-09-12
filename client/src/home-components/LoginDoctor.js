@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 toast.configure()
 export default function LoginDoctor() {
-    
+
     const endPoint = "http://localhost:3000"
     const [doctor, setDoctor] = useState({
         email: '',
@@ -27,35 +27,44 @@ export default function LoginDoctor() {
     const loginSubmit = async e => {
         e.preventDefault()
 
+        setLoading(true)
+
+        // await fetch(endPoint + "/doctor/login", {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({
+        //         email: doctor.email,
+        //         password: doctor.password
+        //     }),
+        //     credentials: 'include'
+        // }).then(response => response.json())
+        //     .then(data => {
+        //         toast(error.response.data.msg)
+        //         localStorage.setItem('isDoctorLogin', true)
+        //         // toast(`Doctor ${doctor.email} has been successfully login !`)
+        //         setLoading(false)
+        //     })
+        //     .catch(error => {
+        //         setLoading(false)
+        //         toast(error.response.data.msg)
+        //     })
 
         try {
 
             setLoading(true)
-
-            await fetch(endPoint + "/doctor/login", {
-
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    email: doctor.email,
-                    password: doctor.password
-                }),
-                credentials: 'include'
-            }).then(response => response.json())
-            .then(data=> console.log(data))
             
+            const response = await axios.post(endPoint + "/doctor/login", { ...doctor },
+            {withCredentials: 'include'})
+
             localStorage.setItem('isDoctorLogin', true)
             toast(`Doctor ${doctor.email} has been successfully login !`)
-            
-            
             setLoading(false)
-
+            window.location.replace('/doctor')
+            
         } catch (error) {
             setLoading(false)
             toast(error.response.data.msg)
         }
-
-
     }
 
     return (

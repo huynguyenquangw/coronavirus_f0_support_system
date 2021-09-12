@@ -13,12 +13,14 @@ import Home from './chat/Home'
 
 import { useContext } from 'react';
 import {GlobalState} from './GlobalState'
+import NotFound from './NotFound'
 
 function Routes() {
 
     const state = useContext(GlobalState)
     const [admin] = state.patientAPI.admin
     const [patient] = state.patientAPI.patient
+    const [doctor] = state.doctorAPI.doctor
 
     return (
         <Router>
@@ -43,13 +45,13 @@ function Routes() {
               <LoginAdmin />
             </Route>
             <Route path="/patient">
-            {patient ? <PatientRoutes /> : <LoginPortal/>}  
+            {patient ? <PatientRoutes /> : <NotFound/>}  
             </Route>
             <Route path="/doctor">
-              <DoctorRoutes />
+            {doctor ? <DoctorRoutes /> : <NotFound/>}
             </Route>
             <Route path="/admin">
-              {admin ? <AdminRoutes /> : <LoginPortal/>}
+              {admin ? <AdminRoutes /> : <NotFound/>}
             </Route>
             <Route path="/chathome">
               <Home />

@@ -44,18 +44,19 @@ export default function LoginPatient() {
 
             setLoading(true)
 
-            await fetch(endPoint + "/user/login", {
-
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    email: user.email,
-                    password: user.password
-                }),
-                credentials: 'include'
-            }).then(response => response.json())
-            .then((data => getRole(data.accessToken)))
-
+            // await fetch(endPoint + "/user/login", {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({
+            //         email: user.email,
+            //         password: user.password
+            //     }),
+            //     credentials: 'include'
+            // }).then(response => response.json())
+            // .then((data => getRole(data.accessToken)))
+            const response = await axios.post(endPoint + "/user/login", { ...user },
+            {withCredentials: 'include'})
+            getRole(response.data.accessToken)
             
             localStorage.setItem('isLogin', true)
             toast(`User ${user.email} has been successfully login !`)
