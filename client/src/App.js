@@ -1,13 +1,15 @@
 import './App.css';
-
-// import Home from './chat/Home'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import {DataProvider} from './GlobalState'
 import Routes from './Routes';
 
+import { ToastContainer, toast } from 'react-toastify';
+
+toast.configure()
 function App() {
- 
+  
   return (
 
     <DataProvider>

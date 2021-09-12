@@ -1,12 +1,9 @@
 import Navbar from "./Navbar"
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router'
-import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
+import {toast } from 'react-toastify';
 
-import 'react-toastify/dist/ReactToastify.css';
-
-toast.configure()
 export default function LoginPatient() {
    
 

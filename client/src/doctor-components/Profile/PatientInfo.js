@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import {toast } from 'react-toastify';
 const PatientInfo = {
     name: '',
     phone: '',
@@ -29,7 +29,7 @@ const GetPatientInfo = () => {
                 console.log(response)
                 setInfo(response.data)
             })
-            .catch(error => console.log(error));
+            .catch(error => toast(error));
     }
 
     PatientInfo.name = info.name

@@ -42,7 +42,7 @@ function Doctors(props) {
             toast(`Doctor ${doctor.email} has been successfully registered !`)
 
         } catch (error) {
-            console.log(error.response.data.msg)
+            toast(error.response.data.msg)
             toast(error.response.data.msg)
 
         }

@@ -25,7 +25,7 @@ const MedicineCtrl = {
         type,
       });
     } catch (error) {
-      console.log(error);
+      toast(error);
     }
   },
 

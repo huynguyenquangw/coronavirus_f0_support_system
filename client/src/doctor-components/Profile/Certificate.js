@@ -69,7 +69,7 @@ function ProfilePicture() {
                 .then(response => {
                     console.log(response.data)
                 })
-                .catch(error => console.log(error.request));
+                .catch(error => toast(error.request));
                 localStorage.removeItem("userProfilePicture")
         }
 
@@ -85,7 +85,7 @@ function ProfilePicture() {
                 setUrl(response.data.url)
                 localStorage.setItem("userProfilePicture", response.data.url)
             })
-            .catch(error => console.log(error.request));
+            .catch(error => toast(error.request));
 
     }
 
@@ -102,7 +102,7 @@ function ProfilePicture() {
                 setUrl(response.data.url)
                 localStorage.setItem("userProfilePicture", response.data.url)
             })
-            .catch(error => console.log(error.request));
+            .catch(error => toast(error.request));
 
 
         fetch(endPoint + "/user/update", {
