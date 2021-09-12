@@ -44,10 +44,10 @@ const PhotoAction = styled.img`
         width: 3rem;
     }
 `
-function ProfilePicture({ info, token, callback, setCallback }) {    
+function ProfilePicture({ info, token, callback, setCallback }) {
 
     const [cloudinary, setCloudinary] = useState({
-        url:  "",
+        url: "",
         public_id: ""
     })
 
@@ -55,101 +55,107 @@ function ProfilePicture({ info, token, callback, setCallback }) {
 
     const editImage = async (e) => {
         e.preventDefault()
-
-        if (cloudinary.url !== "") {
-            //delete
-            let dataDelete = new FormData()
-            dataDelete.append("public_id", cloudinary.public_id)
-
-            axios.post(endPoint + "/api/destroy", dataDelete)
-                .then(response => {
-                    console.log(response.data)
-                })
-                .catch(error => console.log(error.request));
-        }
-
-        //upload
         const file = e.target.files[0]
-        let dataUpload = new FormData()
-        dataUpload.append("file", file)
 
-        try {
-            const response = await axios.post(endPoint + "/api/upload", dataUpload)
-            console.log(response.data)
-            setCloudinary(response.data)
-            updateImage(response.data)
-        } catch (error) {
-            console(error.response.data.msg)
-        }
         
-        // await axios.post(endPoint + "/api/upload", dataUpload)
-        //     .then(response => {
-        //         console.log(response.data)
-        //         setCloudinary(response.data)
-        //         console.log(cloudinary)
 
-        //         setDisplay(cloudinary.url)
-        //     })
-        //     .catch(error => console.log(error.request));
-
-    }
+        if (4 <1) {
+            if (cloudinary.url !== "") {
+                //delete
+                let dataDelete = new FormData()
+                dataDelete.append("public_id", cloudinary.public_id)
     
-    const updateImage = async (cloudinary) => {
+                axios.post(endPoint + "/api/destroy", dataDelete)
+                    .then(response => {
+                        console.log(response.data)
+                    })
+                    .catch(error => console.log(error.request));
+            }
+    
+            //upload
+            const file = e.target.files[0]
+            let dataUpload = new FormData()
+            dataUpload.append("file", file)
+    
+            try {
+                const response = await axios.post(endPoint + "/api/upload", dataUpload)
+                console.log(response.data)
+                setCloudinary(response.data)
+                updateImage(response.data)
+            } catch (error) {
+                console.log(error.response.data.msg)
+        }
+       
+    }
 
-        try {
-            await fetch("http://localhost:3000/user/update", {
-                method: 'PUT',
-                headers: {
-                    "Authorization": token,
-                    'Content-Type': 'application/json',
+    // await axios.post(endPoint + "/api/upload", dataUpload)
+    //     .then(response => {
+    //         console.log(response.data)
+    //         setCloudinary(response.data)
+    //         console.log(cloudinary)
+
+    //         setDisplay(cloudinary.url)
+    //     })
+    //     .catch(error => console.log(error.request));
+
+}
+
+const updateImage = async (cloudinary) => {
+
+    try {
+        await fetch("http://localhost:3000/user/update", {
+            method: 'PUT',
+            headers: {
+                "Authorization": token,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "name": "Huy",
+                "img": {
+                    url: cloudinary.url,
+                    public_id: cloudinary.public_id
                 },
-                body: JSON.stringify({
-                    "name": "Huy",
-                    "img": {
-                        url: cloudinary.url,
-                        public_id: cloudinary.public_id
-                    },
-                    "district": "6125506d73f4275ea38c9b9f",
-                    "phone": "0123456789"
-                })
+                "district": "6125506d73f4275ea38c9b9f",
+                "phone": "0123456789"
             })
-                .then(resp => resp.json())
-                .then(data => {
-                    console.log(data)
-                })
-                .then(setCallback(!callback))
-        } catch (error) {
-            console.log(error.response)
-        }
-
-
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data)
+            })
+            .then(setCallback(!callback))
+    } catch (error) {
+        console.log(error.response)
     }
 
-    
 
-    useEffect(() => {
-        if (info.img) {
-            setCloudinary(info.img)
-        }
-    },[])
-
-    return (
-
-        <Container>
-            <PhotoContainer style={{ backgroundImage: `url(${info.img?.url !== "" ? info.img?.url : profile})` }}>
-                <ActionContainer htmlFor="photo-upload">
-                    <PhotoAction src={photoEdit} />
-                </ActionContainer>
-            </PhotoContainer>
-
-            <input
-                id="photo-upload"
-                type="file"
-                onChange={editImage}></input>
+}
 
 
-        </Container>
-    )
+
+useEffect(() => {
+    if (info.img) {
+        setCloudinary(info.img)
+    }
+}, [])
+
+return (
+
+    <Container>
+        <PhotoContainer style={{ backgroundImage: `url(${info.img?.url !== "" ? info.img?.url : profile})` }}>
+            <ActionContainer htmlFor="photo-upload">
+                <PhotoAction src={photoEdit} />
+            </ActionContainer>
+        </PhotoContainer>
+
+        <input
+            id="photo-upload"
+            type="file"
+            onChange={editImage}></input>
+
+
+    </Container>
+)
 }
 
 export default ProfilePicture

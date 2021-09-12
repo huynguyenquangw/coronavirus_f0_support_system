@@ -81,7 +81,6 @@ function ProfilePicture() {
         axios.post(endPoint + "/api/upload", dataUpload)
             .then(response => {
                 console.log(response.data)
-                window.location.reload()
                 setUrl(response.data.url)
                 localStorage.setItem("userProfilePicture", response.data.url)
             })

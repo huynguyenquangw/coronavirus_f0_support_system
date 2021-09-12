@@ -70,19 +70,12 @@ export default function Register() {
             try {
                 setLoading(true)
                 const response = await axios.post(endPoint + "/user/register", { ...user })
-                localStorage.setItem('token', response.data.accessToken)
-                localStorage.setItem('isLogin', true)
-                console.log(`User ${user.email} has been successfully registered !`)
                 toast(`User ${user.email} has been successfully registered !`)
-
                 setLoading(false)
-                //Change url to profile page
-                // setTimeout( window.location.replace('/'), 10000)
-                history.push('/user/profile')
+                history.push('/login-patient')
 
 
             } catch (error) {
-                console.log(error.response.data.msg)
                 toast(error.response.data.msg)
                 setLoading(false)
 
