@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 function Patients(props) {
     const endPoint = "http://localhost:3000"
     const [data, setData] = useState([]);
+    const [key, setKey] = useState('')
+    
 
 
     const load = () => {
@@ -20,8 +22,13 @@ function Patients(props) {
     return (
         <div>
             {/* <h1 style={{fontSize: "10em"}}>Patients</h1> */}
- 
+
             <h2 class="list"> Patient List</h2>
+            <div style={{fontWeight:"800"}}>
+                Search Name: <input type="text" name='keyword' placeholder="Patients Name"
+                    onChange={(e) => setKey(e.target.value)} />
+            </div>
+            <br />
             <div >
                 <table style={{ width: "100%" }}>
                     <tr>
@@ -33,7 +40,9 @@ function Patients(props) {
 
 
                     </tr>
-                    {data.map(i => (
+
+                    {data.filter(s => s.name.toLowerCase().startsWith(key.toLowerCase())).map(i =>
+
                         <tr>
                             <td>{i.name}</td>
                             <td>{i.email}</td>
@@ -41,11 +50,13 @@ function Patients(props) {
                             <td>{i.district?.name}</td>
                             <td>{i.district?.city?.name}</td>
                         </tr>
-                    ))}
+
+
+                    )}
 
                 </table>
             </div>
-        
+
         </div>
     )
 }

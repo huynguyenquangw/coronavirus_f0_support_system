@@ -9,32 +9,33 @@ function PatientAPI(token) {
     const [callback, setCallback] = useState(false)
     const [info, setInfo] = useState([])
 
+
     const getInfo = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/user/info", {
+            const response = await axios.get(`http://localhost:3000/user/info`, {
                 headers: {
                     Authorization: token
                 }
             })
             setInfo(response.data)
-            if (response.data.role === 1){
+            if (response.data.role === 1) {
                 setAdmin(true)
             }
-            if (response.data.role === 0){
+            if (response.data.role === 0) {
                 setPatient(true)
             }
-        } catch (error){
+        } catch (error) {
             alert(error.response.data.msg)
         }
-        
+
     }
 
     useEffect(
         () => {
-            if(token){
+            if (token) {
                 getInfo()
             }
-            
+
         }, [token, callback]
     )
 
@@ -47,6 +48,7 @@ function PatientAPI(token) {
 }
 
 export default PatientAPI
+
 
 
 // import { useState } from "react"
