@@ -1,25 +1,45 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { info } from '../../api/PatientAPI'
 import { Container, Field } from "../../css-template/Input"
-import {district as sourceDistrict}  from '../../api/API'
 import { useState, useEffect } from 'react'
+import { GlobalState } from '../../GlobalState'
 
-function HomeAddress() {
-
-    const [district, setDistrict] = useState("")
-    const [cityName, setCityName] = useState("")
-    const [postcode, setPostcode] = useState("")
+function HomeAddress({ info}) {
+    const state = useContext(GlobalState)
+    const [district, setDistrict] = state.districtAPI.district
     
-    useEffect(() => {
-        setDistrict(info.district?._id)
-        setCityName(info.district?.city?.name)
-        setPostcode(info.district?.city?.postcode)
-      },[])
+    const [selectedDistrict, setSelectedDistrict] = useState("")
+    
+    const [followingInfo, setFollowingInfo] = useState({
+        name: "",
+        postcode: ""
+    })
+
+    
+
+    useEffect(()=>{
+        if (info.district){
+            setSelectedDistrict(info.district._id)
+        }
+    }, [info])
+
+
+
+    useEffect(()=>{
+
+        district.forEach(i => {
+            if (selectedDistrict == i._id){
+                setFollowingInfo(i.city)
+            }
+        });
+        
+    }, [selectedDistrict])
+
 
     const handleChange = e => {
-        setDistrict(e.target.value)
+        setSelectedDistrict(e.target.value)
     }
+
 
     return (
         <Container>
@@ -27,21 +47,21 @@ function HomeAddress() {
             <Field>
 
             <label htmlFor="district">District</label>
-                <select id="district" value={district} onChange={handleChange}>
-                    {sourceDistrict.map(i =>
+                <select id="district" value={selectedDistrict} onChange={handleChange}>
+                    {district.map(i =>
                         <option value={i._id}>{i.name}</option>
                     )}  
                     </select>
             </Field>
 
-            <Field>
+            <Field style={{userSelect: "none"}}>
                 <label htmlFor="city">City</label>
-                <input id="city" type="text" placeholder="City" value={cityName} readOnly/>
+                <input id="city" type="text" placeholder="City" value={followingInfo.name} readOnly/>
             </Field>
             
-            <Field>
+            <Field style={{userSelect: "none"}}>
                 <label htmlFor="postcode">Postcode</label>
-                <input id="postcode" type="text" placeholder="Full Name" value={postcode} readOnly/>
+                <input id="postcode" type="text" placeholder="Full Name" value={followingInfo.postcode} readOnly/>
             </Field>
 
 

@@ -8,28 +8,19 @@ import LoginPortal from './home-components/LoginPortal';
 import LoginPatient from './home-components/LoginPatient';
 import LoginDoctor from './home-components/LoginDoctor';
 import LoginAdmin from './home-components/LoginAdmin'
-import Practice from './Practice';
+// import Home from './chat/Home'
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Test from './Test';
 import { useEffect } from 'react';
-import { getDistrict } from './api/API'
+import {DataProvider} from './GlobalState'
 
 function App() {
 
-
-  const loadDistrict = async () => {
-    await getDistrict()
-  }
-
-  useEffect(() => {
-    loadDistrict()
-  })
-
+  
 
   return (
 
-    <div>
+    <DataProvider>
       <Router>
         {/* Switch  */}
         <div>
@@ -62,17 +53,14 @@ function App() {
             <Route path="/admin">
               <AdminRoutes />
             </Route>
-            <Route path="/test">
-              <Test />
-            </Route>
-            <Route path="/practice">
-              <Practice />
-            </Route>
+            {/* <Route path="/chathome">
+              <Home />
+            </Route> */}
           </Switch>
         </div>
       </Router>
 
-    </div>
+    </DataProvider>
   );
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 
 const Container=styled.div`
@@ -22,6 +22,7 @@ const CardContainer=styled.div`
 `
 
 function Dashboard(props) {
+
     return (
         <div>
             <h1 style={{fontSize: "10em"}}>Dashboard</h1>

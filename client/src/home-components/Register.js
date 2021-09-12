@@ -41,7 +41,7 @@ export default function Register() {
 
     useEffect(() => {
         getDistrict()
-    })
+    },[])
 
     //Register check
     const registerSubmit = async e => {

@@ -34,13 +34,11 @@ const Logo = styled.img`
     max-width: 12rem;
 `
 
-
-
 function Sidebar({ active }) {
     const history = useHistory()
     const Out = async () => {
-        await Logout()
-        history.push("/login-portal")
+        localStorage.clear()
+        window.location.replace("/login-portal")
     }
 
     return (

@@ -1,16 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { info } from '../../api/PatientAPI'
+// import { info } from '../../api/PatientAPI'
 import {Container , Field} from "../../css-template/Input"
 import { useState, useEffect } from 'react'
 
 
-function PersonalInfo() {
+function PersonalInfo({info}) {
 
+    
     const [user, setUser] = useState({
-        name: info.name || "",
-        email: info.email || "",
-        phone: info.phone || ""
+        name: "",
+        email: "",
+        phone: ""
     })
 
     const onChangeValue = e => {
@@ -18,6 +19,10 @@ function PersonalInfo() {
         setUser({ ...user, [name]: value })
     }
     
+    useEffect(()=>{
+        setUser(info)
+    },[info]
+    )
 
     return (
         <Container>

@@ -1,9 +1,10 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useContext, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import profile from '../../assets/images/profile.svg'
 import photoEdit from '../../assets/icons/profile-picture-edit.svg'
-import { info, GetPatientInfo, UpdatePatientInfo } from '../../api/PatientAPI'
+// import { info, GetPatientInfo, UpdatePatientInfo } from '../../api/PatientAPI'
 import axios from 'axios';
+
 
 
 
@@ -12,6 +13,7 @@ const Container = styled.div`
         visibility: hidden;
     }
 `
+
 const PhotoContainer = styled.div`
     position: relative;
     box-sizing: border-box;
@@ -25,6 +27,7 @@ const PhotoContainer = styled.div`
     background-position: 50% 50%;
     background-size: 101% auto;
 `
+
 const ActionContainer = styled.label`
 `
 
@@ -41,20 +44,22 @@ const PhotoAction = styled.img`
         width: 3rem;
     }
 `
-function ProfilePicture() {
+function ProfilePicture({ info, token, callback, setCallback }) {    
 
-    var picture = info.img?.url ? info.img?.url : ""
-    var publicId = info.img?.public_id ? info.img?.public_id : ""
-
-    const [display, setDisplay] = useState(picture)
+    const [cloudinary, setCloudinary] = useState({
+        url:  "",
+        public_id: ""
+    })
 
     const endPoint = "http://localhost:3000"
 
     const editImage = async (e) => {
-        if (picture !== "") {
+        e.preventDefault()
+
+        if (cloudinary.url !== "") {
             //delete
             let dataDelete = new FormData()
-            dataDelete.append("public_id", publicId)
+            dataDelete.append("public_id", cloudinary.public_id)
 
             axios.post(endPoint + "/api/destroy", dataDelete)
                 .then(response => {
@@ -68,36 +73,70 @@ function ProfilePicture() {
         let dataUpload = new FormData()
         dataUpload.append("file", file)
 
-        await axios.post(endPoint + "/api/upload", dataUpload)
-            .then(response => {
-                console.log(response.data)
-                console.log(response.data.url)
-                console.log(response.data.public_id)
-                picture = response.data.url
-                publicId = response.data.public_id
-                setDisplay(picture)
-            })
-            .catch(error => console.log(error.request));
-        await updateImage()
+        try {
+            const response = await axios.post(endPoint + "/api/upload", dataUpload)
+            console.log(response.data)
+            setCloudinary(response.data)
+            updateImage(response.data)
+        } catch (error) {
+            console(error.response.data.msg)
+        }
+        
+        // await axios.post(endPoint + "/api/upload", dataUpload)
+        //     .then(response => {
+        //         console.log(response.data)
+        //         setCloudinary(response.data)
+        //         console.log(cloudinary)
+
+        //         setDisplay(cloudinary.url)
+        //     })
+        //     .catch(error => console.log(error.request));
+
     }
+    
+    const updateImage = async (cloudinary) => {
 
-    const updateImage = async () => {
-
-        const data = {
-            "img":{
-                "url": picture,
-                "public_id": publicId
-            }
-            
+        try {
+            await fetch("http://localhost:3000/user/update", {
+                method: 'PUT',
+                headers: {
+                    "Authorization": token,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "name": "Huy",
+                    "img": {
+                        url: cloudinary.url,
+                        public_id: cloudinary.public_id
+                    },
+                    "district": "6125506d73f4275ea38c9b9f",
+                    "phone": "0123456789"
+                })
+            })
+                .then(resp => resp.json())
+                .then(data => {
+                    console.log(data)
+                })
+                .then(setCallback(!callback))
+        } catch (error) {
+            console.log(error.response)
         }
 
-        await UpdatePatientInfo(data)
+
     }
+
+    
+
+    useEffect(() => {
+        if (info.img) {
+            setCloudinary(info.img)
+        }
+    },[])
 
     return (
 
         <Container>
-            <PhotoContainer style={{ backgroundImage: `url(${display !== "" ? display : profile})` }}>
+            <PhotoContainer style={{ backgroundImage: `url(${info.img?.url !== "" ? info.img?.url : profile})` }}>
                 <ActionContainer htmlFor="photo-upload">
                     <PhotoAction src={photoEdit} />
                 </ActionContainer>

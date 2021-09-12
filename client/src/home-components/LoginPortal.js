@@ -1,9 +1,13 @@
 import Navbar from "./Navbar"
-import DoctorPhoto from '../assets/images/doctor.png'
 import styled from "styled-components"
 import { Link } from 'react-router-dom';
+import { useContext} from 'react';
+import { GlobalState } from "../GlobalState";
+
 
 export default function LoginPortal() {
+    const state = useContext(GlobalState)   
+    const [district] = state.districtAPI.district
 
     const Main = styled.div`
     width: 35%;
@@ -19,11 +23,11 @@ export default function LoginPortal() {
         <div>
             <Navbar />
             <Main>
-               <Link to="/login-doctor" class="button green">
+               <Link to="/login-doctor" className="button green">
                 Login as Doctor
                </Link>
                
-               <Link to="/login-patient" class="button green">
+               <Link to="/login-patient" className="button green">
                Login as Patient 
                </Link>
 

@@ -1,13 +1,14 @@
 import Navbar from "./Navbar"
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useHistory } from 'react-router'
 import { ToastContainer, toast } from 'react-toastify';
-import { info, GetPatientInfo, Login } from "../api/PatientAPI";
+import axios from "axios";
 
 import 'react-toastify/dist/ReactToastify.css';
 
 toast.configure()
 export default function LoginPatient() {
+    
     const history = useHistory()
     const endPoint = "http://localhost:3000"
     const [user, setUser] = useState({
@@ -22,6 +23,16 @@ export default function LoginPatient() {
         const { name, value } = e.target
         setUser({ ...user, [name]: value })
     }
+
+    const getRole = async (token) =>{
+        const response = await axios.get("http://localhost:3000/user/info", {
+            headers: {
+                Authorization: token
+            }
+        })
+        return response.data.role === 1 ? window.location.replace('/admin') : window.location.replace('/patient')
+    }
+
     //Register check
     const loginSubmit = async e => {
         e.preventDefault()
@@ -30,24 +41,25 @@ export default function LoginPatient() {
         try {
 
             setLoading(true)
+
+            await fetch(endPoint + "/user/login", {
+
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email: user.email,
+                    password: user.password
+                }),
+                credentials: 'include'
+            }).then(response => response.json())
+            .then(data => getRole(data.accessToken))
+
             
-            await Login(user.email, user.password)
-
-            await GetPatientInfo()
-
-            // const response = await axios.post(endPoint + "/user/login", { ...user })
-
             localStorage.setItem('isLogin', true)
-
             toast(`User ${user.email} has been successfully login !`)
+            // getRole(response.data.accessToken)
+
             setLoading(false)
-            
-            if (info.role === 0) {
-                history.push('/patient')
-            }
-            if (info.role === 1) {
-                history.push('/admin')
-            }
 
         } catch (error) {
             setLoading(false)

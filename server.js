@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const path = require('path')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const fileUpload = require('express-fileupload')
@@ -15,7 +16,35 @@ app.use(fileUpload({
     useTempFiles: true
 }))
 
+const http = require('http').createServer(app)
+const io = require('socket.io')(http, {
+    cors: {
+        origin: '*'
+    }
+})
+
+//socketIO
+const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
+
+io.on("connection", (socket) => {
+
+    // Join a conversation
+    const { roomId } = socket.handshake.query;
+    socket.join(roomId);
+
+    // Listen for new messages
+    socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
+        io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
+    });
+
+    // Leave the room if the user closes the socket
+    socket.on("disconnect", () => {
+        socket.leave(roomId);
+    });
+});
+
 //Routes
+
 app.use('/user', require('./routes/UserRouter'))
 app.use('/doctor', require('./routes/DoctorRouter'))
 app.use('/api', require('./routes/UploadToCloudinary')) //Cloudinary
@@ -25,7 +54,6 @@ app.use('/form', require('./routes/MedicineFormRouter'))
 app.use('/medicine', require('./routes/MedicineRouter'))
 app.use('/health', require('./routes/HealthDeclarationRouter'))
 app.use('/pharmacy', require('./routes/PharmacyRouter'))
-
 
 //connect to mongoDB
 const URL = process.env.MONGO_URL
@@ -43,8 +71,7 @@ app.get('/', (req, res) => {
     res.json({ msg: "ON AIR!!!" })
 })
 
-
 const PORT = process.env.PORT || 3000
-app.listen(PORT, () => {
+http.listen(PORT, '127.0.0.1', () => {
     console.log('Server is running on', PORT);
 })
