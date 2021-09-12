@@ -9,31 +9,19 @@ import 'react-toastify/dist/ReactToastify.css';
 toast.configure()
 export default function LoginDoctor() {
     
-    const history = useHistory()
     const endPoint = "http://localhost:3000"
-    const [user, setUser] = useState({
+    const [doctor, setDoctor] = useState({
         email: '',
         password: '',
     })
     // chay Loading effect 
     const [loading, setLoading] = useState(false)
 
-    //On change for user
+    //On change for doctor
     const onChangeValue = e => {
         const { name, value } = e.target
-        setUser({ ...user, [name]: value })
+        setDoctor({ ...doctor, [name]: value })
     }
-
-    const getrf = async () => {
-        await fetch("http://localhost:3000/doctor/refresh_token", {
-            credentials: 'include'
-        })
-            .then(resp => resp.json())
-            .then(data => {
-                console.log(data)
-            })
-    }
-
 
     //Register check
     const loginSubmit = async e => {
@@ -49,15 +37,15 @@ export default function LoginDoctor() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    email: user.email,
-                    password: user.password
+                    email: doctor.email,
+                    password: doctor.password
                 }),
                 credentials: 'include'
             }).then(response => response.json())
             .then(data=> console.log(data))
             
-            localStorage.setItem('isLogin', true)
-            toast(`Doctor ${user.email} has been successfully login !`)
+            localStorage.setItem('isDoctorLogin', true)
+            toast(`Doctor ${doctor.email} has been successfully login !`)
             
             
             setLoading(false)
@@ -84,9 +72,9 @@ export default function LoginDoctor() {
                     <br />
                     <div style={{ width: "70%", margin: "auto" }}>
                         <form onSubmit={loginSubmit}>
-                            <input type="email" className="no3" id="email" name="email" value={user.email} onChange={onChangeValue} placeholder="Email.." />
+                            <input type="email" className="no3" id="email" name="email" value={doctor.email} onChange={onChangeValue} placeholder="Email.." />
                             <br />
-                            <input type="text" className="no3" id="password" name="password" value={user.password} onChange={onChangeValue} placeholder="Password.." />
+                            <input type="text" className="no3" id="password" name="password" value={doctor.password} onChange={onChangeValue} placeholder="Password.." />
                             <br />
                             <input type="submit" value="Log In" className="button blue" />
                         </form>

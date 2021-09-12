@@ -9,6 +9,8 @@ const ChatRoom = ({ roomId, setRoomId, pop, setPop }) => {
     const [newMessage, setNewMessage] = React.useState("");
     const messageRef = useRef()
 
+    console.log(messages.name)
+    
     const handleNewMessageChange = (event) => {
         setNewMessage(event.target.value);
     };
