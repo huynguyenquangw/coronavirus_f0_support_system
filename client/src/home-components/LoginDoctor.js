@@ -54,12 +54,12 @@ export default function LoginDoctor() {
                 }),
                 credentials: 'include'
             }).then(response => response.json())
+            .then(data=> console.log(data))
             
             localStorage.setItem('isLogin', true)
             toast(`Doctor ${user.email} has been successfully login !`)
-            window.location.replace('/doctor')
-            // getRole(response.data.accessToken)
-
+            
+            
             setLoading(false)
 
         } catch (error) {

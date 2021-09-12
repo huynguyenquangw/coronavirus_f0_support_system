@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 toast.configure()
 export default function LoginPatient() {
+   
+
     
     const history = useHistory()
     const endPoint = "http://localhost:3000"
@@ -52,7 +54,7 @@ export default function LoginPatient() {
                 }),
                 credentials: 'include'
             }).then(response => response.json())
-            .then(data => getRole(data.accessToken))
+            .then((data => getRole(data.accessToken)))
 
             
             localStorage.setItem('isLogin', true)

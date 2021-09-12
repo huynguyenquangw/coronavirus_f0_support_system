@@ -3,6 +3,9 @@ import axios from 'axios'
 
 function PatientAPI(token) {
 
+    const [admin, setAdmin] = useState(false)
+    const [patient, setPatient] = useState(false)
+
     const [callback, setCallback] = useState(false)
     const [info, setInfo] = useState([])
 
@@ -14,6 +17,12 @@ function PatientAPI(token) {
                 }
             })
             setInfo(response.data)
+            if (response.data.role === 1){
+                setAdmin(true)
+            }
+            if (response.data.role === 0){
+                setPatient(true)
+            }
         } catch (error){
             alert(error.response.data.msg)
         }
@@ -31,7 +40,9 @@ function PatientAPI(token) {
 
     return {
         info: [info, setInfo],
-        callback: [callback, setCallback]
+        callback: [callback, setCallback],
+        admin: [admin, setAdmin],
+        patient: [patient, setPatient]
     }
 }
 
