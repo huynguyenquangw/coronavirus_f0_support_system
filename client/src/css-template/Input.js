@@ -4,7 +4,11 @@ export const Container = styled.div`
     display: flex !important;
     flex-flow: row wrap;
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
+
+    >*{
+        margin-left: 1rem;
+    }
 
     label{
     font-size: 0.8rem;
@@ -68,6 +72,26 @@ export const CheckboxField = styled.div`
     
     h2{
         display: inline-block !important;
+        font-size: 1.2rem;
+    }
+
+`
+
+export const TextAreaField = styled.div`
+    flex-basis: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+
+    textarea{
+        width: 100%;
+        color: #002341;
+        font-size: 1.2rem;
+        line-height: 1.3rem;
+        box-sizing: border-box;
+        padding: 0.7rem;
+    }
+    
+    h2{
         font-size: 1.2rem;
     }
 
