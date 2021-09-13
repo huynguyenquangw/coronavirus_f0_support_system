@@ -5,7 +5,6 @@ export default function FilterPatient(props) {
 
     const state = useContext(GlobalState)
     const [data,setData] = state.getAllPatientAPI.patients
-
     const [search, setSearch] = state.getAllPatientAPI.search
     const [page, setPage] = state.getAllPatientAPI.page
     const [sort, setSort] = state.getAllPatientAPI.sort

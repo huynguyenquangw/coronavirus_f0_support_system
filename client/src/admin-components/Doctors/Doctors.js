@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import "./doctor.css"
 import { useHistory } from 'react-router'
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 
 import { useState, useEffect } from "react";
+import { GlobalState } from '../../GlobalState';
 
 function Doctors(props) {
+    const state = useContext(GlobalState)
+    const [token, setToken] = state.token
+    console.log((token))
     const endPoint = "http://localhost:3000"
     const [data, setData] = useState([]);
 
@@ -35,7 +39,7 @@ function Doctors(props) {
         try {
             const response = await axios.post(endPoint + "/doctor/register", { ...doctor }, {
                             headers: {
-                                "Authorization": localStorage.getItem("token")
+                                "Authorization": token
                             }
                         })
             load()

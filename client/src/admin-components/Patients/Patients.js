@@ -1,33 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState, useEffect } from "react";
+import FilterPatient from '../../Feature/FilterPatient';
+import { GlobalState } from '../../GlobalState';
+
 // import "./patient.css"
 function Patients(props) {
-    const endPoint = "http://localhost:3000"
-    const [data, setData] = useState([]);
-    const [key, setKey] = useState('')
-    
+    const state = useContext(GlobalState)
+    const [data,setData] = state.getAllPatientAPI.patients
+    console.log(data)
 
-
-    const load = () => {
-        fetch(endPoint + "/user?limit=999999999")
-            .then(response => response.json())
-            .then(item => setData(item.data));
-    }
-
-    //load data automatically
-    useEffect(() => {
-        load()
-    }, [])
 
     return (
         <div>
             {/* <h1 style={{fontSize: "10em"}}>Patients</h1> */}
 
             <h2 class="list"> Patient List</h2>
-            <div style={{fontWeight:"800"}}>
-                Search Name: <input type="text" name='keyword' placeholder="Patients Name"
-                    onChange={(e) => setKey(e.target.value)} />
-            </div>
+            <FilterPatient/>
             <br />
             <div >
                 <table style={{ width: "100%" }}>
@@ -41,7 +29,7 @@ function Patients(props) {
 
                     </tr>
 
-                    {data.filter(s => s.name.toLowerCase().startsWith(key.toLowerCase())).map(i =>
+                    {data.map(i =>
 
                         <tr>
                             <td>{i.name}</td>
