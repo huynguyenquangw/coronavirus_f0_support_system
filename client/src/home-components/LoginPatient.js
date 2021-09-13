@@ -63,6 +63,7 @@ export default function LoginPatient() {
 
         } catch (error) {
             setLoading(false)
+            console.log(error.response.data.msg);
             toast(error.response.data.msg)
         }
 

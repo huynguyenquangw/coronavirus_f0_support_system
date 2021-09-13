@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from 'react'
 import DistrictAPI from './api/API'
 import PatientAPI from './api/PatientAPI'
 import DoctorAPI from './api/DoctorAPI'
+import GetAllPatient from './api/GetAllPatient'
 
 export const GlobalState = createContext()
 
@@ -45,7 +46,8 @@ export const DataProvider = ({ children }) => {
         doctorToken : [doctorToken, setDoctorToken],
         districtAPI: DistrictAPI(),
         patientAPI: PatientAPI(token),
-        doctorAPI: DoctorAPI(doctorToken)
+        doctorAPI: DoctorAPI(doctorToken),
+        getAllPatientAPI: GetAllPatient()
     }
 
     return (
