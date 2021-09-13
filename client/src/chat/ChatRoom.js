@@ -2,15 +2,15 @@ import React, { useEffect, useRef } from "react";
 
 import useChat from "./useChat";
 import './ChatRoom.css'
+import { useState } from "react/cjs/react.development";
 
-const ChatRoom = ({ roomId, setRoomId, pop, setPop }) => {
+const ChatRoom = ({ doctors, isWho, currentPatient, roomId, setRoomId, pop, setPop }) => {
     // const { roomId } = props.match.params;
     const { messages, sendMessage } = useChat(roomId);
-    const [newMessage, setNewMessage] = React.useState("");
+    const [newMessage, setNewMessage] = useState("");
+    const [currentDoctor, setCurrentDoctor] = useState([])
     const messageRef = useRef()
 
-    console.log(messages.name)
-    
     const handleNewMessageChange = (event) => {
         setNewMessage(event.target.value);
     };
@@ -31,6 +31,12 @@ const ChatRoom = ({ roomId, setRoomId, pop, setPop }) => {
     }
 
     useEffect(() => {
+        doctors.forEach(data => {
+            if (data._id == roomId) setCurrentDoctor(data)
+        })
+    }, [roomId, doctors])
+
+    useEffect(() => {
         while (messages.length) {
             messages.pop()
             setPop(false)
@@ -46,10 +52,19 @@ const ChatRoom = ({ roomId, setRoomId, pop, setPop }) => {
         <div className="chat-room-container">
             <div className="chat-header">
                 <div className="logo">
-                    Room
-                    <h3>{roomId}</h3>   {/* bỏ cũng dc, tùy mấy e */}
+                    {isWho === 'isDoctor' ? (
+                        <>
+                            Chat with patient
+                        </>
+                    ) : (
+                        <>
+                            Chat with {currentDoctor.name}
+                        </>
+                    )}
                 </div>
-                <p onClick={() => setRoomId(false)}>query name here</p>
+                <p onClick={() => setRoomId(false)}>
+                    x
+                </p>
             </div>
             <div className="messages-container">
                 <div className="wrapper">
@@ -58,7 +73,16 @@ const ChatRoom = ({ roomId, setRoomId, pop, setPop }) => {
                             {messages.map((message, i) => (
                                 <div key={i} className={`message-row ${message.ownedByCurrentUser ? "my-message" : "other-message"}`}>
                                     <div className="message-title">
-                                        {message.ownedByCurrentUser ? <span>👻 Me</span> : <span>💩 My friend</span>}
+                                        {message.ownedByCurrentUser ? (
+                                            <>
+                                                {isWho === 'isPatient' ? currentPatient.name : currentDoctor.name}
+                                            </>
+                                        ) : (
+                                            <>
+                                                {isWho !== 'isPatient' ? 'Patient' : currentDoctor.name}
+                                            </>
+                                        )}
+                                        {/* {message.ownedByCurrentUser ? currentPatient.name : currentDoctor.name} */}
                                     </div>
 
                                     <div className="message-text">
