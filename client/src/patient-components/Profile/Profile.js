@@ -1,10 +1,10 @@
 import React, {useContext} from 'react'
-import styled from 'styled-components'
 import ProfilePicture from './ProfilePicture'
 import PersonalInfo from './PersonalInfo'
 import HomeAddress from './HomeAddress'
 import { Container, Row, Header } from '../../css-template/DashboardMain'
 import { GlobalState } from '../../GlobalState';
+import {toast } from 'react-toastify';
 
 function Profile(props) {
     const state = useContext(GlobalState)
@@ -34,11 +34,11 @@ function Profile(props) {
             })
                 .then(resp => resp.json())
                 .then(data => {
-                    console.log(data)
+                   toast(data.msg)
                 })
                 .then(setCallback(!callback))
         } catch (error) {
-            alert(error.response.data.msg)
+            toast(error.response.data.msg)
         }
     }
 

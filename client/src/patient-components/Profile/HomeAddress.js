@@ -56,12 +56,12 @@ function HomeAddress({ info}) {
 
             <Field style={{userSelect: "none"}}>
                 <label htmlFor="city">City</label>
-                <input id="city" type="text" placeholder="City" value={followingInfo.name} readOnly/>
+                <input className="uneditable" id="city" type="text" placeholder="City" value={followingInfo.name} readOnly/>
             </Field>
             
             <Field style={{userSelect: "none"}}>
                 <label htmlFor="postcode">Postcode</label>
-                <input id="postcode" type="text" placeholder="Full Name" value={followingInfo.postcode} readOnly/>
+                <input className="uneditable" id="postcode" type="text" placeholder="Full Name" value={followingInfo.postcode} readOnly/>
             </Field>
 
 

@@ -6,9 +6,6 @@ import photoEdit from '../../assets/icons/profile-picture-edit.svg'
 import axios from 'axios';
 import {toast } from 'react-toastify';
 
-
-
-
 const Container = styled.div`
     input{
         visibility: hidden;
@@ -65,6 +62,7 @@ function ProfilePicture({ info, token, callback, setCallback }) {
             axios.post(endPoint + "/api/destroy", dataDelete)
                 .then(response => {
                     console.log(response.data)
+                    toast("Old profile picture has been removed")
                 })
                 .catch(error => toast(error.request));
         }
@@ -79,6 +77,7 @@ function ProfilePicture({ info, token, callback, setCallback }) {
             console.log(response.data)
             setCloudinary(response.data)
             updateImage(response.data)
+            toast("New profile picture has been updated")
         } catch (error) {
             toast(error.response.data.msg)
 
@@ -119,7 +118,7 @@ function ProfilePicture({ info, token, callback, setCallback }) {
             })
                 .then(resp => resp.json())
                 .then(data => {
-                    console.log(data)
+                    toast(data.msg)
                 })
                 .then(setCallback(!callback))
         } catch (error) {

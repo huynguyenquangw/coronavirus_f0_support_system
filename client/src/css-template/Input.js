@@ -25,6 +25,10 @@ export const Container = styled.div`
     border-bottom: 2px solid #afcbe4;
     }
 
+    .uneditable{
+        color: #869eb4;
+    }
+
     input[type=checkbox]{
         width: 10%;
         margin-left: 20px;
@@ -34,7 +38,7 @@ export const Container = styled.div`
         padding: 10px;
     }
 
-    input:focus, input:hover{
+    .editable:focus, .editable:hover{
         color: #00A473;
         border-bottom: 3px solid #00A473;
     }

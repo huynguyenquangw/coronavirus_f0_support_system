@@ -28,15 +28,15 @@ function PersonalInfo({info}) {
         <Container>
             <Field>
                 <label htmlFor="name">Name</label>
-                <input name ="name" id="name" type="text" placeholder="Full Name" value={user.name} onChange={onChangeValue}></input>
+                <input className="editable" name ="name" id="name" type="text" placeholder="Full Name" value={user.name} onChange={onChangeValue}></input>
             </Field>
             <Field>
                 <label htmlFor="email">Email</label>
-                <input name="email" id="email" type="text" placeholder="Email Address" value={user.email} onChange={onChangeValue}></input>
+                <input className="uneditable"name="email" id="email" type="text" placeholder="Email Address" value={user.email} onChange={onChangeValue} readOnly></input>
             </Field>
             <Field>
                 <label htmlFor="name">Phone</label>
-                <input name="phone" id="phone" type="text" placeholder="Full Name" value={user.phone} onChange={onChangeValue}></input>
+                <input className="editable" name="phone" id="phone" type="text" placeholder="Full Name" value={user.phone} onChange={onChangeValue}></input>
             </Field>
         </Container>
     )
