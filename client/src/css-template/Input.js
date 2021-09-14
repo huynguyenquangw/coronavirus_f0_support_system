@@ -64,6 +64,10 @@ export const Field = styled.div`
 
 `;
 
+export const FieldBig = styled.div`
+flex-basis: 100%;
+`
+
 export const CheckboxField = styled.div`
     flex-basis: 33%;
     box-sizing: border-box;

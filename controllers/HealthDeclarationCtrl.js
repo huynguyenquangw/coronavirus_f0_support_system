@@ -72,9 +72,10 @@ const HealthDeclarationCtrl = {
             //Save to MongoDB
             await newHealthDeclaration.save()
 
-            res.json({
-                msg: `Health Declaration has been added!`,
-            })
+            // res.json({
+            //     msg: `Health Declaration has been added!`,
+            // })
+            res.json(newHealthDeclaration)
 
         } catch (error) {
             return res.status(500).json({ msg: error.message })

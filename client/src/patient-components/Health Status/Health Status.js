@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Container, Row, Header } from '../../css-template/DashboardMain'
-import { Container as Form, CheckboxField, TextAreaField } from "../../css-template/Input"
+import { Container as Form, CheckboxField, TextAreaField, FieldBig } from "../../css-template/Input"
 
 function HealthStatus(props) {
     const [health, setHealth] = useState({
@@ -13,6 +13,7 @@ function HealthStatus(props) {
         sorethroat: false,
         phlegm: false,
         runnynose: false,
+        tiredness: false,
         blocknose: false,
         losssmell: false,
         musclepain: false,
@@ -27,6 +28,7 @@ function HealthStatus(props) {
         "Sorethroat",
         "Phlegm",
         "Runny nose",
+        "Tiredness",
         "Blocked nose",
         "Smell loss",
         "Muscle Pain"
@@ -57,7 +59,7 @@ function HealthStatus(props) {
         i += 1
     }
 
-    const updateHealthDeclaration = () =>{
+    const updateHealthDeclaration = () => {
         console.log(health)
     }
 
@@ -67,18 +69,24 @@ function HealthStatus(props) {
                 <Row>
                     <Header>Your Health Status</Header>
                     <Form>
+                        <FieldBig class={{flexBasis: "100%"}}>
+                            <label htmlFor="doctor">Doctor</label>
+                            <select id="doctor">
+
+                                <option value="TYasd">TYasd</option>
+
+                            </select>
+                        </FieldBig>
                         {render}
                         <TextAreaField>
-                        <h2>Other Symptoms</h2>
-                        <textarea name="other" id="other" onChange={onChange}>
+                            <h2>Other Symptoms</h2>
+                            <textarea name="other" id="other" onChange={onChange}>
 
-                        </textarea>
+                            </textarea>
                         </TextAreaField>
                     </Form>
+                    <a className="button green " onClick={updateHealthDeclaration}>Save</a>
                 </Row>
-                <Row>
-                <a className="button green " onClick={updateHealthDeclaration}>Save</a>
-            </Row>
             </Container>
         </div>
     )
