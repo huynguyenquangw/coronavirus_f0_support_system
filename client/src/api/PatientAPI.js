@@ -11,7 +11,7 @@ function PatientAPI(token) {
 
 
     const getInfo = async () => {
-        try {
+        // try {
             const response = await axios.get(`http://localhost:3000/user/info`, {
                 headers: {
                     Authorization: token
@@ -24,9 +24,9 @@ function PatientAPI(token) {
             if (response.data.role === 0) {
                 setPatient(true)
             }
-        } catch (error) {
-            alert(error.response.data.msg)
-        }
+        // } catch (error) {
+        //     console.log(error.response.data.msg)
+        // }
 
     }
 

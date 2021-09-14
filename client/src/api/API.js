@@ -10,7 +10,7 @@ export default function DistrictAPI() {
             setDistrict(response.data)
 
         } catch (error){
-            alert(error.response.data.msg)
+            console.log(error.response.data.msg)
         }
         
     }

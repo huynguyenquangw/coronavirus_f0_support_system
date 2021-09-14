@@ -1,4 +1,4 @@
-import React, { Component, useContext, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import profile from '../../assets/images/profile.svg'
 import photoEdit from '../../assets/icons/profile-picture-edit.svg'
@@ -139,7 +139,7 @@ function ProfilePicture({ info, token, callback, setCallback }) {
     return (
 
         <Container>
-            <PhotoContainer style={{ backgroundImage: `url(${info.img?.url !== "" ? info.img?.url : profile})` }}>
+            <PhotoContainer style={{ backgroundImage: `url(${info.img?.url || profile})` }}>
                 <ActionContainer htmlFor="photo-upload">
                     <PhotoAction src={photoEdit} />
                 </ActionContainer>

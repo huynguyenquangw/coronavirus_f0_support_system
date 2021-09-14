@@ -11,11 +11,15 @@ import chatBlue from '../assets/icons/chat-blue.svg'
 import dashboard from '../assets/icons/dashboard.svg'
 import dashboardActive from '../assets/icons/dashboard-active.svg'
 import dashboardBlue from '../assets/icons/dashboard-blue.svg'
+import prescriptions from '../assets/icons/prescriptions.svg'
+import prescriptionsActive from '../assets/icons/prescriptions-active.svg'
+import prescriptionsBlue from '../assets/icons/prescriptions-blue.svg'
 
 import Dashboard from '../doctor-components/Dashboard/Dashboard'
 import Profile from '../doctor-components/Profile/Profile'
 import Patients from '../doctor-components/Patients/Patients'
 import PatientChat from  '../doctor-components/Patient Chat/PatientsChat'
+import Prescriptioning from '../doctor-components/Prescriptions/Prescriptioning'
 
 const SourceUrl = "/doctor"
 
@@ -42,7 +46,12 @@ const PatientSidebarItems = [
         {title: 'Patient Chat', 
         component: PatientChat,
         icon: chat , icon_active: chatActive , icon_blue: chatBlue,
-        link:  '/chat'}        
+        link:  '/chat'},
+        
+        {title: 'Add Prescriptions', 
+        component: Prescriptioning,
+        icon: prescriptions , icon_active: prescriptionsActive , icon_blue: prescriptionsBlue,
+        link: '/prescriptions'}
     ];
 
     for (let i = 0; i<PatientSidebarItems.length;i++) {

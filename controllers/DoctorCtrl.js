@@ -142,7 +142,7 @@ const DoctorCtrl = {
         },
       );
 
-      res.json({ rf_token });
+      // res.json({ rf_token });
     } catch (error) {
       return res.status(500).json({ msg: error.message });
     }

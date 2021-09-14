@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import profile from '../../assets/images/profile.svg'
 import photoEdit from '../../assets/icons/profile-picture-edit.svg'
@@ -19,7 +19,12 @@ const PhotoContainer = styled.div`
     height: 40vw;
     width: 40vw;
     border-radius: 15%;
+
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 101% auto;
 `
+
 const ActionContainer = styled.label`
 `
 
@@ -36,41 +41,29 @@ const PhotoAction = styled.img`
         width: 3rem;
     }
 `
-function ProfilePicture() {
+function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDoctor }) {
 
-    const [url, setUrl] = useState("");
-    const [publicId, setPublicId] = useState("");
+    const [cloudinary, setCloudinary] = useState({
+        url: "",
+        public_id: ""
+    })
 
     const endPoint = "http://localhost:3000"
-    let userProfilePicture = localStorage.getItem("userProfilePicture")
 
-    const editImage = (e) => {
-        if (localStorage.getItem("userProfilePicture")) {
+    const editImage = async (e) => {
+        e.preventDefault()
 
-            // //destroy
-            // let dataDelete = new FormData()
-            // dataDelete.append("public_id", userProfilePicture)
-
-            // fetch(endPoint + "/api/destroy", {
-            //     method: 'POST',
-            //     body: dataDelete
-            // })
-            //     .then(resp => resp.json())
-            //     .then(data => {
-            //         console.log(data)
-            //     })
-            //     .catch(err => console.log(err))
-            // localStorage.removeItem("userProfilePicture")
+        if (cloudinary.url !== "") {
             //delete
             let dataDelete = new FormData()
-            dataDelete.append("public_id", userProfilePicture)
+            dataDelete.append("public_id", cloudinary.public_id)
 
             axios.post(endPoint + "/api/destroy", dataDelete)
                 .then(response => {
                     console.log(response.data)
+                    toast("Old profile picture has been removed")
                 })
                 .catch(error => toast(error.request));
-                localStorage.removeItem("userProfilePicture")
         }
 
         //upload
@@ -78,78 +71,74 @@ function ProfilePicture() {
         let dataUpload = new FormData()
         dataUpload.append("file", file)
 
-        axios.post(endPoint + "/api/upload", dataUpload)
-            .then(response => {
-                console.log(response.data)
-                setUrl(response.data.url)
-                localStorage.setItem("userProfilePicture", response.data.url)
-            })
-            .catch(error => toast(error.request));
+        try {
+            const response = await axios.post(endPoint + "/api/upload", dataUpload)
+            console.log(response.data)
+            setCloudinary(response.data)
+            updateImage(response.data)
+            toast("New profile picture has been updated")
+        } catch (error) {
+            toast(error.response.data.msg)
+
+        }
+
+        // await axios.post(endPoint + "/api/upload", dataUpload)
+        //     .then(response => {
+        //         console.log(response.data)
+        //         setCloudinary(response.data)
+        //         console.log(cloudinary)
+
+        //         setDisplay(cloudinary.url)
+        //     })
+        //     .catch(error => toast(error.request));
 
     }
 
-    const updateImage = () => {
-        let imgData = new FormData()
-        imgData.append("url", url)
-        imgData.append("public_id", publicId)
+    const updateImage = async (cloudinary) => {
 
-
-        axios.post(endPoint + "/api/upload", imgData)
-            .then(response => {
-                console.log(response.data)
-                window.location.reload()
-                setUrl(response.data.url)
-                localStorage.setItem("userProfilePicture", response.data.url)
+        try {
+            await fetch("http://localhost:3000/doctor/update", {
+                method: 'PUT',
+                headers: {
+                    "Authorization": doctorToken,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "img": {
+                        url: cloudinary.url,
+                        public_id: cloudinary.public_id
+                    },
+                    "name": document.getElementById("name").value,
+                    "district": {
+                        "_id": document.getElementById("district").value,
+                    },
+                    "phone": document.getElementById("phone").value,
+                    "experience": document.getElementById("experience").value,
+                    certificate: doctorInfo.certificate,
+                })
             })
-            .catch(error => toast(error.request));
+                .then(resp => resp.json())
+                .then(data => {
+                    toast(data.msg)
+                })
+                .then(setCallbackDoctor(!callbackDoctor))
+        } catch (error) {
+            toast(error.response)
+        }
 
 
-        fetch(endPoint + "/user/update", {
-            method: 'PUT',
-            headers: {
-                "Authorization": localStorage.getItem("token"),
-                'Content-Type': 'application/json'
-            },
-            body:JSON.stringify({
-                "name": "Huy",
-                "email": "entaimagi@gmail.com",
-                "district": "6125505773f4275ea38c9b81",
-                "phone": "1234567890",
-                "img": {
-                  "url": "https://res.cloudinary.com/lwk/image/upload/v1630578984/lwk/nxkfwggukje3hahoacln.jpg",
-                  "public_id": "lwk/nxkfwggukje3hahoacln"
-                }
-              })
-        })
-            .then(resp => resp.json())
-            .then(data => {
-                console.log(data)
-            })
-            .catch(err => console.log(err))
     }
 
-    let DisplayPhoto = ""
-
-    if (userProfilePicture) {
-        DisplayPhoto = userProfilePicture
-    } else {
-        DisplayPhoto = profile
-    }
-
-    let PhotoCSS = {
-        backgroundImage: 'url(' + DisplayPhoto + ')',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: '50% 50%',
-        backgroundSize: '101% auto'
-    };
-
-    console.log(publicId)
-
+    useEffect(() => {
+        if (doctorInfo.img) {
+            setCloudinary(doctorInfo.img)
+        }
+    }, [])
 
     return (
 
         <Container>
-            <PhotoContainer style={PhotoCSS}>
+            <PhotoContainer style={{ backgroundImage: `url(${doctorInfo.img?.url || profile})` }}>
                 <ActionContainer htmlFor="photo-upload">
                     <PhotoAction src={photoEdit} />
                 </ActionContainer>
@@ -159,7 +148,7 @@ function ProfilePicture() {
                 id="photo-upload"
                 type="file"
                 onChange={editImage}></input>
-            <button onClick={updateImage}>Update</button>
+
 
         </Container>
     )

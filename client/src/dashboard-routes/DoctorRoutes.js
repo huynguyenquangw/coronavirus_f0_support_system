@@ -9,10 +9,12 @@ function PatientRoutes() {
 
     const AllRoute = []
 
-
-    for (let i = 0; i < DoctorSidebarItems.length; i++) {
-        AllRoute.push(<Route key={DoctorSidebarItems[i].icon} path={DoctorSidebarItems[i].link} exact component={DoctorSidebarItems[i].component} />)
+    if (DoctorSidebarItems && DoctorSidebarItems.length > 0) {
+        for (let i = 0; i < DoctorSidebarItems.length; i++) {
+            AllRoute.push(<Route key={DoctorSidebarItems[i].icon} path={DoctorSidebarItems[i].link} exact component={DoctorSidebarItems[i].component} />)
+        }
     }
+
 
     return (
 

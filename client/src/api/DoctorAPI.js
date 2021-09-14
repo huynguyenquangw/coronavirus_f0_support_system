@@ -9,7 +9,7 @@ function DoctorAPI(doctorToken) {
     const [doctorInfo, setDoctorInfo] = useState([])
 
     const getDoctorInfo = async () => {
-        try {
+        // try {
             const response = await axios.get("http://localhost:3000/doctor/info", {
                 headers: {
                     Authorization: doctorToken
@@ -18,9 +18,9 @@ function DoctorAPI(doctorToken) {
             console.log(response.data)
             setDoctorInfo(response.data)
             setDoctor(true)            
-        } catch (error) {
-            alert(error.response.data.msg)
-        }
+        // } catch (error) {
+        //     console.log(error.response.data.msg)
+        // }
 
     }
 

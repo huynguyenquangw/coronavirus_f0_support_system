@@ -3,6 +3,7 @@ import DistrictAPI from './api/API'
 import PatientAPI from './api/PatientAPI'
 import DoctorAPI from './api/DoctorAPI'
 import GetAllPatient from './api/GetAllPatient'
+import GetAllDoctor from './api/GetAllDoctor'
 
 export const GlobalState = createContext()
 
@@ -47,7 +48,8 @@ export const DataProvider = ({ children }) => {
         districtAPI: DistrictAPI(),
         patientAPI: PatientAPI(token),
         doctorAPI: DoctorAPI(doctorToken),
-        getAllPatientAPI: GetAllPatient()
+        getAllPatientAPI: GetAllPatient(),
+        getAllDoctorAPI: GetAllDoctor()
     }
 
     return (
