@@ -74,6 +74,7 @@ function Prescriptioning() {
             await axios.post('http://localhost:3000/form', { ...prescriptionForm }, {
                 headers: { Authorization: doctorToken }
             })
+            toast("New prescriptions created")
         } catch (error) {
             toast(error.response.data.msg)
         }
@@ -93,7 +94,7 @@ function Prescriptioning() {
             <Row>
                 <Header>New Prescription</Header>
                 <Form>
-                    <FieldBig style={{ flexBasis: "100%" }}>
+                    <FieldBig>
                         <label htmlFor="user_id">Patient in {doctorInfo.district?.name}</label>
                         <select id="user_id" name="user_id" value={prescriptionForm.user_id} onChange={handleChange}>
                             <option>Select Patient</option>
@@ -104,55 +105,72 @@ function Prescriptioning() {
                     </FieldBig>
 
                     <TextAreaField>
-                        <h2>Diagnostic</h2>
+                        <label htmlFor="diagnostic">Diagnostic</label>
                         <textarea name="diagnostic" id="diagnostic" onChange={handleChange}></textarea>
                     </TextAreaField>
 
-                    <div className='medincine-container'>
+                    <div className='medicine-container'>
                         <div className="medicine-controller">
-                            <select name="medicine" value={prescriptionMedicine.medicine} onChange={handleChangeMedicine}>
-                                <option>Select Medicine</option>
-                                {medicines.map(i =>
-                                    <option key={i._id} value={i._id}>{i.name}</option>
-                                )}
-                            </select>
-
-                            <label htmlFor="quantity">Quantity</label>
-                            <input type="number" name="quantity"
-                                value={prescriptionMedicine.quantity}
-                                onChange={handleChangeMedicine}
-                                onKeyUp={handleKeyUp}
-                            />
-
-                            <label htmlFor="frequency">Dosage</label>
-                            <input type="text" name="frequency"
-                                value={prescriptionMedicine.frequency}
-                                onChange={handleChangeMedicine}
-                                onKeyUp={handleKeyUp}
-                            />
-
-                            <button onClick={addNewMedicine}>Add Medicine</button>
+                            <div style={{ flexBasis: "30%" }}>
+                                <select name="medicine" value={prescriptionMedicine.medicine} onChange={handleChangeMedicine}>
+                                    <option>Select Medicine</option>
+                                    {medicines.map(i =>
+                                        <option key={i._id} value={i._id}>{i.name}</option>
+                                    )}
+                                </select>
+                            </div>
+                            <div style={{ flexBasis: "10%" }}>
+                                <label htmlFor="quantity">Quantity</label>
+                                <input type="number" name="quantity"
+                                    value={prescriptionMedicine.quantity}
+                                    onChange={handleChangeMedicine}
+                                    onKeyUp={handleKeyUp}
+                                />
+                            </div>
+                            <div style={{ flexBasis: "40%" }}>
+                                <label htmlFor="frequency">Dosage</label>
+                                <input type="text" name="frequency"
+                                    value={prescriptionMedicine.frequency}
+                                    onChange={handleChangeMedicine}
+                                    onKeyUp={handleKeyUp}
+                                />
+                            </div>
+                            <div style={{ flexBasis: "10%" }}>
+                                <a className="button blue" onClick={addNewMedicine}>Add Medicine</a>
+                            </div>
                         </div>
 
-                        <div className="medicine-display">
-                            {prescriptionForm.prescriptions.length > 0 && prescriptionForm.prescriptions.map(i => (
-                                <>
-                                    {medicines.filter(f => f._id === i.medicine).map(m => (
-                                        <div>
-                                            {m.name} - {m.type}
-                                        </div>
-                                    ))}
-                                    -{i.quantity}-
-                                    {i.frequency}
-                                </>
-                            ))}
-                        </div>
+
+                    </div>
+                    <div className="medicine-display">
+                        {prescriptionForm.prescriptions.length > 0 && prescriptionForm.prescriptions.map(i => (
+                            <h2>
+                                {medicines.filter(f => f._id === i.medicine).map(m => (
+
+                                    <span style={{ flexBasis: "30%" }}>
+                                        {m.name} - {m.type}
+                                    </span>
+
+                                ))}
+                                <span style={{ flexBasis: "8%" }}>
+                                {i.quantity}
+                                </span>
+                                <span style={{ flexBasis: "43%" }}>
+                                {i.frequency}
+                                </span>
+                                <span style={{ flexBasis: "10%" }}></span>
+                            </h2>
+                        ))}
                     </div>
 
-                    <div className="medicine-note">
+                    {/* <div className="medicine-note">
                         medicine note
                         <textarea name="note" id="note" onChange={handleChange}></textarea>
-                    </div>
+                    </div> */}
+                    <TextAreaField>
+                        <label htmlFor="note">Notes for patient</label>
+                        <textarea name="note" id="note" onChange={handleChange}></textarea>
+                    </TextAreaField>
                 </Form>
                 <a className="button green " onClick={saveMedicineForm}>Save</a>
             </Row>
