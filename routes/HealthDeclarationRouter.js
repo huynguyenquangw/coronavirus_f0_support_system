@@ -1,22 +1,24 @@
 const router = require('express').Router()
 const HealthDeclarationCtrl = require('../controllers/HealthDeclarationCtrl')
 const auth = require('../middleware/auth')
-const authAdmin = require('../middleware/authAdmin')
+const authDoctor = require('../middleware/authDoctor')
 
 //Create a health declaration form
 router.post('/add', auth, HealthDeclarationCtrl.add)
 
+//Get Health Declaration for patient
+router.get('/user', auth, HealthDeclarationCtrl.getHealthDeclarationForPatient)
 
-//Get Health Declaration by id
-router.get('/info/:id', auth, HealthDeclarationCtrl.getHealthDeclaration)
+//Get Health Declaration for doctor
+router.get('/doctor', authDoctor, HealthDeclarationCtrl.getHealthDeclarationForDoctor)
 
 //Get all Health declarations
 router.get('/', HealthDeclarationCtrl.getAllHealthDeclaration)
 
 //Update Health Declaration by id
-router.put('/update/:id', auth, authAdmin,  HealthDeclarationCtrl.updateHealthDeclarationByID)
+router.put('/update/:id', auth, HealthDeclarationCtrl.updateHealthDeclarationByID)
 
 //Delete by Health Declaration id
-router.delete('/delete/:id', auth, authAdmin, HealthDeclarationCtrl.deleteHealthDeclarationByID)
+router.delete('/delete/:id', auth, HealthDeclarationCtrl.deleteHealthDeclarationByID)
 
 module.exports = router

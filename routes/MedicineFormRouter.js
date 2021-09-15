@@ -7,8 +7,10 @@ const authAdmin = require("../middleware/authAdmin");
 //Add new
 router.post("/", authDoctor, medicineFormCtrl.addMedicineForm);
 
-//Get all
-router.get("/", authDoctor, medicineFormCtrl.getAllMedicineForms);
+//Get all medicineform for doctor
+router.get("/doctor", authDoctor, medicineFormCtrl.getAllMedicineFormsForDoctor);
+//Get all medicineform for patient
+router.get("/user", auth, medicineFormCtrl.getAllMedicineFormsForPatient);
 
 // Delete form by id
 router.delete(

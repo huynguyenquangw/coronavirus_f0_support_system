@@ -61,7 +61,7 @@ const HealthDeclarationCtrl = {
 
             const doctor = await Doctors.findById({ _id: doctor_id })
             if (!doctor) return res.status(400).json({ msg: "The doctor does not exist." })
-            
+
             // Objectid of User is automatically filled in when the user logs in
             const newHealthDeclaration = new HealthDeclaration(
                 {
@@ -82,14 +82,42 @@ const HealthDeclarationCtrl = {
         }
     },
 
-    // Get a Health Declaration by ID
-    getHealthDeclaration: async (req, res) => {
+    // Get a Health Declaration for Patient
+    getHealthDeclarationForPatient: async (req, res) => {
         try {
-           // const healthdeclaration = await HealthDeclaration.findById(req.healthdeclaration.id)
-           const healthdeclaration = await HealthDeclaration.findById(req.params.id)
+            const features = new APIfeatures(HealthDeclaration.find({ user_id: req.user.id }), req.query)
+                .filter().sort().paginate()
+
+            const healthdeclaration = await features.query
+
             if (!healthdeclaration) return res.status(400).json({ msg: 'Health Declaration does not exist.' })
 
-            res.json(healthdeclaration)
+            res.json({
+                status: 'Success',
+                results: healthdeclaration.length,
+                data: healthdeclaration
+            })
+
+        } catch (error) {
+            return res.status(500).json({ msg: error.message })
+        }
+    },
+
+    // Get a Health Declaration for Doctor
+    getHealthDeclarationForDoctor: async (req, res) => {
+        try {
+            const features = new APIfeatures(HealthDeclaration.find({ doctor_id: req.doctor.id }), req.query)
+                .filter().sort().paginate()
+
+            const healthdeclaration = await features.query
+
+            if (!healthdeclaration) return res.status(400).json({ msg: 'Health Declaration does not exist.' })
+
+            res.json({
+                status: 'Success',
+                results: healthdeclaration.length,
+                data: healthdeclaration
+            })
 
         } catch (error) {
             return res.status(500).json({ msg: error.message })
@@ -134,7 +162,7 @@ const HealthDeclarationCtrl = {
             return res.status(500).json({ msg: error.message })
         }
     },
-    
+
     //Delete by ID
     deleteHealthDeclarationByID: async (req, res) => {
         try {

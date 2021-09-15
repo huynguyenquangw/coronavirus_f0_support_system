@@ -45,11 +45,31 @@ const MedicineFormCtrl = {
   },
 
   /**
-   * Get all district
+   * Get all medicine
    */
-  getAllMedicineForms: async (req, res) => {
+  getAllMedicineFormsForDoctor: async (req, res) => {
     try {
       const forms = await MedicineForms.find({ doctor_id: req.doctor.id })
+        .populate({
+          path: "user_id", select: "-_id -__v",
+        })
+        .populate({
+          path: "doctor_id", select: "-_id -__v",
+        })
+        .populate({
+          path: "prescriptions", select: "-_id -__v",
+          populate: { path: "medicine", select: "-_id -__v" }
+        });
+      if (!forms) return res.status(400).json({ msg: "NOT found!" });
+
+      res.json(forms);
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
+  getAllMedicineFormsForPatient: async (req, res) => {
+    try {
+      const forms = await MedicineForms.find({ user_id: req.user.id })
         .populate({
           path: "user_id", select: "-_id -__v",
         })

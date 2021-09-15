@@ -5,13 +5,11 @@ const HealthDeclarationSchema = mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Users',
         required: true,
-       
     },
     doctor_id: {
         type:mongoose.Schema.Types.ObjectId,
         ref:'Doctors', 
         required: true,
-        
     },
     fever: {
         type: Boolean,
