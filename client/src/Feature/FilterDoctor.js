@@ -2,18 +2,24 @@ import React, { useContext, useEffect, useState } from 'react'
 import { GlobalState } from '../GlobalState'
 import './FilterPatient.css'
 import { toast } from 'react-toastify'
+import axios from 'axios'
 
 export default function FilterDoctor() {
     const state = useContext(GlobalState)
-    const [data] = state.getAllDoctorAPI.doctors
+    const [realDoctorDataLength, setRealDoctorDataLength] = useState(0)
     const [districts] = state.districtAPI.district
     const [search, setSearch] = state.getAllDoctorAPI.search
     const [page, setPage] = state.getAllDoctorAPI.page
     const [filter, setFilter] = state.getAllDoctorAPI.filter
     const [limit, setLimit] = state.getAllDoctorAPI.limit
 
-    console.log(data.length)
-    const totalPages = Math.ceil(data.length / (limit * 5) + 1)
+    const totalPages = Math.ceil(realDoctorDataLength / (limit * 5))
+
+    const getAll = async () => {
+        const response = await axios.get(`http://localhost:3000/doctor?limit=999999999`)
+        setRealDoctorDataLength(response.data.data.length)
+    }
+
     const pageIncrease = () => {
         if (page > 0 && page !== totalPages) {
             setPage(i => i + 1)
@@ -27,6 +33,7 @@ export default function FilterDoctor() {
     }
 
     useEffect(() => {
+        getAll()
         setLimit(1)
     }, [])
 
