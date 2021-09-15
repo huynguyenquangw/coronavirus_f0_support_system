@@ -6,14 +6,17 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import { useState, useEffect } from "react";
 import { GlobalState } from '../../GlobalState';
+import FilterDoctor from '../../Feature/FilterDoctor';
 
 function Doctors(props) {
     const state = useContext(GlobalState)
     const [token, setToken] = state.token
+    const [data,setData] = state.getAllDoctorAPI.doctors
+    const [sort, setSort] = state.getAllDoctorAPI.sort
+    console.log(sort)
     console.log((token))
     const endPoint = "http://localhost:3000"
-    const [data, setData] = useState([]);
-
+    const history = useHistory()
     const [doctor, setDoctor] = useState({
         name: '',
         email: '',
@@ -44,7 +47,7 @@ function Doctors(props) {
                         })
             load()
             toast(`Doctor ${doctor.email} has been successfully registered !`)
-
+            history.push('/admin/doctors')
         } catch (error) {
             toast(error.response.data.msg)
             toast(error.response.data.msg)
@@ -60,9 +63,7 @@ function Doctors(props) {
     }
 
     const load = () => {
-        fetch(endPoint + "/doctor?limit=999999999")
-            .then(response => response.json())
-            .then(item => setData(item.data));
+        
     }
 
     //load data automatically
@@ -88,12 +89,46 @@ function Doctors(props) {
             </div>
 
             <h2 class="list"> Doctor List</h2>
+            <FilterDoctor/>
             <div >
                 <table style={{ width: "100%" }}>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
+                    <th>
+                            {sort === '' || sort === 'sort=+name' || sort === undefined
+                                ? <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                    value="sort=-name" onClick={e => setSort(e.target.value)}>
+                                    Name <i className="fas fa-arrow-down"></i>
+                                </button>
+                                : <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                    value="sort=+name" onClick={e => setSort(e.target.value)}>
+                                    Name <i className="fas fa-arrow-up"></i>
+                                </button>
+                            }
+                        </th>
+                        <th>
+                            {sort === '' || sort === 'sort=+email' || sort === undefined
+                                ? <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                    value="sort=-email" onClick={e => setSort(e.target.value)}>
+                                    Email <i className="fas fa-arrow-down"></i>
+                                </button>
+                                : <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                    value="sort=+email" onClick={e => setSort(e.target.value)}>
+                                    Email <i className="fas fa-arrow-up"></i>
+                                </button>
+                            }
+                        </th>
+                        <th>
+                            {sort === '' || sort === 'sort=+phone' || sort === undefined
+                                ? <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                    value="sort=-phone" onClick={e => setSort(e.target.value)}>
+                                    Phone <i className="fas fa-arrow-down"></i>
+                                </button>
+                                : <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                    value="sort=+phone" onClick={e => setSort(e.target.value)}>
+                                    Phone <i className="fas fa-arrow-up"></i>
+                                </button>
+                            }
+                        </th>
                         <th>District</th>
                     </tr>
                     {data.map(i => (
