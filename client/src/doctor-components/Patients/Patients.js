@@ -5,24 +5,53 @@ import { GlobalState } from '../../GlobalState';
 // import "./patient.css"
 function Patients(props) {
     const state = useContext(GlobalState)
-    const [data,setData] = state.getAllPatientAPI.patients
-    console.log(data)
-
-
-  
+    const [data] = state.getAllPatientAPI.patients
+    const [sort, setSort] = state.getAllPatientAPI.sort
+    console.log(sort)
 
     return (
         <div>
-            {/* <h1 style={{fontSize: "10em"}}>Patients</h1> */}
-
-            <FilterPatient/>
-            <h2 class="list"> Patient List</h2>
+            <h2 className="list"> Patient List</h2>
+            <FilterPatient />
             <div >
                 <table style={{ width: "100%" }}>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
+                        <th>
+                            {sort === '' || sort === 'sort=+name' || sort === undefined
+                                ? <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                    value="sort=-name" onClick={e => setSort(e.target.value)}>
+                                    Name <i className="fas fa-arrow-down"></i>
+                                </button>
+                                : <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                    value="sort=+name" onClick={e => setSort(e.target.value)}>
+                                    Name <i className="fas fa-arrow-up"></i>
+                                </button>
+                            }
+                        </th>
+                        <th>
+                            {sort === '' || sort === 'sort=+email' || sort === undefined
+                                ? <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                    value="sort=-email" onClick={e => setSort(e.target.value)}>
+                                    Email <i className="fas fa-arrow-down"></i>
+                                </button>
+                                : <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                    value="sort=+email" onClick={e => setSort(e.target.value)}>
+                                    Email <i className="fas fa-arrow-up"></i>
+                                </button>
+                            }
+                        </th>
+                        <th>
+                            {sort === '' || sort === 'sort=+phone' || sort === undefined
+                                ? <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                    value="sort=-phone" onClick={e => setSort(e.target.value)}>
+                                    Phone <i className="fas fa-arrow-down"></i>
+                                </button>
+                                : <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                    value="sort=+phone" onClick={e => setSort(e.target.value)}>
+                                    Phone <i className="fas fa-arrow-up"></i>
+                                </button>
+                            }
+                        </th>
                         <th>District</th>
                         <th>City</th>
 
@@ -40,7 +69,7 @@ function Patients(props) {
 
                 </table>
             </div>
-        
+
         </div>
     )
 }

@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
 import Layout from '../Layout'
-
+import { GlobalState } from '../GlobalState'
 import DoctorSidebarItems from '../sidebar/DoctorSidebarItems'
+import Chat from '../chat/Chat'
 
 function PatientRoutes() {
+    const state = useContext(GlobalState)
+    const [doctorInfo] = state.doctorAPI.doctorInfo
+    const [isDoctor] = state.doctorAPI.doctor
 
     const AllRoute = []
 
@@ -20,6 +23,7 @@ function PatientRoutes() {
 
         <Route render={(props) => (
             <Layout {...props}>
+                <Chat isDoctor={isDoctor} doctorInfo={doctorInfo} />
                 <Switch>
                     {AllRoute}
                 </Switch>

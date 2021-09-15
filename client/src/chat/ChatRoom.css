@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-    width: 4px;
+    width: 1px;
     scroll-behavior: smooth;
 }
 ::-webkit-scrollbar-thumb {
@@ -22,7 +22,12 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    overflow: hidden;
+    /* overflow: hidden; */
+    background-color: #fff;
+    transition: 0.25s ease;
+}
+.chat-room-container.active {
+    transform: translateY(90%);
 }
 .chat-header {
     background-color: #fff;
@@ -35,6 +40,24 @@
     box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px 0;
     font-size: 0.8rem;
     z-index: 1;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.btn-toggle {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-right: 5px;
+}
+.btn-toggle button {
+    background-color: #fff;
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 .logo {
     display: flex;
@@ -45,12 +68,41 @@
 .chat-header p {
     margin-right: 10px;
 }
-
+.notifi {
+    background-color: #f54b56;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 50%;
+    color: white;
+    animation: noti 2s linear infinite;
+}
+@keyframes noti {
+    0% {
+        transform: scale(1);
+    }
+    20% {
+        transform: scale(1);
+        background-color: #f54b56ea;
+    }
+    50% {
+        transform: scale(1.1);
+        background-color: red;
+    }
+    60% {
+        transform: scale(1.05);
+        background-color: rgba(255, 0, 0, 0.89);
+    }
+    75% {
+        transform: scale(1.15);
+    }
+}
 /* message box */
 .messages-container {
     /* background-color: #aaa; */
     padding: 5px;
-    width: 100%;
+    width: 97%;
     height: 330px;
     overflow: hidden;
     overflow-y: auto;
@@ -77,8 +129,9 @@
     grid-template-columns: 70%;
     /* background-color: red; */
     margin-bottom: 1rem;
+    padding-right: 5px;
 }
-.message-title span{
+.message-title span {
     text-transform: capitalize;
     font-size: 0.8rem;
 }
@@ -121,15 +174,15 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
+    /* justify-content: space-between; */
     height: 50px;
-    padding: 10px 8px 0;
+    padding-top: 10px;
+    padding-left: 5px;
     margin-bottom: 10px;
     z-index: 1;
 }
 .chat-room-container .input-container textarea {
-    width: 100%;
+    width: 80%;
     outline: none;
     border: 1px solid rgba(128, 128, 128, 0.3);
     border-radius: 10px;

@@ -9,57 +9,53 @@ import LoginPortal from './home-components/LoginPortal';
 import LoginPatient from './home-components/LoginPatient';
 import LoginDoctor from './home-components/LoginDoctor';
 import LoginAdmin from './home-components/LoginAdmin'
-import Home from './chat/Home'
 
 import { useContext } from 'react';
-import {GlobalState} from './GlobalState'
+import { GlobalState } from './GlobalState'
 import NotFound from './NotFound'
 
 function Routes() {
 
-    const state = useContext(GlobalState)
-    const [admin] = state.patientAPI.admin
-    const [patient] = state.patientAPI.patient
-    const [doctor] = state.doctorAPI.doctor
+  const state = useContext(GlobalState)
+  const [admin] = state.patientAPI.admin
+  const [patient] = state.patientAPI.patient
+  const [doctor] = state.doctorAPI.doctor
 
-    return (
-        <Router>
-        <div>
-          <Switch>
-            <Route exact path="/">
-              <HomePage />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route>
-            <Route path="/login-portal">
-              <LoginPortal />
-            </Route>
-            <Route path="/login-patient">
-              <LoginPatient />
-            </Route>
-            <Route path="/login-doctor">
-              <LoginDoctor />
-            </Route>
-            <Route path="/admin-login">
-              <LoginAdmin />
-            </Route>
-            <Route path="/patient">
-            {patient ? <PatientRoutes /> : <NotFound/>}  
-            </Route>
-            <Route path="/doctor">
-            {doctor ? <DoctorRoutes /> : <NotFound/>}
-            </Route>
-            <Route path="/admin">
-              {admin ? <AdminRoutes /> : <NotFound/>}
-            </Route>
-            <Route path="/chathome">
-              <Home />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    )
+  return (
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/login-portal">
+            <LoginPortal />
+          </Route>
+          <Route path="/login-patient">
+            <LoginPatient />
+          </Route>
+          <Route path="/login-doctor">
+            <LoginDoctor />
+          </Route>
+          <Route path="/admin-login">
+            <LoginAdmin />
+          </Route>
+          <Route path="/patient">
+            {patient ? <PatientRoutes /> : <NotFound />}
+          </Route>
+          <Route path="/doctor">
+            {doctor ? <DoctorRoutes /> : <NotFound />}
+          </Route>
+          <Route path="/admin">
+            {admin ? <AdminRoutes /> : <NotFound />}
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  )
 }
 
 export default Routes

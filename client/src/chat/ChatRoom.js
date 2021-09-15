@@ -9,6 +9,8 @@ const ChatRoom = ({ doctors, isWho, currentPatient, roomId, setRoomId, pop, setP
     const { messages, sendMessage } = useChat(roomId);
     const [newMessage, setNewMessage] = useState("");
     const [currentDoctor, setCurrentDoctor] = useState([])
+    const [open, setOpen] = useState(false)
+    const [oldMessageLength, setOldMessageLength] = useState(0)
     const messageRef = useRef()
 
     const handleNewMessageChange = (event) => {
@@ -30,6 +32,11 @@ const ChatRoom = ({ doctors, isWho, currentPatient, roomId, setRoomId, pop, setP
         }
     }
 
+    const isGotNewMessages = (array) => {
+        if (oldMessageLength < array.length) return true
+        else return false
+    }
+
     useEffect(() => {
         doctors.forEach(data => {
             if (data._id == roomId) setCurrentDoctor(data)
@@ -43,13 +50,14 @@ const ChatRoom = ({ doctors, isWho, currentPatient, roomId, setRoomId, pop, setP
         }
     }, [roomId, pop])
 
+    useEffect(() => {
+        setOldMessageLength(messages.length)
+    }, [open])
+
     useEffect(() => messageRef.current.scrollIntoView({ behavior: "smooth" }))
 
-    // console.log({ pop });
-    // console.log({ roomId });
-
     return (
-        <div className="chat-room-container">
+        <div className={open ? "chat-room-container" : "chat-room-container active"}>
             <div className="chat-header">
                 <div className="logo">
                     {isWho === 'isDoctor' ? (
@@ -62,9 +70,26 @@ const ChatRoom = ({ doctors, isWho, currentPatient, roomId, setRoomId, pop, setP
                         </>
                     )}
                 </div>
-                <p onClick={() => setRoomId(false)}>
-                    x
-                </p>
+
+                {!open && isGotNewMessages(messages) &&
+                    <div className="notifi">
+                        {messages.length - oldMessageLength}
+                    </div>}
+
+                <div className="btn-toggle">
+                    {open
+                        ? <button onClick={() => setOpen(false)}>
+                            -
+                        </button>
+                        : <button onClick={() => setOpen(true)}>
+                            +
+                        </button>
+                    }
+                    <button onClick={() => setRoomId(false)}>
+                        x
+                    </button>
+                </div>
+
             </div>
             <div className="messages-container">
                 <div className="wrapper">

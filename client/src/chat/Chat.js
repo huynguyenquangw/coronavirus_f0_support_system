@@ -5,7 +5,7 @@ import ChatRoom from "./ChatRoom";
 
 const api = "http://localhost:3000"
 
-const Home = ({ isDoctor, doctorInfo, isPatient, patientInfo }) => {
+const Chat = ({ isDoctor, doctorInfo, isPatient, patientInfo }) => {
     const [user, setUser] = useState([])
     const [roomId, setRoomId] = useState(false)
     const [pop, setPop] = useState(false)
@@ -48,4 +48,4 @@ const Home = ({ isDoctor, doctorInfo, isPatient, patientInfo }) => {
     );
 };
 
-export default Home;
+export default Chat;
