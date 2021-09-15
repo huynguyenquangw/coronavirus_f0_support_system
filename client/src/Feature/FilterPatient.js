@@ -10,7 +10,7 @@ export default function FilterPatient() {
     const [search, setSearch] = state.getAllPatientAPI.search
     const [page, setPage] = state.getAllPatientAPI.page
     const [filter, setFilter] = state.getAllPatientAPI.filter
-    const [limit] = state.getAllPatientAPI.limit
+    const [limit, setLimit] = state.getAllPatientAPI.limit
 
     const totalPages = Math.ceil(data.length / (limit * 5) + 1)
     const pageIncrease = () => {
@@ -24,6 +24,10 @@ export default function FilterPatient() {
     const pageDecrease = () => {
         if (page > 0) setPage(i => i - 1)
     }
+
+    useEffect(() => {
+        setLimit(1)
+    }, [])
 
     return (
         <div className='filter'>
