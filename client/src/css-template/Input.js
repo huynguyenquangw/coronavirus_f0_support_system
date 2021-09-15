@@ -84,7 +84,6 @@ export const CheckboxField = styled.div`
 export const TextAreaField = styled.div`
     flex-basis: 100%;
     box-sizing: border-box;
-    padding: 0.5rem 1rem;
 
     textarea{
         width: 100%;
