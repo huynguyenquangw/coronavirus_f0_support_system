@@ -3,15 +3,16 @@ import { GlobalState } from '../GlobalState'
 import './FilterPatient.css'
 import { toast } from 'react-toastify'
 
-export default function FilterPatient() {
+export default function FilterDoctor() {
     const state = useContext(GlobalState)
-    const [data] = state.getAllPatientAPI.patients
+    const [data] = state.getAllDoctorAPI.doctors
     const [districts] = state.districtAPI.district
-    const [search, setSearch] = state.getAllPatientAPI.search
-    const [page, setPage] = state.getAllPatientAPI.page
-    const [filter, setFilter] = state.getAllPatientAPI.filter
-    const [limit, setLimit] = state.getAllPatientAPI.limit
+    const [search, setSearch] = state.getAllDoctorAPI.search
+    const [page, setPage] = state.getAllDoctorAPI.page
+    const [filter, setFilter] = state.getAllDoctorAPI.filter
+    const [limit, setLimit] = state.getAllDoctorAPI.limit
 
+    console.log(data.length)
     const totalPages = Math.ceil(data.length / (limit * 5) + 1)
     const pageIncrease = () => {
         if (page > 0 && page !== totalPages) {
