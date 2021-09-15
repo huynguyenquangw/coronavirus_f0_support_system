@@ -4,6 +4,8 @@ import PatientAPI from './api/PatientAPI'
 import DoctorAPI from './api/DoctorAPI'
 import GetAllPatient from './api/GetAllPatient'
 import GetAllDoctor from './api/GetAllDoctor'
+import GetHealthDeclareForDoctor from './api/GetHealthDeclareForDoctor'
+
 
 export const GlobalState = createContext()
 
@@ -36,20 +38,21 @@ export const DataProvider = ({ children }) => {
         if (localStorage.getItem('isLogin')) {
             getrf()
         }
-        if (localStorage.getItem('isDoctorLogin')){
+        if (localStorage.getItem('isDoctorLogin')) {
             getDoctorRf()
         }
     }, [])
-    
+
 
     const state = {
         token: [token, setToken],
-        doctorToken : [doctorToken, setDoctorToken],
+        doctorToken: [doctorToken, setDoctorToken],
         districtAPI: DistrictAPI(),
         patientAPI: PatientAPI(token),
         doctorAPI: DoctorAPI(doctorToken),
         getAllPatientAPI: GetAllPatient(),
-        getAllDoctorAPI: GetAllDoctor()
+        getAllDoctorAPI: GetAllDoctor(),
+        getHealthDeclareForDoctor: GetHealthDeclareForDoctor(doctorToken)
     }
 
     return (

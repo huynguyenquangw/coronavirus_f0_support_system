@@ -85,7 +85,14 @@ const HealthDeclarationCtrl = {
     // Get a Health Declaration for Patient
     getHealthDeclarationForPatient: async (req, res) => {
         try {
-            const features = new APIfeatures(HealthDeclaration.find({ user_id: req.user.id }), req.query)
+            const features = new APIfeatures(HealthDeclaration.find({ user_id: req.user.id })
+                .populate({
+                    path: "doctor_id",
+                })
+                .populate({
+                    path: "medicineform_id",
+                }),
+                req.query)
                 .filter().sort().paginate()
 
             const healthdeclaration = await features.query
@@ -106,7 +113,14 @@ const HealthDeclarationCtrl = {
     // Get a Health Declaration for Doctor
     getHealthDeclarationForDoctor: async (req, res) => {
         try {
-            const features = new APIfeatures(HealthDeclaration.find({ doctor_id: req.doctor.id }), req.query)
+            const features = new APIfeatures(HealthDeclaration.find({ doctor_id: req.doctor.id })
+                .populate({
+                    path: "user_id",
+                })
+                .populate({
+                    path: "medicineform_id",
+                }),
+                req.query)
                 .filter().sort().paginate()
 
             const healthdeclaration = await features.query
@@ -137,6 +151,22 @@ const HealthDeclarationCtrl = {
             })
 
             res.json({ msg: `Health Declaration of Pt.${user_id} assigned to Doctor. ${doctor_id}has been updated.` })
+
+        } catch (error) {
+            return res.status(500).json({ msg: error.message })
+        }
+    },
+
+    //Update medicine ID for health declaration
+    updateMedicineForHealthDeclaration: async (req, res) => {
+        try {
+            const { medicineform_id, status } = req.body
+
+            await HealthDeclaration.findByIdAndUpdate({ _id: req.params.id }, {
+                medicineform_id, status
+            })
+
+            res.json({ msg: `Medicine ${medicineform_id} has been transferred to Health Declaration ${req.params.id}.` })
 
         } catch (error) {
             return res.status(500).json({ msg: error.message })

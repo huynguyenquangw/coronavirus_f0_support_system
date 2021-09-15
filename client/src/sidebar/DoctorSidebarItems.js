@@ -18,43 +18,58 @@ import prescriptionsBlue from '../assets/icons/prescriptions-blue.svg'
 import Dashboard from '../doctor-components/Dashboard/Dashboard'
 import Profile from '../doctor-components/Profile/Profile'
 import Patients from '../doctor-components/Patients/Patients'
-import PatientChat from  '../doctor-components/Patient Chat/PatientsChat'
+import PatientChat from '../doctor-components/Patient Chat/PatientsChat'
 import Prescriptioning from '../doctor-components/Prescriptions/Prescriptioning'
 
 const SourceUrl = "/doctor"
 
 const PatientSidebarItems = [
 
-        {title: 'Dashboard', 
+    {
+        title: 'Dashboard',
         component: Dashboard,
-        icon: dashboard, 
+        icon: dashboard,
         icon_active: dashboardActive, icon_blue: dashboardBlue,
-        link: '' },
+        link: ''
+    },
 
-        {title: 'Profile', 
+    {
+        title: 'Profile',
         component: Profile,
-        icon: profile , 
+        icon: profile,
         icon_active: profileActive, icon_blue: profileBlue,
-        link: '/profile'},
+        link: '/profile'
+    },
 
-        {title: 'Patients', 
+    {
+        title: 'Patients',
         component: Patients,
-        icon: patients , 
+        icon: patients,
         icon_active: patientsActive, icon_blue: patientsBlue,
-        link: '/patients'},
-        
-        {title: 'Patient Chat', 
-        component: PatientChat,
-        icon: chat , icon_active: chatActive , icon_blue: chatBlue,
-        link:  '/chat'},
-        
-        {title: 'Add Prescriptions', 
-        component: Prescriptioning,
-        icon: prescriptions , icon_active: prescriptionsActive , icon_blue: prescriptionsBlue,
-        link: '/prescriptions'}
-    ];
+        link: '/patients'
+    },
 
-    for (let i = 0; i<PatientSidebarItems.length;i++) {
-        PatientSidebarItems[i].link = SourceUrl + PatientSidebarItems[i].link
-    }
+    {
+        title: 'Healtth Declaration',
+        component: PatientChat,
+        icon: chat, icon_active: chatActive, icon_blue: chatBlue,
+        link: '/chat'
+    },
+
+    {
+        title: 'Add Prescriptions',
+        component: Prescriptioning,
+        icon: prescriptions, icon_active: prescriptionsActive, icon_blue: prescriptionsBlue,
+        link: '/prescriptions'
+    },
+
+    {
+        component: Prescriptioning,
+        link: '/prescriptions/medicine/:id'
+    },
+];
+
+for (let i = 0; i < PatientSidebarItems.length; i++) {
+    PatientSidebarItems[i].link = SourceUrl + PatientSidebarItems[i].link
+}
 export default PatientSidebarItems;

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { createElement, useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router'
 import { toast } from 'react-toastify'
 import { Container, Row, Header } from '../../css-template/DashboardMain'
 import { Container as Form, CheckboxField, TextAreaField, FieldBig } from "../../css-template/Input"
@@ -25,11 +26,15 @@ function Prescriptioning() {
     const [doctorInfo] = state.doctorAPI.doctorInfo
     const [patients] = state.getAllPatientAPI.patients
     const [limit, setLimit] = state.getAllPatientAPI.limit
+    const [healthDeclares] = state.getHealthDeclareForDoctor.healths
+    const [callback, setCallBack] = state.getHealthDeclareForDoctor.callback
 
     const [medicines, setMedicines] = useState([])
 
     const [prescriptionForm, setPrescriptionForm] = useState(initialState)
     const [prescriptionMedicine, setPrescriptionMedicine] = useState(medicineState)
+
+    const param = useParams()
 
     const handleChange = e => {
         const { name, value } = e.target
@@ -67,14 +72,33 @@ function Prescriptioning() {
         setPrescriptionMedicine(medicineState);
     }
 
+    const updateMedicine = async (data) => {
+        try {
+            if (param.id) {
+                await axios.put(`http://localhost:3000/health/update/medicine/${param.id}`, {
+                    medicineform_id: data,
+                    status: true
+                }, {
+                    headers: { Authorization: doctorToken }
+                })
+                setCallBack(!callback)
+                toast(`Prescriptions ID: ${data} has been transferred to Health Declaration ID: ${param.id}`)
+            }
+        } catch (error) {
+            toast(error.response.data.msg)
+        }
+    }
+
     //save medicine form
     const saveMedicineForm = async (e) => {
         e.preventDefault()
         try {
-            await axios.post('http://localhost:3000/form', { ...prescriptionForm }, {
+            const res = await axios.post('http://localhost:3000/form', { ...prescriptionForm }, {
                 headers: { Authorization: doctorToken }
             })
+            updateMedicine(res.data.data._id)
             toast("New prescriptions created")
+
         } catch (error) {
             toast(error.response.data.msg)
         }
@@ -82,10 +106,19 @@ function Prescriptioning() {
 
     useEffect(() => {
         setLimit(9999999)
-        setPrescriptionForm({ ...prescriptionForm, doctor_id: doctorInfo._id })
         getMedicine()
     }, [])
 
+    useEffect(() => {
+        if (param.id) {
+            healthDeclares.forEach(data => {
+                if (data._id == param.id) {
+                    setPrescriptionForm({ ...prescriptionForm, user_id: data.user_id._id, doctor_id: doctorInfo._id })
+                }
+            })
+        }
+        else setPrescriptionForm({ ...prescriptionForm, doctor_id: doctorInfo._id })
+    }, [param.id])
 
     console.log(prescriptionForm)
 
@@ -153,10 +186,10 @@ function Prescriptioning() {
 
                                 ))}
                                 <span style={{ flexBasis: "8%" }}>
-                                {i.quantity}
+                                    {i.quantity}
                                 </span>
                                 <span style={{ flexBasis: "43%" }}>
-                                {i.frequency}
+                                    {i.frequency}
                                 </span>
                                 <span style={{ flexBasis: "10%" }}></span>
                             </h2>

@@ -15,7 +15,6 @@ function DoctorAPI(doctorToken) {
                     Authorization: doctorToken
                 }
             })
-            console.log(response.data)
             setDoctorInfo(response.data)
             setDoctor(true)            
         // } catch (error) {

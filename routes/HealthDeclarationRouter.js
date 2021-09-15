@@ -18,6 +18,9 @@ router.get('/', HealthDeclarationCtrl.getAllHealthDeclaration)
 //Update Health Declaration by id
 router.put('/update/:id', auth, HealthDeclarationCtrl.updateHealthDeclarationByID)
 
+//Update medicine for health declaration by id
+router.put('/update/medicine/:id', authDoctor, HealthDeclarationCtrl.updateMedicineForHealthDeclaration)
+
 //Delete by Health Declaration id
 router.delete('/delete/:id', auth, HealthDeclarationCtrl.deleteHealthDeclarationByID)
 
