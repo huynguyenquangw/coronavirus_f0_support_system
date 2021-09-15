@@ -8,11 +8,11 @@ const authAdmin = require("../middleware/authAdmin");
 router.post("/", authDoctor, medicineFormCtrl.addMedicineForm);
 
 //Get all
-router.get("/", auth, authAdmin, medicineFormCtrl.getAllMedicineForms);
+router.get("/", authDoctor, medicineFormCtrl.getAllMedicineForms);
 
 // Delete form by id
 router.delete(
-  "/delete/:id",  
+  "/delete/:id",
   authDoctor,
   medicineFormCtrl.deleteMedicineFormByID,
 );

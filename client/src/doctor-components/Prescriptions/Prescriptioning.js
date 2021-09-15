@@ -15,13 +15,14 @@ const initialState = {
     user_id: "",
     doctor_id: "",
     diagnostic: "",
-    prescription: [],
+    prescriptions: [],
     note: ""
 }
 
 function Prescriptioning() {
     const state = useContext(GlobalState)
-    const [doctorInfo, setDoctorInfo] = state.doctorAPI.doctorInfo
+    const [doctorToken] = state.doctorToken
+    const [doctorInfo] = state.doctorAPI.doctorInfo
     const [patients] = state.getAllPatientAPI.patients
     const [limit, setLimit] = state.getAllPatientAPI.limit
 
@@ -30,26 +31,28 @@ function Prescriptioning() {
     const [prescriptionForm, setPrescriptionForm] = useState(initialState)
     const [prescriptionMedicine, setPrescriptionMedicine] = useState(medicineState)
 
-    const [renderNewMedicine, setRenderNewMedicine] = useState([])
-
-    const [clearMedicine, setClearMedicine] = useState(false)
-
     const handleChange = e => {
         const { name, value } = e.target
         setPrescriptionForm({ ...prescriptionForm, [name]: value })
     }
 
-    // const handleChangeMedicine = e => {
-    // const { name, value } = e.target
-    // setPrescriptionMedicine({ ...prescriptionMedicine, [name]: value })
+    const handleChangeMedicine = e => {
+        const { name, value } = e.target
+        setPrescriptionMedicine({ ...prescriptionMedicine, [name]: value })
+    }
 
-    // }
-
-    console.log(prescriptionForm.prescription)
+    const handleKeyUp = e => {
+        e.preventDefault()
+        if (e.key === "Enter") {
+            const { medicine, frequency, quantity } = prescriptionMedicine
+            if (medicine !== "" && frequency !== "" && quantity > 0) {
+                addNewMedicine()
+            }
+        }
+    }
 
     //get all medicines
     const getMedicine = async (e) => {
-
         try {
             const response = await axios.get("http://localhost:3000/medicine")
             setMedicines(response.data)
@@ -58,31 +61,23 @@ function Prescriptioning() {
         }
     }
 
+    //add new medicine
     const addNewMedicine = () => {
-        const newMedicine = (
-            <div>
-                <select name="medicine" onChange={e => setPrescriptionMedicine({ ...prescriptionMedicine, medicine: e.target.value })}>
-                    <option>Select Medicine</option>
-                    {medicines.map(i =>
-                        <option key={i._id} value={i._id}>{i.name}</option>
-                    )}
-                </select>
-
-                <label htmlFor="quantity">Quantity</label>
-                <input type="number" name="quantity" onChange={e => setPrescriptionMedicine({ ...prescriptionMedicine, quantity: e.target.value })} />
-
-                <label htmlFor="frequency">Dosage</label>
-                <input type="text" name="frequency" onChange={e => setPrescriptionMedicine({ ...prescriptionMedicine, frequency: e.target.value })} />
-                <div className="new-medicine"></div>
-            </div>
-        )
-        setRenderNewMedicine([...renderNewMedicine, newMedicine])
-        setClearMedicine(true)
-
-        console.log(prescriptionMedicine)
+        setPrescriptionForm({ ...prescriptionForm, prescriptions: [...prescriptionForm.prescriptions, prescriptionMedicine] })
+        setPrescriptionMedicine(medicineState);
     }
 
-
+    //save medicine form
+    const saveMedicineForm = async (e) => {
+        e.preventDefault()
+        try {
+            await axios.post('http://localhost:3000/form', { ...prescriptionForm }, {
+                headers: { Authorization: doctorToken }
+            })
+        } catch (error) {
+            toast(error.response.data.msg)
+        }
+    }
 
     useEffect(() => {
         setLimit(9999999)
@@ -90,20 +85,8 @@ function Prescriptioning() {
         getMedicine()
     }, [])
 
-    //push medicine into prescription
-    useEffect(() => {
-        const { medicine, quantity, frequency } = prescriptionMedicine
-        let tempArray = []
-        if (medicine !== "" && quantity > 0 && frequency !== "") {
-            tempArray = prescriptionMedicine
-            prescriptionForm.prescription.push(tempArray)
-            tempArray = []
-        }
 
-
-    }, [prescriptionMedicine])
-
-
+    console.log(prescriptionForm)
 
     return (
         <Container>
@@ -119,39 +102,59 @@ function Prescriptioning() {
                             )}
                         </select>
                     </FieldBig>
+
                     <TextAreaField>
                         <h2>Diagnostic</h2>
                         <textarea name="diagnostic" id="diagnostic" onChange={handleChange}></textarea>
                     </TextAreaField>
-                    <div>
-                        <select name="medicine" onChange={e => setPrescriptionMedicine({ ...prescriptionMedicine, medicine: e.target.value })}>
-                            <option>Select Medicine</option>
-                            {medicines.map(i =>
-                                <option key={i._id} value={i._id}>{i.name}</option>
-                            )}
-                        </select>
 
-                        <label htmlFor="quantity">Quantity</label>
-                        <input type="number" name="quantity" onChange={e => setPrescriptionMedicine({ ...prescriptionMedicine, quantity: e.target.value })} />
+                    <div className='medincine-container'>
+                        <div className="medicine-controller">
+                            <select name="medicine" value={prescriptionMedicine.medicine} onChange={handleChangeMedicine}>
+                                <option>Select Medicine</option>
+                                {medicines.map(i =>
+                                    <option key={i._id} value={i._id}>{i.name}</option>
+                                )}
+                            </select>
 
-                        <label htmlFor="frequency">Dosage</label>
-                        <input type="text" name="frequency" onChange={e => setPrescriptionMedicine({ ...prescriptionMedicine, frequency: e.target.value })} />
+                            <label htmlFor="quantity">Quantity</label>
+                            <input type="number" name="quantity"
+                                value={prescriptionMedicine.quantity}
+                                onChange={handleChangeMedicine}
+                                onKeyUp={handleKeyUp}
+                            />
 
-                        <div className="new-medicine">
-                            {renderNewMedicine.map(i => (
-                                <div>
-                                    {i}
-                                </div>
-                            ))}
+                            <label htmlFor="frequency">Dosage</label>
+                            <input type="text" name="frequency"
+                                value={prescriptionMedicine.frequency}
+                                onChange={handleChangeMedicine}
+                                onKeyUp={handleKeyUp}
+                            />
+
+                            <button onClick={addNewMedicine}>Add Medicine</button>
                         </div>
 
+                        <div className="medicine-display">
+                            {prescriptionForm.prescriptions.length > 0 && prescriptionForm.prescriptions.map(i => (
+                                <>
+                                    {medicines.filter(f => f._id === i.medicine).map(m => (
+                                        <div>
+                                            {m.name} - {m.type}
+                                        </div>
+                                    ))}
+                                    -{i.quantity}-
+                                    {i.frequency}
+                                </>
+                            ))}
+                        </div>
                     </div>
 
-                    <button onClick={addNewMedicine}>Add Medicine</button>
-
-
+                    <div className="medicine-note">
+                        medicine note
+                        <textarea name="note" id="note" onChange={handleChange}></textarea>
+                    </div>
                 </Form>
-                <a className="button green " on>Save</a>
+                <a className="button green " onClick={saveMedicineForm}>Save</a>
             </Row>
         </Container>
     )
