@@ -31,12 +31,12 @@ function HealthPopup({ modalDisplayHealth, setModalDisplayHealth, healthData, ke
             <div className={modalDisplayHealth === _id ? "modal-content active" : "modal-content"}>
                 <span className="close" onClick={() => setModalDisplayHealth(false)}>&times;</span>
                 <div className="header">
-                    <h1>Prescription from {healthData.doctor_id.name}</h1>
-                    <h2>{fullDate(new Date(createdAt))}</h2>
+                    <h1>Health Declaration created on {fullDate(new Date(createdAt))}</h1>
+                    <h2>With Dr.{healthData.doctor_id.name}</h2>
+                    <h2>ID: {_id}</h2>
                 </div>
                 <div class="info">
-                    <h1>Diagnostics</h1>
-                    <p>asdasda</p>
+                    <h1>Symptoms</h1>
                 </div>
                
             </div>
