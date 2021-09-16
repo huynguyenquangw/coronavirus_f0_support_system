@@ -84,8 +84,8 @@ function Doctors(props) {
                     <input type="submit" value="Register" className="button green" />
                 </form>
             </div>
-
-            <h2 class="list"> Doctor List</h2>
+       
+            <h2 class="list" style={{paddingTop:"1rem"}}> Doctor List</h2>
             <FilterDoctor />
             <div >
                 <table style={{ width: "100%" }}>

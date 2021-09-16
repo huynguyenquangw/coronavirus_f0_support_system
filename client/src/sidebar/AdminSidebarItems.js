@@ -32,6 +32,13 @@ const PatientSidebarItems = [
         icon_active: patientsActive, icon_blue: patientsBlue,
         link: '/patients'
     },
+    {
+        title: 'Medicine',
+        component: Medicine,
+        icon: patients,
+        icon_active: patientsActive, icon_blue: patientsBlue,
+        link: '/medicine'
+    },
 
 
 
