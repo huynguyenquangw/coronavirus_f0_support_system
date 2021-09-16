@@ -37,13 +37,13 @@ function Patients(props) {
             <div className="display">
                 {healthDeclares.map(health => (
                     <>
-                        {trueOrFalse ? (
+                        {trueOrFalse === 'true' ? (
                             <div key={health._id}>
                                 {health._id}
                                 {health.user_id?.name}
                             </div>
                         ) : (
-                            <Link key={health._id} to={`/doctor/prescriptions/medicine/${health._id}`}>
+                            <Link to={`/doctor/prescriptions/medicine/${health._id}`}>
                                 {health._id}
                                 {health.user_id?.name}
                             </Link>
