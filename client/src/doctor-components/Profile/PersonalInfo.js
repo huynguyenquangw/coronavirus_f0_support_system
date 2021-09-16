@@ -19,8 +19,7 @@ function PersonalInfo({doctorInfo}) {
     
     useEffect(()=>{
         setUser(doctorInfo)
-    },[doctorInfo]
-    )
+    },[doctorInfo])
 
     return (
         <Container>

@@ -144,10 +144,7 @@ function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDo
                 </ActionContainer>
             </PhotoContainer>
 
-            <input
-                id="photo-upload"
-                type="file"
-                onChange={editImage}></input>
+            <input id="photo-upload" type="file" onChange={editImage}></input>
 
 
         </Container>

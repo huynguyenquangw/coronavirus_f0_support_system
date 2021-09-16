@@ -19,6 +19,8 @@ const Chat = ({ isDoctor, doctorInfo, isPatient, patientInfo }) => {
         getUser()
     }, [])
 
+    console.log(user);
+
     return (
         <>
             {isDoctor &&
@@ -32,7 +34,7 @@ const Chat = ({ isDoctor, doctorInfo, isPatient, patientInfo }) => {
                             setPop(true)
                         }}>
                             <option value="">please choose</option>
-                            {user.map(user => (
+                            {user.filter(f => patientInfo.district?._id === f.district?._id).map(user => (
                                 // <Link to={`/${user._id}`} key={user._id} className="user">
                                 //     {user.name}
                                 // </Link>
