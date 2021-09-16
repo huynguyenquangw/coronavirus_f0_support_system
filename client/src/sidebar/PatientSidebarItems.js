@@ -10,25 +10,25 @@ import healthBlue from '../assets/icons/health-status-blue.svg'
 import chat from '../assets/icons/chat.svg'
 import chatActive from '../assets/icons/chat-active.svg'
 import chatBlue from '../assets/icons/chat-blue.svg'
-import dashboard from '../assets/icons/dashboard.svg'
-import dashboardActive from '../assets/icons/dashboard-active.svg'
-import dashboardBlue from '../assets/icons/dashboard-blue.svg'
+import viewHealth from '../assets/icons/view-health.svg'
+import viewHealthActive from '../assets/icons/view-health-active.svg'
+import viewHealthBlue from '../assets/icons/view-health-blue.svg'
 
 import Dashboard from '../patient-components/Dashboard/Dashboard'
 import DoctorChat from '../patient-components/Doctor Chat/DoctorChat'
 import HealthStatus from '../patient-components/Health Status/Health Status'
-import Prescriptions from '../patient-components/Prescriptions/Prescriptions'
+import AllHealth from '../patient-components/Prescriptions/AllHealth'
 import Profile from '../patient-components/Profile/Profile'
 
 const SourceUrl = "/patient"
 
 const PatientSidebarItems = [
 
-        {title: 'Dashboard', 
-        component: Dashboard,
-        icon: dashboard, 
-        icon_active: dashboardActive, icon_blue: dashboardBlue,
-        link: '' },
+        // {title: 'Dashboard', 
+        // component: Dashboard,
+        // icon: dashboard, 
+        // icon_active: dashboardActive, icon_blue: dashboardBlue,
+        // link: '' },
 
         {title: 'Profile', 
         component: Profile,
@@ -36,15 +36,15 @@ const PatientSidebarItems = [
         icon_active: profileActive, icon_blue: profileBlue,
         link: '/profile'},
 
-        {title: 'Health Status', 
+        {title: 'Add Health', 
         component: HealthStatus,
         icon: health , icon_active: healthActive , icon_blue: healthBlue,
         link:'/health'},
 
-        {title: 'Prescriptions', 
-        component: Prescriptions,
-        icon: prescriptions , icon_active: prescriptionsActive , icon_blue: prescriptionsBlue,
-        link: '/prescriptions'},
+        {title: 'View Health', 
+        component: AllHealth,
+        icon: viewHealth , icon_active: viewHealthActive , icon_blue: viewHealthBlue,
+        link: '/view-health'},
         
         {title: 'Doctor Chat', 
         component: DoctorChat,

@@ -96,7 +96,7 @@ function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDo
 
     const updateImage = async (cloudinary) => {
 
-        try {
+        // try {
             await fetch("http://localhost:3000/doctor/update", {
                 method: 'PUT',
                 headers: {
@@ -113,8 +113,10 @@ function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDo
                         "_id": document.getElementById("district").value,
                     },
                     "phone": document.getElementById("phone").value,
-                    "experience": document.getElementById("experience").value,
-                    certificate: doctorInfo.certificate,
+                    // "experience": document.getElementById("experience").value,
+                    // certificate: doctorInfo.certificate,
+                    "experience": "sddfdddddd",
+                    certificate: { blank: "" },
                 })
             })
                 .then(resp => resp.json())
@@ -122,9 +124,9 @@ function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDo
                     toast(data.msg)
                 })
                 .then(setCallbackDoctor(!callbackDoctor))
-        } catch (error) {
-            toast(error.response)
-        }
+        // } catch (error) {
+        //     toast(error.response)
+        // }
 
 
     }

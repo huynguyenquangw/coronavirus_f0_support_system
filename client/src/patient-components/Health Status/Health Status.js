@@ -12,6 +12,7 @@ function HealthStatus(props) {
     const [token] = state.token
     const [data, setData] = state.getAllDoctorAPI.doctors
     const [limit, setLimit] = state.getAllDoctorAPI.limit
+    const [callback, setCallBack] = state.getHealthDeclareForPatient.callback
 
     const [selectedDoctor, setSelectedDoctor] = useState("")
 
@@ -91,6 +92,7 @@ function HealthStatus(props) {
                 },
             })
             toast('Health Declaration has been created.')
+            setCallBack(!callback)
 
         } catch (error) {
             toast(error.response.data.msg)

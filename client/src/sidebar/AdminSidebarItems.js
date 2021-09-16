@@ -21,31 +21,37 @@ const SourceUrl = "/admin"
 
 const PatientSidebarItems = [
 
-        {title: 'Dashboard', 
-        component: Dashboard,
-        icon: dashboard, 
-        icon_active: dashboardActive, icon_blue: dashboardBlue,
-        link: '' },
+            // {title: 'Dashboard', 
+            // component: Dashboard,
+            // icon: dashboard, 
+            // icon_active: dashboardActive, icon_blue: dashboardBlue,
+            // link: '' },
 
-        {title: 'Patients', 
-        component: Patients,
-        icon: patients , 
-        icon_active: patientsActive, icon_blue: patientsBlue,
-        link: '/patients'},
-
-        {title: 'Doctors', 
+    {
+        title: 'Doctors',
         component: Doctors,
-        icon: doctors , 
-        icon_active: doctorsActive , icon_blue: doctorsBlue,
-        link:'/doctors'},
+        icon: doctors,
+        icon_active: doctorsActive, icon_blue: doctorsBlue,
+        link: '/doctors'
+    },
 
-        {title: 'Pharmacies', 
-        component: Pharmacies,
-        icon: pharmacies , icon_active: pharmaciesActive , icon_blue: pharmaciesBlue,
-        link: '/pharmacies'},
-    ];
+        {
+        title: 'Patients',
+        component: Patients,
+        icon: patients,
+        icon_active: patientsActive, icon_blue: patientsBlue,
+        link: '/patients'
+    },
 
-    for (let i = 0; i<PatientSidebarItems.length;i++) {
-        PatientSidebarItems[i].link = SourceUrl + PatientSidebarItems[i].link
-    }
+
+
+    // {title: 'Pharmacies', 
+    // component: Pharmacies,
+    // icon: pharmacies , icon_active: pharmaciesActive , icon_blue: pharmaciesBlue,
+    // link: '/pharmacies'},
+];
+
+for (let i = 0; i < PatientSidebarItems.length; i++) {
+    PatientSidebarItems[i].link = SourceUrl + PatientSidebarItems[i].link
+}
 export default PatientSidebarItems;

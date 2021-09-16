@@ -8,7 +8,7 @@ import AdminRoutes from './dashboard-routes/AdminRoutes'
 import LoginPortal from './home-components/LoginPortal';
 import LoginPatient from './home-components/LoginPatient';
 import LoginDoctor from './home-components/LoginDoctor';
-import LoginAdmin from './home-components/LoginAdmin'
+// import LoginAdmin from './home-components/LoginAdmin'
 
 import { useContext } from 'react';
 import { GlobalState } from './GlobalState'
@@ -40,9 +40,9 @@ function Routes() {
           <Route path="/login-doctor">
             <LoginDoctor />
           </Route>
-          <Route path="/admin-login">
+          {/* <Route path="/admin-login">
             <LoginAdmin />
-          </Route>
+          </Route> */}
           <Route path="/patient">
             {patient ? <PatientRoutes /> : <NotFound />}
           </Route>
