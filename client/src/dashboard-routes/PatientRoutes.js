@@ -1,12 +1,9 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
+import { Route, Switch } from 'react-router-dom'
 import Layout from '../Layout'
-
 import PatientSidebarItems from '../sidebar/PatientSidebarItems'
 
 function PatientRoutes() {
-
     const AllRoute = []
 
     for (let i = 0; i < PatientSidebarItems.length; i++) {
@@ -14,7 +11,6 @@ function PatientRoutes() {
     }
 
     return (
-
         <Route render={(props) => (
             <Layout {...props}>
                 <Switch>

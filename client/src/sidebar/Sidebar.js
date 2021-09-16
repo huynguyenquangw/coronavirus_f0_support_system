@@ -1,12 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import Menu from './Menu/Menu'
-import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router'
-
+// import { Link } from 'react-router-dom';
+// import { useHistory } from 'react-router'
 // import assets
 import logo from '../assets/images/logo.svg'
-import { Logout } from '../api/PatientAPI';
+// import { Logout } from '../api/PatientAPI';
 
 const Container = styled.div`
     background-color: #FFFFFF;
@@ -35,7 +34,7 @@ const Logo = styled.img`
 `
 
 function Sidebar({ active }) {
-    const history = useHistory()
+    // const history = useHistory()
     const Out = async () => {
         localStorage.clear()
         window.location.replace("/login-portal")

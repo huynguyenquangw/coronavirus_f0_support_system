@@ -8,16 +8,19 @@ import { toast } from 'react-toastify';
 
 function HealthStatus(props) {
     const state = useContext(GlobalState)
-    const [info, setInfo] = state.patientAPI.info
     const [token] = state.token
-    const [data, setData] = state.getAllDoctorAPI.doctors
+    const [loading, setLoading] = state.loading
+    const [info] = state.patientAPI.info
+    const [data] = state.getAllDoctorAPI.doctors
     const [limit, setLimit] = state.getAllDoctorAPI.limit
     const [callback, setCallBack] = state.getHealthDeclareForPatient.callback
 
     const [selectedDoctor, setSelectedDoctor] = useState("")
 
     useEffect(() => {
-        setLimit(9999999)
+        setLimit(limit * 9999999)
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const [health, setHealth] = useState({
@@ -82,6 +85,7 @@ function HealthStatus(props) {
     const updateHealthDeclaration = async (e) => {
         e.preventDefault()
         try {
+            setLoading(!loading)
             await axios.post("http://localhost:3000/health/add", {
                 ...health,
                 user_id: info._id,
@@ -93,25 +97,11 @@ function HealthStatus(props) {
             })
             toast('Health Declaration has been created.')
             setCallBack(!callback)
-
+            setLoading(false)
         } catch (error) {
             toast(error.response.data.msg)
         }
     }
-
-
-
-    // useEffect(() => {
-    //     const doctorOption = document.querySelectorAll(".doctor-option")
-    //     if (doctorOption.length > 0) {
-    //         setSelectedDoctor(doctorOption[0].value)
-    //     }
-    // for (let index = 0; index < doctorOption.length; index++) {
-    //     if(index == 0){
-    // setSelectedDoctor(doctorOption[0].value)
-    //     }
-    // }
-    // })
 
     return (
         <div>
@@ -126,9 +116,8 @@ function HealthStatus(props) {
                                 {data.map(i =>
                                     i.district?._id == info.district?._id ?
                                         <option className="doctor-option" value={i._id}>
-                                            <img />
                                             {i.name}
-                                            </option> : ""
+                                        </option> : ""
                                 )}
                             </select>
                         </FieldBig>
@@ -140,7 +129,7 @@ function HealthStatus(props) {
                             </textarea>
                         </TextAreaField>
                     </Form>
-                    <a className="button green " onClick={updateHealthDeclaration}>Save</a>
+                    <button className="button green " onClick={updateHealthDeclaration}>Save</button>
                 </Row>
             </Container>
         </div>

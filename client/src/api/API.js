@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 export default function DistrictAPI() {
@@ -9,10 +9,10 @@ export default function DistrictAPI() {
             const response = await axios.get("http://localhost:3000/district")
             setDistrict(response.data)
 
-        } catch (error){
+        } catch (error) {
             console.log(error.response.data.msg)
         }
-        
+
     }
 
     useEffect(

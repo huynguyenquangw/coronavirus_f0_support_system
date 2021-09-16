@@ -1,13 +1,12 @@
 import Navbar from "./Navbar"
 import styled from "styled-components"
 import { Link } from 'react-router-dom';
-import { useContext} from 'react';
-import { GlobalState } from "../GlobalState";
-
+// import { useContext} from 'react';
+// import { GlobalState } from "../GlobalState";
 
 export default function LoginPortal() {
-    const state = useContext(GlobalState)   
-    const [district] = state.districtAPI.district
+    // const state = useContext(GlobalState)   
+    // const [district] = state.districtAPI.district
 
     const Main = styled.div`
     width: 35%;
@@ -30,7 +29,6 @@ export default function LoginPortal() {
                <Link to="/login-patient" className="button green">
                Login as Patient 
                </Link>
-
             </Main>
         </div>
 

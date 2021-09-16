@@ -1,28 +1,24 @@
 import React, { useContext } from 'react'
-import { useState, useEffect } from "react";
 import FilterPatient from '../../Feature/FilterPatient';
 import { GlobalState } from '../../GlobalState';
-
 // import "./patient.css"
+
 function Patients(props) {
     const state = useContext(GlobalState)
-    const [data,setData] = state.getAllPatientAPI.patients
+    const [data] = state.getAllPatientAPI.patients
     const [sort, setSort] = state.getAllPatientAPI.sort
-    console.log(sort)
-
-
+    // console.log(sort)
 
     return (
         <div>
             {/* <h1 style={{fontSize: "10em"}}>Patients</h1> */}
-
             <h2 class="list"> Patient List</h2>
-            <FilterPatient/>
+            <FilterPatient />
             <br />
             <div >
                 <table style={{ width: "100%" }}>
                     <tr>
-                    <th>
+                        <th>
                             {sort === '' || sort === 'sort=+name' || sort === undefined
                                 ? <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
                                     value="sort=-name" onClick={e => setSort(e.target.value)}>

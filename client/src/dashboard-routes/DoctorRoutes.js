@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Layout from '../Layout'
 import { GlobalState } from '../GlobalState'
 import DoctorSidebarItems from '../sidebar/DoctorSidebarItems'

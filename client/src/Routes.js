@@ -13,10 +13,11 @@ import LoginDoctor from './home-components/LoginDoctor';
 import { useContext } from 'react';
 import { GlobalState } from './GlobalState'
 import NotFound from './NotFound'
+import Loading from './Loading';
 
 function Routes() {
-
   const state = useContext(GlobalState)
+  const [loading] = state.loading
   const [admin] = state.patientAPI.admin
   const [patient] = state.patientAPI.patient
   const [doctor] = state.doctorAPI.doctor
@@ -24,6 +25,7 @@ function Routes() {
   return (
     <Router>
       <div>
+        {loading && <Loading />}
         <Switch>
           <Route exact path="/">
             <HomePage />

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import profile from '../../assets/images/profile.svg'
 import photoEdit from '../../assets/icons/profile-picture-edit.svg'
 import axios from 'axios';
-import {toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const Container = styled.div`
     input{
@@ -123,20 +123,17 @@ function ProfilePicture({ info, token, callback, setCallback }) {
         } catch (error) {
             toast(error.response)
         }
-
-
     }
-
-
 
     useEffect(() => {
         if (info.img) {
             setCloudinary(info.img)
         }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
-
         <Container>
             <PhotoContainer style={{ backgroundImage: `url(${info.img?.url || profile})` }}>
                 <ActionContainer htmlFor="photo-upload">
@@ -144,12 +141,7 @@ function ProfilePicture({ info, token, callback, setCallback }) {
                 </ActionContainer>
             </PhotoContainer>
 
-            <input
-                id="photo-upload"
-                type="file"
-                onChange={editImage}></input>
-
-
+            <input id="photo-upload" type="file" onChange={editImage} />
         </Container>
     )
 }

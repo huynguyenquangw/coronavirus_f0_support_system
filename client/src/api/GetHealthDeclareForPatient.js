@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 export default function GetHealthDeclareForPatient(token) {
@@ -29,6 +29,7 @@ export default function GetHealthDeclareForPatient(token) {
             getHealth()
             getRealLength()
         } 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token, callback, filter, trueOrFalse, page, limit])
 
     return {

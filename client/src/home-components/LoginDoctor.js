@@ -1,21 +1,21 @@
 import Navbar from "./Navbar"
 import { useContext, useState } from 'react';
-import { useHistory } from 'react-router'
-import { ToastContainer, toast } from 'react-toastify';
+// import { useHistory } from 'react-router'
+import { toast } from 'react-toastify';
 import axios from "axios";
-
 import 'react-toastify/dist/ReactToastify.css';
+import { GlobalState } from "../GlobalState";
 
 toast.configure()
 export default function LoginDoctor() {
-
     const endPoint = "http://localhost:3000"
+
+    const state = useContext(GlobalState)
+    const [loading, setLoading] = state.loading
     const [doctor, setDoctor] = useState({
         email: '',
         password: '',
     })
-    // chay Loading effect 
-    const [loading, setLoading] = useState(false)
 
     //On change for doctor
     const onChangeValue = e => {
@@ -26,41 +26,16 @@ export default function LoginDoctor() {
     //Register check
     const loginSubmit = async e => {
         e.preventDefault()
-
-        setLoading(true)
-
-        // await fetch(endPoint + "/doctor/login", {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify({
-        //         email: doctor.email,
-        //         password: doctor.password
-        //     }),
-        //     credentials: 'include'
-        // }).then(response => response.json())
-        //     .then(data => {
-        //         toast(error.response.data.msg)
-        //         localStorage.setItem('isDoctorLogin', true)
-        //         // toast(`Doctor ${doctor.email} has been successfully login !`)
-        //         setLoading(false)
-        //     })
-        //     .catch(error => {
-        //         setLoading(false)
-        //         toast(error.response.data.msg)
-        //     })
-
         try {
-
-            setLoading(true)
-            
-            const response = await axios.post(endPoint + "/doctor/login", { ...doctor },
-            {withCredentials: 'include'})
+            setLoading(!loading)
+            await axios.post(endPoint + "/doctor/login", { ...doctor },
+                { withCredentials: 'include' })
 
             localStorage.setItem('isDoctorLogin', true)
             toast(`Doctor ${doctor.email} has been successfully login !`)
             setLoading(false)
             window.location.replace('/doctor/profile')
-            
+
         } catch (error) {
             setLoading(false)
             toast(error.response.data.msg)
@@ -89,9 +64,7 @@ export default function LoginDoctor() {
                         </form>
                     </div></div>
                 <div className="item3"></div>
-
             </div>
-
         </div>
 
     )

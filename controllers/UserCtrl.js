@@ -212,7 +212,7 @@ const userCtrl = {
   /**
    * Update patient info by ID
    */
-   updatePatientByID: async (req, res) => {
+  updatePatientByID: async (req, res) => {
     try {
       const { name, img, district, phone } = req.body;
 
@@ -252,7 +252,7 @@ const userCtrl = {
       // await Users.findOneAndUpdate(
       //   { _id: req.params.id },
       const user = await Users.findByIdAndUpdate(
-        {_id: req.user.id},
+        { _id: req.user.id },
         {
           password: passwordHash,
         },

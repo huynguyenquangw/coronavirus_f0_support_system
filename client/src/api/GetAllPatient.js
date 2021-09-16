@@ -1,14 +1,10 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-
+import { useEffect, useState } from 'react'
 
 export default function GetAllPatient(props) {
-
-
     const [patients, setPatients] = useState([])
 
     //Features
-
     const [search, setSearch] = useState('')
     const [sort, setSort] = useState('')
     const [limit, setLimit] = useState(1)
@@ -22,6 +18,8 @@ export default function GetAllPatient(props) {
 
     useEffect(() => {
         getAll()
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search, sort, limit, page, filter])
 
     return {

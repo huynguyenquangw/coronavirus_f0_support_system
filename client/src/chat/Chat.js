@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+// import { Link } from "react-router-dom";
 import axios from 'axios'
 import ChatRoom from "./ChatRoom";
 
@@ -32,7 +32,7 @@ const Chat = ({ isDoctor, doctorInfo, isPatient, patientInfo }) => {
                             setPop(true)
                         }}>
                             <option value="">please choose</option>
-                            {user.map(user => (
+                            {user.filter(f => patientInfo.district?._id === f.district?._id).map(user => (
                                 // <Link to={`/${user._id}`} key={user._id} className="user">
                                 //     {user.name}
                                 // </Link>
