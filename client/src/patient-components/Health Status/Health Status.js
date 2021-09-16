@@ -12,6 +12,7 @@ function HealthStatus(props) {
     const [token] = state.token
     const [data, setData] = state.getAllDoctorAPI.doctors
     const [limit, setLimit] = state.getAllDoctorAPI.limit
+    const [callback, setCallBack] = state.getHealthDeclareForPatient.callback
 
     const [selectedDoctor, setSelectedDoctor] = useState("")
 
@@ -91,6 +92,7 @@ function HealthStatus(props) {
                 },
             })
             toast('Health Declaration has been created.')
+            setCallBack(!callback)
 
         } catch (error) {
             toast(error.response.data.msg)
@@ -123,7 +125,10 @@ function HealthStatus(props) {
                                 <option value="">Please select doctor</option>
                                 {data.map(i =>
                                     i.district?._id == info.district?._id ?
-                                        <option className="doctor-option" value={i._id}>{i.name}</option> : ""
+                                        <option className="doctor-option" value={i._id}>
+                                            <img />
+                                            {i.name}
+                                            </option> : ""
                                 )}
                             </select>
                         </FieldBig>

@@ -59,7 +59,7 @@ export default function LoginDoctor() {
             localStorage.setItem('isDoctorLogin', true)
             toast(`Doctor ${doctor.email} has been successfully login !`)
             setLoading(false)
-            window.location.replace('/doctor')
+            window.location.replace('/doctor/profile')
             
         } catch (error) {
             setLoading(false)

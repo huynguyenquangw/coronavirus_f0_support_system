@@ -14,6 +14,9 @@ import dashboardBlue from '../assets/icons/dashboard-blue.svg'
 import prescriptions from '../assets/icons/prescriptions.svg'
 import prescriptionsActive from '../assets/icons/prescriptions-active.svg'
 import prescriptionsBlue from '../assets/icons/prescriptions-blue.svg'
+import health from '../assets/icons/health-status.svg'
+import healthActive from '../assets/icons/health-status-active.svg'
+import healthBlue from '../assets/icons/health-status-blue.svg'
 
 import Dashboard from '../doctor-components/Dashboard/Dashboard'
 import Profile from '../doctor-components/Profile/Profile'
@@ -25,13 +28,13 @@ const SourceUrl = "/doctor"
 
 const PatientSidebarItems = [
 
-    {
-        title: 'Dashboard',
-        component: Dashboard,
-        icon: dashboard,
-        icon_active: dashboardActive, icon_blue: dashboardBlue,
-        link: ''
-    },
+    // {
+    //     title: 'Dashboard',
+    //     component: Dashboard,
+    //     icon: dashboard,
+    //     icon_active: dashboardActive, icon_blue: dashboardBlue,
+    //     link: ''
+    // },
 
     {
         title: 'Profile',
@@ -52,8 +55,8 @@ const PatientSidebarItems = [
     {
         title: 'Health Declaration',
         component: PatientChat,
-        icon: chat, icon_active: chatActive, icon_blue: chatBlue,
-        link: '/chat'
+        icon: health, icon_active: healthActive, icon_blue: healthBlue,
+        link: '/health'
     },
 
     {

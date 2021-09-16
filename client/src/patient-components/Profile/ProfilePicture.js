@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import profile from '../../assets/images/profile.svg'
 import photoEdit from '../../assets/icons/profile-picture-edit.svg'
-// import { info, GetPatientInfo, UpdatePatientInfo } from '../../api/PatientAPI'
 import axios from 'axios';
 import {toast } from 'react-toastify';
 
