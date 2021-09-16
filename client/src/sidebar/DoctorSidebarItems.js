@@ -57,7 +57,7 @@ const PatientSidebarItems = [
         link: '/prescriptions'
     },
 
-    {
+    {   title: 'Prescriptioning',
         component: Prescriptioning,
         link: '/prescriptions/medicine/:id'
     },

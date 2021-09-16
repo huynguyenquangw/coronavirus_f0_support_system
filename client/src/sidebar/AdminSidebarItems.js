@@ -6,6 +6,7 @@ import doctorsActive from '../assets/icons/doctors-active.svg'
 import doctorsBlue from '../assets/icons/doctors-blue.svg'
 import Patients from '../admin-components/Patients/Patients'
 import Doctors from '../admin-components/Doctors/Doctors'
+import Medicine from '../admin-components/Medicine/Medicine'
 
 const SourceUrl = "/admin"
 

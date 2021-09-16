@@ -7,7 +7,7 @@ function PatientRoutes() {
     const AllRoute = []
 
     for (let i = 0; i < PatientSidebarItems.length; i++) {
-        AllRoute.push(<Route key={PatientSidebarItems[i].icon} path={PatientSidebarItems[i].link} exact component={PatientSidebarItems[i].component} />)
+        AllRoute.push(<Route key={PatientSidebarItems[i].title} path={PatientSidebarItems[i].link} exact component={PatientSidebarItems[i].component} />)
     }
 
     return (
