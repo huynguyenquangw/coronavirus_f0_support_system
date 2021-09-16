@@ -24,7 +24,7 @@ function MedicinePopup({ modalDisplay, setModalDisplay, medicineData, healthData
     var span = document.getElementsByClassName("close")[0];
     var modal = document.getElementById("myModal")
 
-
+    const {createdAt, diagnostic, prescriptions} = medicineData
 
     return (
         <div id="myModal" className={modalDisplay ? "modal active" : "modal"}>
@@ -32,11 +32,11 @@ function MedicinePopup({ modalDisplay, setModalDisplay, medicineData, healthData
                 <span className="close" onClick={() => setModalDisplay(false)}>&times;</span>
                 <div className="header">
                     <h1>Prescription from {healthData.doctor_id.name}</h1>
-                    <h2>{fullDate(new Date(medicineData.createdAt))}</h2>
+                    <h2>{fullDate(new Date(createdAt))}</h2>
                 </div>
                 <div class="info">
                     <h1>Diagnostics</h1>
-                    <p>{medicineData.diagnostic}</p>
+                    <p>{diagnostic}</p>
                 </div>
                 <div class="info">
                     <h1>Prescribed Medicine</h1>
@@ -47,6 +47,9 @@ function MedicinePopup({ modalDisplay, setModalDisplay, medicineData, healthData
                             <th>Quantity</th>
                             <th>Dosage</th>
                         </tr>
+                        {prescriptions.map(medicine => (
+                            <td></td>
+                        ))}
                     </table>
                 </div>
                 <div class="info">

@@ -23,6 +23,7 @@ th {
     font-weight: 800;
     color: #88A7C1;
     border-bottom: 3px solid #88A7C1;
+    text-transform: capitalize;
 }
 
 .del {
