@@ -12,10 +12,11 @@ import pharmacies from '../assets/icons/pharmacies.svg'
 import pharmaciesActive from '../assets/icons/pharmacies-active.svg'
 import pharmaciesBlue from '../assets/icons/pharmacies-blue.svg'
 
-import Dashboard from '../admin-components/Dashboard/Dashboard'
+
 import Patients from '../admin-components/Patients/Patients'
 import Doctors from '../admin-components/Doctors/Doctors'
-import Pharmacies from '../admin-components/Pharmacies/Pharmacies'
+import Medicine from '../admin-components/Medicine/Medicine'
+
 
 const SourceUrl = "/admin"
 
@@ -41,6 +42,13 @@ const PatientSidebarItems = [
         icon: patients,
         icon_active: patientsActive, icon_blue: patientsBlue,
         link: '/patients'
+    },
+    {
+        title: 'Medicine',
+        component: Medicine,
+        icon: patients,
+        icon_active: patientsActive, icon_blue: patientsBlue,
+        link: '/medicine'
     },
 
 
