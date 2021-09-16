@@ -88,9 +88,15 @@ const HealthDeclarationCtrl = {
             const features = new APIfeatures(HealthDeclaration.find({ user_id: req.user.id })
                 .populate({
                     path: "doctor_id",
+                    select: "-password"
                 })
                 .populate({
                     path: "medicineform_id",
+                    select: "-__v",
+                    populate: {
+                        path: "medicine",
+                        select: "-__v"
+                    }
                 }),
                 req.query)
                 .filter().sort().paginate()
