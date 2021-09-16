@@ -1,0 +1,10 @@
+.filterCondition{
+    padding: 4px 8px;
+    outline: none;
+    border-radius: 10px;
+    border: 1px solid grey;
+    margin-left: 5px;
+}
+.radioStyle{
+    margin-right: 5px;
+}
