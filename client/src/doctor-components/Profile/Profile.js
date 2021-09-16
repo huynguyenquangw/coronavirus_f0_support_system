@@ -33,7 +33,6 @@ function Profile(props) {
                 "experience": "sddfdddddd",
                 certificate: { blank: "" },
                 img: { blank: "" }
-
             })
         })
             .then(resp => resp.json())
@@ -41,9 +40,6 @@ function Profile(props) {
                 toast(data.msg)
             })
             .then(setCallbackDoctor(!callbackDoctor))
-        // } catch (error) {
-        //     toast(error.response.data.msg)
-        // }
     }
 
     return (

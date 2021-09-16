@@ -84,6 +84,11 @@ a {
     text-decoration: none;
 }
 
+.icon {
+    cursor: pointer;
+    width: 2rem;
+}
+
 .button {
     line-height: 1.3rem;
     font-weight: 700;
@@ -94,10 +99,11 @@ a {
     transition: 0.1s;
     text-align: center;
     cursor: pointer;
+    transform: scale(1);
 }
 
 .button:hover {
-    padding: 1rem 2rem;
+    transform: scale(1.1)
 }
 
 .button.green {
@@ -446,6 +452,24 @@ li {
     color: #00A473;
     font-size: 1.5rem;
     margin-bottom: 0.9rem;
+}
+
+.modal-content .symptoms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+.modal-content .symptoms>p {
+    margin-right: 2rem;
+    line-height: 2rem;
+    flex-basis: 25%;
+}
+
+.modal-content .symptoms i {
+    color: #4397e0;
+    font-size: 1.2rem;
+    margin-right: 0.3rem;
 }
 
 

@@ -1,19 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { GlobalState } from '../../GlobalState'
-import { Link } from 'react-router-dom';
 import "../../doctor-components/Patient Chat/GetHealthPatient.css"
 import MedicinePopup from './MedicinePopup';
 import HealthPopup from './HealthPopup';
-import { useState } from 'react/cjs/react.development';
-import viewMedicine from '../../assets/icons/view-medicine.svg'
+import viewHealth from '../../assets/icons/view-medicine.svg'
 import prescriptions from '../../assets/icons/prescriptions.svg'
+import { toast } from 'react-toastify'
 
 function AllHealth(props) {
     const state = useContext(GlobalState)
     const [healthDeclares, setHealthDeclares] = state.getHealthDeclareForPatient.healths
     const [filter, setFilter] = state.getHealthDeclareForPatient.filter
     const [trueOrFalse, setTrueOrFalse] = state.getHealthDeclareForPatient.trueOrFalse
-    const [modalDisplayPres, setModalDisplayPres] = useState("")
+    const [page, setPage] = state.getHealthDeclareForPatient.page
+    const [realLength] = state.getHealthDeclareForPatient.realLength
+
+    const [modalDisplay, setModalDisplay] = useState("")
     const [modalDisplayHealth, setModalDisplayHealth] = useState("")
 
     const trueorfalse = ["true", "false"]
@@ -21,88 +23,107 @@ function AllHealth(props) {
         "fever", "cough", "breathing", "sorethroat", "phlegm", "runnynose", "tiredness",
         "blocknose", "losssmell", "musclepain", "vaccinated", "covid", "status"
     ]
+    const totalPages = Math.ceil(realLength / 10)
+
+    const pageIncrease = () => {
+        if (page > 0 && page !== totalPages) {
+            setPage(i => i + 1)
+        } else {
+            toast("No more data available, please go back ")
+        }
+    }
+
+    const pageDecrease = () => {
+        if (page > 1) setPage(i => i - 1)
+    }
+
     console.log(healthDeclares)
-
-
-
 
     return (
         <div>
+            <div className="filter-section">
+                <div className="filter-by-status">
+                    <label > Choose a conditions:</label>
+                    <select className="filterCondition" name="filter" id="filter" value={filter} onChange={e => {
+                        setPage(1)
+                        setFilter(e.target.value)
+                    }
+                    }>
+                        {filterName.map((name, i) =>
+                            <option key={i} value={name}>{name}</option>
+                        )}
+                    </select>
+                </div>
 
-
-            <label > Choose a conditions:</label>
-
-            <select className="filterCondition" name="filter" id="filter" value={filter} onChange={e => setFilter(e.target.value)}>
-                {filterName.map((name, i) =>
-                    <option key={i} value={name}>{name}</option>
-                )}
-            </select>
-
-            <div className="true-false">
-                <label className="radioStyle" > Check:</label>
-                {trueorfalse.map((ToF, i) => (
-                    <label key={i} htmlFor={ToF}>
-                        {ToF}
-                        <input type="radio" name="radiovalues" value={ToF}
-                            onChange={e => setTrueOrFalse(e.target.value)}
-                            checked={ToF === trueOrFalse} id={ToF}
-                        />
-                    </label>
-                ))}
+                <div className="true-false">
+                    {/* <label className="radioStyle" > Check:</label> */}
+                    {trueorfalse.map((ToF, i) => (
+                        <label key={i} htmlFor={ToF}>
+                            {ToF === 'true' ? 'prescribed' : 'unprescribed'}
+                            <input type="radio" name="radiovalues" value={ToF}
+                                onChange={e => {
+                                    setTrueOrFalse(e.target.value)
+                                    setPage(1)
+                                }}
+                                checked={ToF === trueOrFalse} id={ToF}
+                            />
+                        </label>
+                    ))}
+                </div>
+                <div className="paginate">
+                    <button className='btn-prev' onClick={pageDecrease}> <i className="fas fa-chevron-left"></i> Prev page </button>
+                    <input className='inputPage' min='1' max={totalPages} type="number" value={page} onChange={e => setPage(e.target.value)} />
+                    <button className='btn-next' onClick={pageIncrease}> Next page <i className="fas fa-chevron-right"></i> </button>
+                </div>
             </div>
-            <br />
-
-            <div className="display">
-                <table>
+            {/* <div className="display"> */}
+            <table className="display">
+                <thead>
                     <tr>
-                        <th>
-                            Health Declaration ID
-                        </th>
-                        <th>
-                            Doctor name
-                        </th>
-                        <th> Vaccinated</th>
-                        <th> Covid</th>
-                        <th> Status</th>
+                        <th>Date</th>
+                        <th>Health Declaration ID</th>
+                        <th>Doctor name</th>
+                        <th>Vaccinated</th>
+                        <th>Covid</th>
                         <th></th>
                     </tr>
-                    {healthDeclares.map(health => (
+                </thead>
+                {healthDeclares.map(health => (
+                    <tbody key={health._id}>
                         <tr>
-                            {trueOrFalse === 'true' ? (
-
+                            {/* {trueOrFalse === 'true' ? (
                                 <td key={health._id} > {health._id}</td>
-
-
                             ) : (
-
                                 <td>
                                     <Link to={`/doctor/prescriptions/medicine/${health._id}`}>
                                         {health._id}
                                     </Link>
                                 </td>
-
-
                             )}
-                            <td key={health._id}>{health.doctor_id?.name}</td>
+                            <td key={health._id}>{health.doctor_id?.name}</td> */}
+                            <td>{health.createdAt.substring(0,10)}</td>
+                            <td key={health._id} > {health._id}</td>
+                            <td>{health.doctor_id?.name}</td>
                             <td> {health.vaccinated ? "true" : "false"}</td>
                             <td> {health.covid ? "true" : "false"}</td>
-                            <td> {health.status ? "true" : "false"}</td>
                             <td style={{ cursor: "pointer", textAlign: "center" }} >
-                                <img style={{ width: "2rem" }} class="hover" src={prescriptions} onClick={() => { setModalDisplayPres(health._id) }} />
-                                <img style={{ width: "2rem", marginLeft: "2rem" }} class="hover" src={viewMedicine} />
+                                {trueOrFalse == "true" && <img onClick={() => { setModalDisplay(health._id) }} className="hover icon" src={prescriptions} />}
+
+                                <img onClick={() => { setModalDisplayHealth(health._id) }} className="hover icon" style={{ marginLeft: "1rem" }} src={viewHealth} />
                             </td>
-                            <td><MedicinePopup key={health._id} modalDisplayPres={modalDisplayPres} setModalDisplayPres={setModalDisplayPres} healthData={health} medicineData={health.medicineform_id} /></td>
-                            <td><MedicinePopup key={health._id} modalDisplayHealth={modalDisplayHealth} setModalDisplayHealth={setModalDisplayHealth} healthData={health} /></td>
-
                         </tr>
+                        <tr>
+                            {trueOrFalse == "true" && <td><MedicinePopup key={health._id} modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} healthData={health} medicineData={health.medicineform_id} /></td>}
+                            <td><HealthPopup key={health._id} modalDisplayHealth={modalDisplayHealth} setModalDisplayHealth={setModalDisplayHealth} healthData={health} /></td>
+                        </tr>
+                    </tbody>
+
+                ))}
+
+            </table>
 
 
-                    ))}
-
-                </table>
-
-
-            </div>
+            {/* </div> */}
         </div>
     )
 }

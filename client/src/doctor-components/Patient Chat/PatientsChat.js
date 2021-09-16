@@ -1,8 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { GlobalState } from '../../GlobalState'
 import { Link } from 'react-router-dom';
 import "./GetHealthPatient.css"
 import { toast } from 'react-toastify'
+import MedicinePopup from '../../patient-components/Prescriptions/MedicinePopup';
+import HealthPopup from '../../patient-components/Prescriptions/HealthPopup';
+import viewHealth from '../../assets/icons/view-medicine.svg'
+import prescriptions from '../../assets/icons/prescriptions.svg'
 
 function Patients(props) {
     const state = useContext(GlobalState)
@@ -11,6 +15,8 @@ function Patients(props) {
     const [trueOrFalse, setTrueOrFalse] = state.getHealthDeclareForDoctor.trueOrFalse
     const [page, setPage] = state.getHealthDeclareForDoctor.page
     const [realLength] = state.getHealthDeclareForDoctor.realLength
+
+    const [modalDisplayHealth, setModalDisplayHealth] = useState("")
 
     const trueorfalse = ["true", "false"]
     const filterName = [
@@ -79,6 +85,7 @@ function Patients(props) {
                         <th>vaccinated</th>
                         <th>status</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 {healthDeclares.map(health => (
@@ -89,17 +96,22 @@ function Patients(props) {
                             <td>{health.covid ? 'positive' : 'negative'}</td>
                             <td>{health.vaccinated ? 'approved' : 'disapproved'}</td>
                             <td>{health.status ? 'got medicine' : 'no medicine'}</td>
+                            <td style={{ cursor: "pointer", textAlign: "center" }} >
+                            <img onClick={() => { setModalDisplayHealth(health._id) }} className="hover icon" src={viewHealth} />
+                            </td>
                             <td>
-                                <button>view health</button>
                                 {trueOrFalse === 'false' &&
-                                    <Link to={`/doctor/prescriptions/medicine/${health._id}`}>
-                                        add medicine
+                                    <Link className="button green" to={`/doctor/prescriptions/medicine/${health._id}`}>
+                                        Add medicine
                                     </Link>
                                 }
                                 {trueOrFalse === 'true' &&
-                                    <button>view medicine</button>
+                                    <img onClick={() => {setModalDisplayHealth(health._id)}} className="hover icon" src={prescriptions} />
                                 }
                             </td>
+                        </tr>
+                        <tr>
+                        {/* <td><HealthPopup key={health._id} modalDisplayHealth={modalDisplayHealth} setModalDisplayHealth={setModalDisplayHealth} healthData={healthDeclares} /></td> */}
                         </tr>
                     </tbody>
                 ))}

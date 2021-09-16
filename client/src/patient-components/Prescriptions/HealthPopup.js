@@ -21,24 +21,52 @@ const fullDate = (date) => {
 
 function HealthPopup({ modalDisplayHealth, setModalDisplayHealth, healthData, key }) {
 
-    console.log({healthData})
-    console.log({modalDisplayHealth})
-
-    const {_id, createdAt} = healthData
+    const { _id, createdAt, fever, cough, breathing, sorethroat, phlegm, runnynose, tiredness,
+        blocknose, losssmell, musclepain, vaccinated, covid, othersymptoms } = healthData
 
     return (
         <div id={key} className={modalDisplayHealth === _id ? "modal active" : "modal"}>
             <div className={modalDisplayHealth === _id ? "modal-content active" : "modal-content"}>
                 <span className="close" onClick={() => setModalDisplayHealth(false)}>&times;</span>
                 <div className="header">
-                    <h1>Health Declaration created on {fullDate(new Date(createdAt))}</h1>
-                    <h2>With Dr.{healthData.doctor_id.name}</h2>
-                    <h2>ID: {_id}</h2>
+                    <h1>Health Declaration</h1>
+                    <h2>created on {fullDate(new Date(createdAt))}</h2>
+                    <h3>
+                        {healthData.doctor_id.name && "With Dr." + healthData.doctor_id.name}
+                        {healthData.doctor_id.name && "With Dr." + healthData.doctor_id.name}
+                    </h3>
+                    <h3>ID: {_id}</h3>
                 </div>
-                <div class="info">
+                {covid && vaccinated &&
+                    <div className="info">
+                        <h1>Status</h1>
+                        <div className="symptoms">
+                            {covid ? <p><i class="fas fa-virus"></i>Covid Positived</p> : ""}
+                            {vaccinated ? <p><i class="fas fa-syringe"></i>Vaccinated</p> : ""}
+                        </div>
+                    </div>
+                }
+                <div className="info">
                     <h1>Symptoms</h1>
+                    <div className="symptoms">
+                        {fever ? <p>Fever</p> : ""}
+                        {cough ? <p>Cough</p> : ""}
+                        {breathing ? <p>Breathing difficulties</p> : ""}
+                        {sorethroat ? <p>Sorethroat</p> : ""}
+                        {phlegm ? <p>Phlegm</p> : ""}
+                        {runnynose ? <p>Runny nose</p> : ""}
+                        {tiredness ? <p>Tiredness</p> : ""}
+                        {blocknose ? <p>Blocked nose</p> : ""}
+                        {losssmell ? <p>Smell loss</p> : ""}
+                        {musclepain ? <p>Muscle Pain</p> : ""}
+                    </div>
                 </div>
-               
+                {othersymptoms &&
+                    <div className="info">
+                        <h1>Other Symptoms</h1>
+                        {othersymptoms && othersymptoms}
+                    </div>
+                }
             </div>
         </div>
     )
