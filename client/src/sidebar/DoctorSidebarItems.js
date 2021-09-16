@@ -50,7 +50,7 @@ const PatientSidebarItems = [
     },
 
     {
-        title: 'Healtth Declaration',
+        title: 'Health Declaration',
         component: PatientChat,
         icon: chat, icon_active: chatActive, icon_blue: chatBlue,
         link: '/chat'
