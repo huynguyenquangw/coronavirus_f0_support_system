@@ -94,8 +94,10 @@ const HealthDeclarationCtrl = {
                     path: "medicineform_id",
                     select: "-__v",
                     populate: {
-                        path: "medicine",
-                        select: "-__v"
+                        path: "prescriptions",
+                        populate: {
+                            path: "medicine"
+                        }
                     }
                 }),
                 req.query)
@@ -125,6 +127,13 @@ const HealthDeclarationCtrl = {
                 })
                 .populate({
                     path: "medicineform_id",
+                    select: "-__v",
+                    populate: {
+                        path: "prescriptions",
+                        populate: {
+                            path: "medicine"
+                        }
+                    }
                 }),
                 req.query)
                 .filter().sort().paginate()

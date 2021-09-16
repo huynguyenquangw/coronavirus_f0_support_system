@@ -38,7 +38,10 @@ function Patients(props) {
             <div className="filter-section">
                 <div className="filter-by-status">
                     <label>Choose a condition: </label>
-                    <select className="filterCondition" name="filter" id="filter" value={filter} onChange={e => setFilter(e.target.value)}>
+                    <select className="filterCondition" name="filter" id="filter" value={filter} onChange={e => {
+                        setPage(1)
+                        setFilter(e.target.value)
+                    }}>
                         {filterName.map((name, i) =>
                             <option key={i} value={name}>{name}</option>
                         )}
@@ -50,7 +53,10 @@ function Patients(props) {
                         <label key={i} htmlFor={ToF}>
                             {ToF === 'true' ? 'prescribed' : 'unprescribed'}
                             <input type="radio" name="radiovalues" value={ToF}
-                                onChange={e => setTrueOrFalse(e.target.value)}
+                                onChange={e => {
+                                    setTrueOrFalse(e.target.value)
+                                    setPage(1)
+                                }}
                                 checked={ToF === trueOrFalse} id={ToF}
                             />
                         </label>
