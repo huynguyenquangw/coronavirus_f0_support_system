@@ -210,7 +210,7 @@ const DoctorCtrl = {
    */
   updateDoctorByID: async (req, res) => {
     try {
-      const { name, district, phone, certificate, experience } = req.body;
+      const { name, district, phone, certificate, experience, img } = req.body;
 
       // const doctor = await Doctors.findOne({ email })
       // if (doctor) return res.status(400).json({ msg: "The email is already existed." })
@@ -230,7 +230,7 @@ const DoctorCtrl = {
         return res.status(400).json({ msg: "District is required." });
 
       if (!experience)
-        return res.status(400).json({ msg: "Experience has 10 numbers." });
+        return res.status(400).json({ msg: "Experience is required." });
 
       if (isNaN(phone))
         return res.status(400).json({ msg: "Phone only contains number." });
@@ -240,10 +240,10 @@ const DoctorCtrl = {
       // await Doctors.findOneAndUpdate(
       //   { _id: req.params.id },
       const doctor = await Doctors.findByIdAndUpdate(
-        {_id: req.doctor.id},
+        { _id: req.doctor.id },
         {
           name,
-          // password: passwordHash,
+          img,
           district,
           phone,
           certificate,
@@ -272,7 +272,7 @@ const DoctorCtrl = {
       const passwordHash = await bcrypt.hash(password, 10);
 
       const doctor = await Doctors.findByIdAndUpdate(
-        {_id: req.doctor.id},
+        { _id: req.doctor.id },
         {
           password: passwordHash,
         },

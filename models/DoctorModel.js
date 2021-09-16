@@ -34,6 +34,9 @@ const DoctorSchema = mongoose.Schema({
     experience: {
         type: String,
         default: ''
+    },
+    img: {
+        type: Object
     }
 }, {
     timestamps: true
