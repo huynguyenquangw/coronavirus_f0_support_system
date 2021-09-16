@@ -1,11 +1,8 @@
-import React, { useContext } from 'react'
-import {Container , Field} from "../../css-template/Input"
+import React from 'react'
+import { Container, Field } from "../../css-template/Input"
 import { useState, useEffect } from 'react'
 
-
-function PersonalInfo({doctorInfo}) {
-
-    
+function PersonalInfo({ doctorInfo }) {
     const [user, setUser] = useState({
         name: "",
         email: "",
@@ -16,20 +13,20 @@ function PersonalInfo({doctorInfo}) {
         const { name, value } = e.target
         setUser({ ...user, [name]: value })
     }
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         setUser(doctorInfo)
-    },[doctorInfo])
+    }, [doctorInfo])
 
     return (
         <Container>
             <Field>
                 <label htmlFor="name">Name</label>
-                <input className="editable" name ="name" id="name" type="text" placeholder="Full Name" value={user.name} onChange={onChangeValue}></input>
+                <input className="editable" name="name" id="name" type="text" placeholder="Full Name" value={user.name} onChange={onChangeValue}></input>
             </Field>
             <Field>
                 <label htmlFor="email">Email</label>
-                <input className="uneditable"name="email" id="email" type="text" placeholder="Email Address" value={user.email} onChange={onChangeValue} readOnly></input>
+                <input className="uneditable" name="email" id="email" type="text" placeholder="Email Address" value={user.email} onChange={onChangeValue} readOnly></input>
             </Field>
             <Field>
                 <label htmlFor="name">Phone</label>

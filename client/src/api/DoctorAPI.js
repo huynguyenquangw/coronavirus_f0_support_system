@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import  { useState, useEffect } from 'react'
 import axios from 'axios'
 
 function DoctorAPI(doctorToken) {
@@ -10,27 +10,26 @@ function DoctorAPI(doctorToken) {
 
     const getDoctorInfo = async () => {
         // try {
-            const response = await axios.get("http://localhost:3000/doctor/info", {
-                headers: {
-                    Authorization: doctorToken
-                }
-            })
-            setDoctorInfo(response.data)
-            setDoctor(true)            
+        const response = await axios.get("http://localhost:3000/doctor/info", {
+            headers: {
+                Authorization: doctorToken
+            }
+        })
+        setDoctorInfo(response.data)
+        setDoctor(true)
         // } catch (error) {
         //     console.log(error.response.data.msg)
         // }
 
     }
 
-    useEffect(
-        () => {
-            if (doctorToken) {
-                getDoctorInfo()
-            }
+    useEffect(() => {
+        if (doctorToken) {
+            getDoctorInfo()
+        }
 
-        }, [doctorToken, callbackDoctor]
-    )
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [doctorToken, callbackDoctor])
 
     return {
         doctorInfo: [doctorInfo, setDoctorInfo],

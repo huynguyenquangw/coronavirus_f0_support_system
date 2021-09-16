@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import { useState, useEffect } from "react";
 import FilterPatient from '../../Feature/FilterPatient';
 import { GlobalState } from '../../GlobalState';
 // import "./patient.css"
@@ -7,7 +6,7 @@ function Patients(props) {
     const state = useContext(GlobalState)
     const [data] = state.getAllPatientAPI.patients
     const [sort, setSort] = state.getAllPatientAPI.sort
-    console.log(sort)
+    // console.log(sort)
 
     return (
         <div>

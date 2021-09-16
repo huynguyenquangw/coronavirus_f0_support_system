@@ -35,6 +35,8 @@ export default function FilterPatient() {
     useEffect(() => {
         setLimit(1)
         getAll()
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

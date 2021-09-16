@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 function Patients(props) {
     const state = useContext(GlobalState)
-    const [healthDeclares, setHealthDeclares] = state.getHealthDeclareForDoctor.healths
+    const [healthDeclares] = state.getHealthDeclareForDoctor.healths
     const [filter, setFilter] = state.getHealthDeclareForDoctor.filter
     const [trueOrFalse, setTrueOrFalse] = state.getHealthDeclareForDoctor.trueOrFalse
     const [page, setPage] = state.getHealthDeclareForDoctor.page
@@ -31,7 +31,7 @@ function Patients(props) {
         if (page > 1) setPage(i => i - 1)
     }
 
-    console.log(healthDeclares);
+    // console.log(healthDeclares);
 
     return (
         <div>

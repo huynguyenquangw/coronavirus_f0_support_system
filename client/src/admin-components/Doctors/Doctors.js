@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import "./doctor.css"
 import { useHistory } from 'react-router'
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import { useState, useEffect } from "react";
 import { GlobalState } from '../../GlobalState';
@@ -10,8 +10,8 @@ import FilterDoctor from '../../Feature/FilterDoctor';
 
 function Doctors(props) {
     const state = useContext(GlobalState)
-    const [token, setToken] = state.token
-    const [data, setData] = state.getAllDoctorAPI.doctors
+    const [token] = state.token
+    const [data] = state.getAllDoctorAPI.doctors
     const [sort, setSort] = state.getAllDoctorAPI.sort
     console.log(sort)
     console.log((token))
@@ -22,9 +22,6 @@ function Doctors(props) {
         email: '',
         password: '',
     })
-
-    const [district, setDistrict] = useState([])
-
 
     //Register check
     const registerSubmit = async e => {
@@ -40,7 +37,7 @@ function Doctors(props) {
             return false;
         } else {
             try {
-                const response = await axios.post(endPoint + "/doctor/register", { ...doctor }, {
+                await axios.post(endPoint + "/doctor/register", { ...doctor }, {
                     headers: {
                         "Authorization": token
                     }

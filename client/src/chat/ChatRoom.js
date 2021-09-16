@@ -48,10 +48,14 @@ const ChatRoom = ({ doctors, isWho, currentPatient, roomId, setRoomId, pop, setP
             messages.pop()
             setPop(false)
         }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [roomId, pop])
 
     useEffect(() => {
         setOldMessageLength(messages.length)
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open])
 
     useEffect(() => messageRef.current.scrollIntoView({ behavior: "smooth" }))

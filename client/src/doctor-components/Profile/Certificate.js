@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import certificate from '../../assets/images/certificate.svg'
 import photoEdit from '../../assets/icons/profile-picture-edit.svg'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 const Container = styled.div`
@@ -10,7 +10,6 @@ const Container = styled.div`
         visibility: hidden;
     }
 `
-
 const PhotoContainer = styled.img`
     position: relative;
     box-sizing: border-box;
@@ -40,6 +39,7 @@ const PhotoAction = styled.img`
         width: 3rem;
     }
 `
+
 function Certificate({ doctorInfo, doctorToken, callbackDoctor, setCallbackDoctor }) {
 
     const [cloudinary, setCloudinary] = useState({
@@ -124,20 +124,17 @@ function Certificate({ doctorInfo, doctorToken, callbackDoctor, setCallbackDocto
         } catch (error) {
             toast(error.response)
         }
-
-
     }
-
-
 
     useEffect(() => {
         if (doctorInfo.img) {
             setCloudinary(doctorInfo.img)
         }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
-
         <Container>
             <PhotoContainer style={{ backgroundImage: `url(${doctorInfo.img?.url || certificate})` }}>
                 <ActionContainer htmlFor="photo-upload">
@@ -145,10 +142,7 @@ function Certificate({ doctorInfo, doctorToken, callbackDoctor, setCallbackDocto
                 </ActionContainer>
             </PhotoContainer>
 
-            <input
-                id="photo-upload"
-                type="file"
-                onChange={editImage}></input>
+            <input id="photo-upload" type="file" onChange={editImage} />
 
 
         </Container>

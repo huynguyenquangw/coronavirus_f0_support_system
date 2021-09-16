@@ -89,7 +89,7 @@ function Layout(props) {
             <MainContainer>
 
                 <HeadingContainer>
-                    <img src={HeadingIcon} />
+                    <img src={HeadingIcon} alt='headingicon' />
                     <h1>{HeadingTitle}</h1>
                 </HeadingContainer>
                 {props.children}

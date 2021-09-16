@@ -1,22 +1,22 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import ProfilePicture from './ProfilePicture'
 import PersonalInfo from './PersonalInfo'
 import HomeAddress from './HomeAddress'
 import { Container, Row, Header } from '../../css-template/DashboardMain'
 import { GlobalState } from '../../GlobalState';
-import {toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 function Profile(props) {
     const state = useContext(GlobalState)
-    const [info, setInfo] = state.patientAPI.info
-    const [token, setToken] = state.token
+    const [info] = state.patientAPI.info
+    const [token] = state.token
     const [callback, setCallback] = state.patientAPI.callback
-    
+    const [loading, setLoading] = state.loading
 
     const updateInfo = async (e) => {
         e.preventDefault()
-
         try {
+            setLoading(!loading)
             await fetch("http://localhost:3000/user/update", {
                 method: 'PUT',
                 headers: {
@@ -34,7 +34,8 @@ function Profile(props) {
             })
                 .then(resp => resp.json())
                 .then(data => {
-                   toast(data.msg)
+                    toast(data.msg)
+                    setLoading(false)
                 })
                 .then(setCallback(!callback))
         } catch (error) {
@@ -57,7 +58,7 @@ function Profile(props) {
                 <HomeAddress info={info} />
             </Row>
             <Row>
-                <a className="button green " onClick={updateInfo}>Save</a>
+                <button className="button green" onClick={updateInfo}>Save</button>
             </Row>
         </Container>
     )

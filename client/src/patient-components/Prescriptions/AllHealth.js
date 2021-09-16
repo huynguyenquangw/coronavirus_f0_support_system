@@ -21,15 +21,10 @@ function AllHealth(props) {
         "fever", "cough", "breathing", "sorethroat", "phlegm", "runnynose", "tiredness",
         "blocknose", "losssmell", "musclepain", "vaccinated", "covid", "status"
     ]
-    console.log(healthDeclares)
-
-
-
+    // console.log(healthDeclares)
 
     return (
         <div>
-
-
             <label > Choose a conditions:</label>
 
             <select className="filterCondition" name="filter" id="filter" value={filter} onChange={e => setFilter(e.target.value)}>

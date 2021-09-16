@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+// import { Link } from "react-router-dom";
 import axios from 'axios'
 import ChatRoom from "./ChatRoom";
 
@@ -18,8 +18,6 @@ const Chat = ({ isDoctor, doctorInfo, isPatient, patientInfo }) => {
     useEffect(() => {
         getUser()
     }, [])
-
-    console.log(user);
 
     return (
         <>

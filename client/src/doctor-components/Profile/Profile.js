@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import ProfilePicture from './ProfilePicture'
-import Certificate from './Certificate'
+// import Certificate from './Certificate'
 import PersonalInfo from './PersonalInfo'
 import Location from './Location'
 import { Container, Row, Header } from '../../css-template/DashboardMain'
@@ -10,13 +10,12 @@ import { toast } from 'react-toastify';
 
 function Profile(props) {
     const state = useContext(GlobalState)
-    const [doctorInfo, setDoctorInfo] = state.doctorAPI.doctorInfo
-    const [doctorToken, setDoctorToken] = state.doctorToken
+    const [doctorInfo] = state.doctorAPI.doctorInfo
+    const [doctorToken] = state.doctorToken
     const [callbackDoctor, setCallbackDoctor] = state.doctorAPI.callbackDoctor
 
     const updateInfo = async (e) => {
         e.preventDefault()
-
         // try {
         await fetch("http://localhost:3000/doctor/update", {
             method: 'PUT',
@@ -33,7 +32,6 @@ function Profile(props) {
                 "experience": "sddfdddddd",
                 certificate: { blank: "" },
                 img: { blank: "" }
-
             })
         })
             .then(resp => resp.json())
@@ -65,7 +63,7 @@ function Profile(props) {
                 <Location doctorInfo={doctorInfo} />
             </Row>
             <Row>
-                <a className="button green " onClick={updateInfo}>Save</a>
+                <button className="button green " onClick={updateInfo}>Save</button>
             </Row>
         </Container>
     )

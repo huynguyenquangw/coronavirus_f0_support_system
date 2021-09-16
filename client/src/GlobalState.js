@@ -14,6 +14,7 @@ export const DataProvider = ({ children }) => {
 
     const [token, setToken] = useState(false)
     const [doctorToken, setDoctorToken] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const getrf = async () => {
         await fetch("http://localhost:3000/user/refresh_token", {
@@ -47,6 +48,7 @@ export const DataProvider = ({ children }) => {
 
     const state = {
         token: [token, setToken],
+        loading: [loading, setLoading],
         doctorToken: [doctorToken, setDoctorToken],
         districtAPI: DistrictAPI(),
         patientAPI: PatientAPI(token),

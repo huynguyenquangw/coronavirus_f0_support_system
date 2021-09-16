@@ -1,15 +1,18 @@
 import Navbar from './Navbar';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router'
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
+import { GlobalState } from '../GlobalState';
 
 toast.configure()
 export default function Register() {
-    const history = useHistory()
     const endPoint = "http://localhost:3000"
+
+    const state = useContext(GlobalState)
+    const [loading, setLoading] = state.loading
     const [confirmPass, setConfirmPass] = useState('');
 
     const [user, setUser] = useState({
@@ -19,8 +22,8 @@ export default function Register() {
         district: '',
         phone: ''
     })
-    // chay Loading effect 
-    const [loading, setLoading] = useState(false)
+    const history = useHistory()
+
     const [district, setDistrict] = useState([])
 
     //On change for user
@@ -36,55 +39,48 @@ export default function Register() {
         } catch (error) {
             toast(error.response.data.msg)
         }
-
     }
 
     useEffect(() => {
         getDistrict()
-    },[])
+    }, [])
 
     //Register check
     const registerSubmit = async e => {
-        console.log(typeof user.email )
+        // console.log(typeof user.email)
         e.preventDefault()
-        if(user.district==='' || user.district==='Options'){
+        if (user.district === '' || user.district === 'Options') {
             toast(("Please choose a district "))
             return false;
         }
-        if(user.password.length < 6 ){
+        if (user.password.length < 6) {
             toast(("Password must be at least 6 characters ! "))
             return false;
         }
-        if(user.phone.length < 10 || user.phone.length>10){
+        if (user.phone.length < 10 || user.phone.length > 10) {
             toast(("Phone must have 10 characters ! "))
             return false;
         }
-        if(user.name.length < 1 ){
+        if (user.name.length < 1) {
             toast(("Please insert the username "))
             return false;
         }
-  
+
         if (user.password !== confirmPass) {
             toast('Password does not match !')
         } else {
             try {
-                setLoading(true)
-                const response = await axios.post(endPoint + "/user/register", { ...user })
+                setLoading(!loading)
+                await axios.post(endPoint + "/user/register", { ...user })
                 toast(`User ${user.email} has been successfully registered !`)
                 setLoading(false)
                 history.push('/login-patient')
-
-
             } catch (error) {
                 toast(error.response.data.msg)
                 setLoading(false)
-
             }
         }
-
     }
-
-
 
     return (
         <div>
@@ -108,7 +104,7 @@ export default function Register() {
                             <br />
                             {/* <input type="text"  className="no3" id="district" name="district"  placeholder="District.."value = {user.district} onChange = {onChangeValue} /> */}
                             <select name="district" id="district" className="no3" value={user.district} onChange={onChangeValue} >
-                                    <option > Options </option>
+                                <option > Options </option>
                                 {district.map(i =>
                                     <option value={i._id}>{i.name}</option>
                                 )}
@@ -123,9 +119,7 @@ export default function Register() {
                     </div>
                 </div>
                 <div className="item3"></div>
-
             </div>
         </div>
-
     )
 }

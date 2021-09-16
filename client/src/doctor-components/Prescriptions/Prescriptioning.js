@@ -1,9 +1,9 @@
 import axios from 'axios'
-import React, { createElement, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { toast } from 'react-toastify'
 import { Container, Row, Header } from '../../css-template/DashboardMain'
-import { Container as Form, CheckboxField, TextAreaField, FieldBig } from "../../css-template/Input"
+import { Container as Form, TextAreaField, FieldBig } from "../../css-template/Input"
 import { GlobalState } from '../../GlobalState'
 
 const medicineState = {
@@ -105,8 +105,10 @@ function Prescriptioning() {
     }
 
     useEffect(() => {
-        setLimit(9999999)
+        setLimit(limit * 9999999)
         getMedicine()
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
@@ -118,9 +120,11 @@ function Prescriptioning() {
             })
         }
         else setPrescriptionForm({ ...prescriptionForm, doctor_id: doctorInfo._id })
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [param.id])
 
-    console.log(prescriptionForm)
+    // console.log(prescriptionForm)
 
     return (
         <Container>
@@ -169,7 +173,7 @@ function Prescriptioning() {
                                 />
                             </div>
                             <div style={{ flexBasis: "10%" }}>
-                                <a className="button blue" onClick={addNewMedicine}>Add Medicine</a>
+                                <button className="button blue" onClick={addNewMedicine}>Add Medicine</button>
                             </div>
                         </div>
 
@@ -205,7 +209,7 @@ function Prescriptioning() {
                         <textarea name="note" id="note" onChange={handleChange}></textarea>
                     </TextAreaField>
                 </Form>
-                <a className="button green " onClick={saveMedicineForm}>Save</a>
+                <button className="button green " onClick={saveMedicineForm}>Save</button>
             </Row>
         </Container>
     )

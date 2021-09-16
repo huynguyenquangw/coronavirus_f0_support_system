@@ -1,21 +1,20 @@
 import Navbar from "./Navbar"
 import { useContext, useState } from 'react';
-import { useHistory } from 'react-router'
+// import { useHistory } from 'react-router'
 import axios from "axios";
-import {toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+import { GlobalState } from "../GlobalState";
 
 export default function LoginPatient() {
-   
-
-    
-    const history = useHistory()
     const endPoint = "http://localhost:3000"
+
+    const state = useContext(GlobalState)
+    const [loading, setLoading] = state.loading
     const [user, setUser] = useState({
         email: '',
         password: '',
     })
-    // chay Loading effect 
-    const [loading, setLoading] = useState(false)
+
 
     //On change for user
     const onChangeValue = e => {
@@ -23,7 +22,7 @@ export default function LoginPatient() {
         setUser({ ...user, [name]: value })
     }
 
-    const getRole = async (token) =>{
+    const getRole = async (token) => {
         const response = await axios.get("http://localhost:3000/user/info", {
             headers: {
                 Authorization: token
@@ -35,30 +34,15 @@ export default function LoginPatient() {
     //Register check
     const loginSubmit = async e => {
         e.preventDefault()
-
-
         try {
-
-            setLoading(true)
-
-            // await fetch(endPoint + "/user/login", {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({
-            //         email: user.email,
-            //         password: user.password
-            //     }),
-            //     credentials: 'include'
-            // }).then(response => response.json())
-            // .then((data => getRole(data.accessToken)))
+            setLoading(!loading)
             const response = await axios.post(endPoint + "/user/login", { ...user },
-            {withCredentials: 'include'})
+                { withCredentials: 'include' })
             getRole(response.data.accessToken)
-            
+
             localStorage.setItem('isLogin', true)
             toast(`User ${user.email} has been successfully login !`)
             // getRole(response.data.accessToken)
-
             setLoading(false)
 
         } catch (error) {
@@ -66,8 +50,6 @@ export default function LoginPatient() {
             console.log(error.response.data.msg);
             toast(error.response.data.msg)
         }
-
-
     }
 
     return (

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import profile from '../../assets/images/profile.svg'
 import photoEdit from '../../assets/icons/profile-picture-edit.svg'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 const Container = styled.div`
@@ -42,7 +42,6 @@ const PhotoAction = styled.img`
     }
 `
 function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDoctor }) {
-
     const [cloudinary, setCloudinary] = useState({
         url: "",
         public_id: ""
@@ -97,48 +96,47 @@ function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDo
     const updateImage = async (cloudinary) => {
 
         // try {
-            await fetch("http://localhost:3000/doctor/update", {
-                method: 'PUT',
-                headers: {
-                    "Authorization": doctorToken,
-                    'Content-Type': 'application/json',
+        await fetch("http://localhost:3000/doctor/update", {
+            method: 'PUT',
+            headers: {
+                "Authorization": doctorToken,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "img": {
+                    url: cloudinary.url,
+                    public_id: cloudinary.public_id
                 },
-                body: JSON.stringify({
-                    "img": {
-                        url: cloudinary.url,
-                        public_id: cloudinary.public_id
-                    },
-                    "name": document.getElementById("name").value,
-                    "district": {
-                        "_id": document.getElementById("district").value,
-                    },
-                    "phone": document.getElementById("phone").value,
-                    // "experience": document.getElementById("experience").value,
-                    // certificate: doctorInfo.certificate,
-                    "experience": "sddfdddddd",
-                    certificate: { blank: "" },
-                })
+                "name": document.getElementById("name").value,
+                "district": {
+                    "_id": document.getElementById("district").value,
+                },
+                "phone": document.getElementById("phone").value,
+                // "experience": document.getElementById("experience").value,
+                // certificate: doctorInfo.certificate,
+                "experience": "sddfdddddd",
+                certificate: { blank: "" },
             })
-                .then(resp => resp.json())
-                .then(data => {
-                    toast(data.msg)
-                })
-                .then(setCallbackDoctor(!callbackDoctor))
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                toast(data.msg)
+            })
+            .then(setCallbackDoctor(!callbackDoctor))
         // } catch (error) {
         //     toast(error.response)
         // }
-
-
     }
 
     useEffect(() => {
         if (doctorInfo.img) {
             setCloudinary(doctorInfo.img)
         }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
-
         <Container>
             <PhotoContainer style={{ backgroundImage: `url(${doctorInfo.img?.url || profile})` }}>
                 <ActionContainer htmlFor="photo-upload">
@@ -146,9 +144,7 @@ function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDo
                 </ActionContainer>
             </PhotoContainer>
 
-            <input id="photo-upload" type="file" onChange={editImage}></input>
-
-
+            <input id="photo-upload" type="file" onChange={editImage} />
         </Container>
     )
 }
