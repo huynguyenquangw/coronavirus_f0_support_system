@@ -3,15 +3,18 @@ import { GlobalState } from '../../GlobalState'
 import { Link } from 'react-router-dom';
 import "../../doctor-components/Patient Chat/GetHealthPatient.css"
 import MedicinePopup from './MedicinePopup';
+import HealthPopup from './HealthPopup';
 import { useState } from 'react/cjs/react.development';
 import viewMedicine from '../../assets/icons/view-medicine.svg'
+import prescriptions from '../../assets/icons/prescriptions.svg'
 
 function AllHealth(props) {
     const state = useContext(GlobalState)
     const [healthDeclares, setHealthDeclares] = state.getHealthDeclareForPatient.healths
     const [filter, setFilter] = state.getHealthDeclareForPatient.filter
     const [trueOrFalse, setTrueOrFalse] = state.getHealthDeclareForPatient.trueOrFalse
-    const [modalDisplay, setModalDisplay] = useState(false)
+    const [modalDisplayPres, setModalDisplayPres] = useState("")
+    const [modalDisplayHealth, setModalDisplayHealth] = useState("")
 
     const trueorfalse = ["true", "false"]
     const filterName = [
@@ -25,7 +28,7 @@ function AllHealth(props) {
 
     return (
         <div>
-            
+
 
             <label > Choose a conditions:</label>
 
@@ -61,7 +64,7 @@ function AllHealth(props) {
                         <th> Vaccinated</th>
                         <th> Covid</th>
                         <th> Status</th>
-                        <th  style={{textAlign: "center"}}> View Prescription</th>
+                        <th></th>
                     </tr>
                     {healthDeclares.map(health => (
                         <tr>
@@ -84,10 +87,13 @@ function AllHealth(props) {
                             <td> {health.vaccinated ? "true" : "false"}</td>
                             <td> {health.covid ? "true" : "false"}</td>
                             <td> {health.status ? "true" : "false"}</td>
-                            <td style={{ cursor: "pointer", textAlign: "center" }} onClick={() => { setModalDisplay(true) }}>
-                                <img class="hover" src={viewMedicine} />
+                            <td style={{ cursor: "pointer", textAlign: "center" }} >
+                                <img style={{ width: "2rem" }} class="hover" src={prescriptions} onClick={() => { setModalDisplayPres(health._id) }} />
+                                <img style={{ width: "2rem", marginLeft: "2rem" }} class="hover" src={viewMedicine} />
                             </td>
-                            <td><MedicinePopup modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} healthData={health }medicineData={health.medicineform_id}/></td>
+                            <td><MedicinePopup key={health._id} modalDisplayPres={modalDisplayPres} setModalDisplayPres={setModalDisplayPres} healthData={health} medicineData={health.medicineform_id} /></td>
+                            <td><MedicinePopup key={health._id} modalDisplayHealth={modalDisplayHealth} setModalDisplayHealth={setModalDisplayHealth} healthData={health} /></td>
+
                         </tr>
 
 

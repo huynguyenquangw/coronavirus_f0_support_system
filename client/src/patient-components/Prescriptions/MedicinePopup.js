@@ -19,17 +19,16 @@ const fullDate = (date) => {
     return `${getDate(date)}, ${getMonth(date)} ${date.getDate()}, ${date.getFullYear()}`;
 }
 
-function MedicinePopup({ modalDisplay, setModalDisplay, medicineData, healthData }) {
+function MedicinePopup({ modalDisplayPres, setModalDisplayPres, medicineData, healthData, key }) {
 
-    var span = document.getElementsByClassName("close")[0];
-    var modal = document.getElementById("myModal")
-
-    const {createdAt, diagnostic, prescriptions} = medicineData
+    console.log({healthData})
+    console.log({modalDisplayPres})
+    const { createdAt, diagnostic, prescriptions } = medicineData
 
     return (
-        <div id="myModal" className={modalDisplay ? "modal active" : "modal"}>
-            <div className={modalDisplay ? "modal-content active" : "modal-content"}>
-                <span className="close" onClick={() => setModalDisplay(false)}>&times;</span>
+        <div id={key} className={modalDisplayPres === healthData._id ? "modal active" : "modal"}>
+            <div className={modalDisplayPres === healthData._id ? "modal-content active" : "modal-content"}>
+                <span className="close" onClick={() => setModalDisplayPres(false)}>&times;</span>
                 <div className="header">
                     <h1>Prescription from {healthData.doctor_id.name}</h1>
                     <h2>{fullDate(new Date(createdAt))}</h2>
@@ -47,8 +46,13 @@ function MedicinePopup({ modalDisplay, setModalDisplay, medicineData, healthData
                             <th>Quantity</th>
                             <th>Dosage</th>
                         </tr>
-                        {prescriptions.map(medicine => (
-                            <td></td>
+                        {prescriptions.map(pres => (
+                            <tr>
+                                <td>{pres.medicine.name}</td>
+                                <td>{pres.medicine.type}</td>
+                                <td>{pres.quantity}</td>
+                                <td>{pres.frequency}</td>
+                            </tr>
                         ))}
                     </table>
                 </div>
@@ -56,14 +60,9 @@ function MedicinePopup({ modalDisplay, setModalDisplay, medicineData, healthData
                     <h1>Doctor Notes</h1>
                     <p>{medicineData.note}</p>
                 </div>
-
-
-
-
-
-
-            </div>
+           </div>
         </div>
+
     )
 }
 
