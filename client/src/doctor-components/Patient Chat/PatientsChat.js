@@ -17,6 +17,7 @@ function Patients(props) {
     const [realLength] = state.getHealthDeclareForDoctor.realLength
 
     const [modalDisplayHealth, setModalDisplayHealth] = useState("")
+    const [modalDisplay, setModalDisplay] = useState("")
 
     const trueorfalse = ["true", "false"]
     const filterName = [
@@ -90,7 +91,7 @@ function Patients(props) {
                 </thead>
                 {healthDeclares.map(health => (
                     <tbody key={health._id}>
-                        <tr>
+                        <tr >
                             <td>{health._id}</td>
                             <td>{health.user_id?.name}</td>
                             <td>{health.covid ? 'positive' : 'negative'}</td>
@@ -100,18 +101,17 @@ function Patients(props) {
                             <img onClick={() => { setModalDisplayHealth(health._id) }} className="hover icon" src={viewHealth} />
                             </td>
                             <td>
-                                {trueOrFalse === 'false' &&
+                                {trueOrFalse === 'false' && filter === "status" &&
                                     <Link className="button green" to={`/doctor/prescriptions/medicine/${health._id}`}>
                                         Add medicine
                                     </Link>
                                 }
                                 {trueOrFalse === 'true' &&
-                                    <img onClick={() => {setModalDisplayHealth(health._id)}} className="hover icon" src={prescriptions} />
+                                    <img onClick={() => {setModalDisplay(health._id)}} className="hover icon" src={prescriptions} />
                                 }
                             </td>
-                        </tr>
-                        <tr>
-                        {/* <td><HealthPopup key={health._id} modalDisplayHealth={modalDisplayHealth} setModalDisplayHealth={setModalDisplayHealth} healthData={healthDeclares} /></td> */}
+                            {trueOrFalse == "true" && <td><MedicinePopup key={health._id + "medicineDoctor"} modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} healthData={health} medicineData={health.medicineform_id} /></td>}
+                        <td><HealthPopup key={health._id} modalDisplayHealth={modalDisplayHealth} setModalDisplayHealth={setModalDisplayHealth} healthData={health} /></td>
                         </tr>
                     </tbody>
                 ))}

@@ -10,24 +10,23 @@ const Container = styled.div`
         visibility: hidden;
     }
 `
-const PhotoContainer = styled.img`
-    position: relative;
-    box-sizing: border-box;
-    max-width: 15rem;
-    max-height: 15rem;
-    height: 40vw;
-    border-radius: 15%;
 
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: 101% auto;
+const PhotoContainer = styled.div`
+    position: relative;
+    max-width: 35rem;
+`
+
+const Photo = styled.img`
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
 `
 
 const ActionContainer = styled.label`
 `
 
 const PhotoAction = styled.img`
-    display: inline-block;
     position: absolute;
     right: 1rem;
     top: 1rem;
@@ -40,22 +39,22 @@ const PhotoAction = styled.img`
     }
 `
 
-function Certificate({ doctorInfo, doctorToken, callbackDoctor, setCallbackDoctor }) {
+function Certificate({ doctorInfo, doctorToken, callbackDoctor, setCallbackDoctor, setLoading }) {
 
-    const [cloudinary, setCloudinary] = useState({
+    const [cloudinaryCertificate, setCloudinaryCertificate] = useState({
         url: "",
         public_id: ""
     })
 
     const endPoint = "http://localhost:3000"
 
-    const editImage = async (e) => {
+    const editCertificate = async (e) => {
         e.preventDefault()
-
-        if (cloudinary.url !== "") {
+        setLoading(true)
+        if (cloudinaryCertificate.url !== "") {
             //delete
             let dataDelete = new FormData()
-            dataDelete.append("public_id", cloudinary.public_id)
+            dataDelete.append("public_id", cloudinaryCertificate.public_id)
 
             axios.post(endPoint + "/api/destroy", dataDelete)
                 .then(response => {
@@ -73,47 +72,30 @@ function Certificate({ doctorInfo, doctorToken, callbackDoctor, setCallbackDocto
         try {
             const response = await axios.post(endPoint + "/api/upload", dataUpload)
             console.log(response.data)
-            setCloudinary(response.data)
-            updateImage(response.data)
+            setCloudinaryCertificate(response.data)
+            updateCertificate(response.data)
             toast("New certificate has been updated")
         } catch (error) {
             toast(error.response.data.msg)
 
         }
-
-        // await axios.post(endPoint + "/api/upload", dataUpload)
-        //     .then(response => {
-        //         console.log(response.data)
-        //         setCloudinary(response.data)
-        //         console.log(cloudinary)
-
-        //         setDisplay(cloudinary.url)
-        //     })
-        //     .catch(error => toast(error.request));
-
+        setLoading(false)
     }
 
-    const updateImage = async (cloudinary) => {
+    const updateCertificate = async (cloudinaryCertificate) => {
 
         try {
-            await fetch("http://localhost:3000/doctor/update", {
+            await fetch("http://localhost:3000/doctor/update/certificate", {
                 method: 'PUT',
                 headers: {
                     "Authorization": doctorToken,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    "img": {
-                        url: cloudinary.url,
-                        public_id: cloudinary.public_id
+                    "certificate": {
+                        url: cloudinaryCertificate.url,
+                        public_id: cloudinaryCertificate.public_id
                     },
-                    "name": document.getElementById("name").value,
-                    "district": {
-                        "_id": document.getElementById("district").value,
-                    },
-                    "phone": document.getElementById("phone").value,
-                    "experience": document.getElementById("experience").value,
-                    certificate: doctorInfo.certificate,
                 })
             })
                 .then(resp => resp.json())
@@ -127,24 +109,22 @@ function Certificate({ doctorInfo, doctorToken, callbackDoctor, setCallbackDocto
     }
 
     useEffect(() => {
-        if (doctorInfo.img) {
-            setCloudinary(doctorInfo.img)
+        if (doctorInfo.certificate) {
+            setCloudinaryCertificate(doctorInfo.certificate)
         }
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
         <Container>
-            <PhotoContainer style={{ backgroundImage: `url(${doctorInfo.img?.url || certificate})` }}>
-                <ActionContainer htmlFor="photo-upload">
+            <PhotoContainer>
+                <Photo src={doctorInfo.certificate?.url || certificate} />
+                <ActionContainer htmlFor="certificate-upload">
                     <PhotoAction src={photoEdit} />
                 </ActionContainer>
             </PhotoContainer>
 
-            <input id="photo-upload" type="file" onChange={editImage} />
-
-
+            <input id="certificate-upload" type="file" onChange={editCertificate} />
         </Container>
     )
 }

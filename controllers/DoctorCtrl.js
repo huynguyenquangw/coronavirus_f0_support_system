@@ -208,20 +208,52 @@ const DoctorCtrl = {
   /**
    * Update doctor info by ID
    */
+  updateDoctorImgByID: async (req, res) => {
+    try {
+      const { img } = req.body;
+
+      if (!img)
+        return res.status(400).json({ msg: "No image provided. " });
+
+      await Doctors.findByIdAndUpdate(
+        { _id: req.doctor.id },
+        {
+          img,
+        },
+      );
+
+      res.json(img)
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
+
+  updateDoctorCertificateByID: async (req, res) => {
+    try {
+      const { certificate } = req.body;
+
+      if (!certificate)
+        return res.status(400).json({ msg: "No certificate provided. " });
+
+      await Doctors.findByIdAndUpdate(
+        { _id: req.doctor.id },
+        {
+          certificate,
+        },
+      );
+
+      res.json(certificate)
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+    }
+  },
+
   updateDoctorByID: async (req, res) => {
     try {
-      const { name, district, phone, certificate, experience, img } = req.body;
+      const { name, district, phone, experience } = req.body;
 
       // const doctor = await Doctors.findOne({ email })
       // if (doctor) return res.status(400).json({ msg: "The email is already existed." })
-
-      if (!certificate)
-        return res.status(400).json({ msg: "No certificate provide. " });
-
-      // if (password.length < 6)
-      //   return res
-      //     .status(400)
-      //     .json({ msg: "Password mus be at least 6 character longs." });
 
       if (phone.length !== 10)
         return res.status(400).json({ msg: "Phone has 10 numbers." });
@@ -243,10 +275,8 @@ const DoctorCtrl = {
         { _id: req.doctor.id },
         {
           name,
-          img,
           district,
           phone,
-          certificate,
           experience,
         },
       );

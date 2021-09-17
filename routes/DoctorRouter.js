@@ -24,6 +24,10 @@ router.delete("/delete/:id", auth, authAdmin, doctorCtrl.deleteDoctorByID);
 //Update doctor by token
 router.put("/update", authDoctor, doctorCtrl.updateDoctorByID);
 
+router.put("/update/img", authDoctor, doctorCtrl.updateDoctorImgByID);
+
+router.put("/update/certificate", authDoctor, doctorCtrl.updateDoctorCertificateByID);
+
 //Update patient password by token
 router.put("/updatepw", authDoctor, doctorCtrl.updateDoctorPasswordByID);
 

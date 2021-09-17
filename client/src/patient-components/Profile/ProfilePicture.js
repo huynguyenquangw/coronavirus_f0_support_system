@@ -41,7 +41,7 @@ const PhotoAction = styled.img`
         width: 3rem;
     }
 `
-function ProfilePicture({ info, token, callback, setCallback }) {
+function ProfilePicture({ info, token, callback, setCallback, setLoading }) {
 
     const [cloudinary, setCloudinary] = useState({
         url: "",
@@ -52,7 +52,7 @@ function ProfilePicture({ info, token, callback, setCallback }) {
 
     const editImage = async (e) => {
         e.preventDefault()
-
+        setLoading(true)
         if (cloudinary.url !== "") {
             //delete
             let dataDelete = new FormData()
@@ -81,17 +81,7 @@ function ProfilePicture({ info, token, callback, setCallback }) {
             toast(error.response.data.msg)
 
         }
-
-        // await axios.post(endPoint + "/api/upload", dataUpload)
-        //     .then(response => {
-        //         console.log(response.data)
-        //         setCloudinary(response.data)
-        //         console.log(cloudinary)
-
-        //         setDisplay(cloudinary.url)
-        //     })
-        //     .catch(error => toast(error.request));
-
+        setLoading(false)
     }
 
     const updateImage = async (cloudinary) => {

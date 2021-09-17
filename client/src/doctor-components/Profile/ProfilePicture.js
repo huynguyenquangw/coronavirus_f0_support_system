@@ -41,7 +41,7 @@ const PhotoAction = styled.img`
         width: 3rem;
     }
 `
-function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDoctor }) {
+function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDoctor, setLoading }) {
     const [cloudinary, setCloudinary] = useState({
         url: "",
         public_id: ""
@@ -51,7 +51,7 @@ function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDo
 
     const editImage = async (e) => {
         e.preventDefault()
-
+        setLoading(true)
         if (cloudinary.url !== "") {
             //delete
             let dataDelete = new FormData()
@@ -80,23 +80,13 @@ function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDo
             toast(error.response.data.msg)
 
         }
-
-        // await axios.post(endPoint + "/api/upload", dataUpload)
-        //     .then(response => {
-        //         console.log(response.data)
-        //         setCloudinary(response.data)
-        //         console.log(cloudinary)
-
-        //         setDisplay(cloudinary.url)
-        //     })
-        //     .catch(error => toast(error.request));
-
+        setLoading(false)
     }
 
     const updateImage = async (cloudinary) => {
 
         // try {
-        await fetch("http://localhost:3000/doctor/update", {
+        await fetch("http://localhost:3000/doctor/update/img", {
             method: 'PUT',
             headers: {
                 "Authorization": doctorToken,
@@ -106,16 +96,7 @@ function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDo
                 "img": {
                     url: cloudinary.url,
                     public_id: cloudinary.public_id
-                },
-                "name": document.getElementById("name").value,
-                "district": {
-                    "_id": document.getElementById("district").value,
-                },
-                "phone": document.getElementById("phone").value,
-                // "experience": document.getElementById("experience").value,
-                // certificate: doctorInfo.certificate,
-                "experience": "sddfdddddd",
-                certificate: { blank: "" },
+                }
             })
         })
             .then(resp => resp.json())

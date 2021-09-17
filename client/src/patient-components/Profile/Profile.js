@@ -47,15 +47,15 @@ function Profile(props) {
         <Container>
             <Row>
                 <Header>PROFILE PICTURE</Header>
-                <ProfilePicture info={info} token={token} callback={callback} setCallback={setCallback} />
+                <ProfilePicture setLoading={setLoading} info={info} token={token} callback={callback} setCallback={setCallback} />
             </Row>
             <Row>
                 <Header>PERSONAL INFORMATION</Header>
-                <PersonalInfo info={info} />
+                <PersonalInfo setLoading={setLoading} info={info} />
             </Row>
             <Row>
                 <Header>HOME ADDRESS</Header>
-                <HomeAddress info={info} />
+                <HomeAddress setLoading={setLoading} info={info} />
             </Row>
             <Row>
                 <button className="button green" onClick={updateInfo}>Save</button>

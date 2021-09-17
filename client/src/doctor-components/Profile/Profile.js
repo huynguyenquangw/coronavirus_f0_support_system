@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import ProfilePicture from './ProfilePicture'
-// import Certificate from './Certificate'
+import Certificate from './Certificate'
 import PersonalInfo from './PersonalInfo'
 import Location from './Location'
 import { Container, Row, Header } from '../../css-template/DashboardMain'
@@ -13,10 +13,11 @@ function Profile(props) {
     const [doctorInfo] = state.doctorAPI.doctorInfo
     const [doctorToken] = state.doctorToken
     const [callbackDoctor, setCallbackDoctor] = state.doctorAPI.callbackDoctor
+    const [loading, setLoading] = state.loading
 
     const updateInfo = async (e) => {
         e.preventDefault()
-        // try {
+        setLoading(!loading)
         await fetch("http://localhost:3000/doctor/update", {
             method: 'PUT',
             headers: {
@@ -29,9 +30,7 @@ function Profile(props) {
                     "_id": document.getElementById("district").value,
                 },
                 "phone": document.getElementById("phone").value,
-                "experience": "sddfdddddd",
-                certificate: { blank: "" },
-                img: { blank: "" }
+                "experience": document.getElementById("experience").value
             })
         })
             .then(resp => resp.json())
@@ -39,22 +38,23 @@ function Profile(props) {
                 toast(data.msg)
             })
             .then(setCallbackDoctor(!callbackDoctor))
+        setLoading(false)
     }
 
     return (
         <Container>
             <Row>
                 <Header>PROFILE PICTURE</Header>
-                <ProfilePicture doctorInfo={doctorInfo} doctorToken={doctorToken} callbackDoctor={callbackDoctor} setCallbackDoctor={setCallbackDoctor} />
+                <ProfilePicture setLoading={setLoading} doctorInfo={doctorInfo} doctorToken={doctorToken} callbackDoctor={callbackDoctor} setCallbackDoctor={setCallbackDoctor} />
             </Row>
             <Row>
                 <Header>PERSONAL INFORMATION</Header>
                 <PersonalInfo doctorInfo={doctorInfo} />
             </Row>
-            {/* <Row>
+            <Row>
                 <Header>CERTIFICATE</Header>
-                <Certificate doctorInfo={doctorInfo} doctorToken={doctorToken} callbackDoctor={callbackDoctor} setCallbackDoctor={setCallbackDoctor}/>
-            </Row> */}
+                <Certificate setLoading={setLoading} doctorInfo={doctorInfo} doctorToken={doctorToken} callbackDoctor={callbackDoctor} setCallbackDoctor={setCallbackDoctor} />
+            </Row>
             <Row>
                 <Header>ASSIGNED LOCATION</Header>
                 <Location doctorInfo={doctorInfo} />

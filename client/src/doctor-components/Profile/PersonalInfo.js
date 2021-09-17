@@ -1,12 +1,13 @@
 import React from 'react'
-import { Container, Field } from "../../css-template/Input"
+import { Container, Field, TextAreaField } from "../../css-template/Input"
 import { useState, useEffect } from 'react'
 
 function PersonalInfo({ doctorInfo }) {
     const [user, setUser] = useState({
         name: "",
         email: "",
-        phone: ""
+        phone: "",
+        experience: ""
     })
 
     const onChangeValue = e => {
@@ -32,6 +33,10 @@ function PersonalInfo({ doctorInfo }) {
                 <label htmlFor="name">Phone</label>
                 <input className="editable" name="phone" id="phone" type="text" placeholder="Full Name" value={user.phone} onChange={onChangeValue}></input>
             </Field>
+            <TextAreaField>
+                <h2>Experiences</h2>
+                <textarea name="experience" id="experience" value={user.experience} onChange={onChangeValue}></textarea>
+            </TextAreaField>
         </Container>
     )
 }

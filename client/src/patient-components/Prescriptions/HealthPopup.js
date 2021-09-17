@@ -19,21 +19,21 @@ const fullDate = (date) => {
     return `${getDate(date)}, ${getMonth(date)} ${date.getDate()}, ${date.getFullYear()}`;
 }
 
-function HealthPopup({ modalDisplayHealth, setModalDisplayHealth, healthData, key }) {
+function HealthPopup({ modalDisplayHealth, setModalDisplayHealth, healthData}) {
 
     const { _id, createdAt, fever, cough, breathing, sorethroat, phlegm, runnynose, tiredness,
         blocknose, losssmell, musclepain, vaccinated, covid, othersymptoms } = healthData
 
     return (
-        <div id={key} className={modalDisplayHealth === _id ? "modal active" : "modal"}>
+        <div className={modalDisplayHealth === _id ? "modal active" : "modal"}>
             <div className={modalDisplayHealth === _id ? "modal-content active" : "modal-content"}>
                 <span className="close" onClick={() => setModalDisplayHealth(false)}>&times;</span>
                 <div className="header">
                     <h1>Health Declaration</h1>
                     <h2>created on {fullDate(new Date(createdAt))}</h2>
                     <h3>
-                        {healthData.doctor_id.name && "With Dr." + healthData.doctor_id.name}
-                        {healthData.doctor_id.name && "With Dr." + healthData.doctor_id.name}
+                        {healthData.doctor_id?.name && "With Dr." + healthData.doctor_id.name}
+                        {healthData.user_id?.name && "From Pt." + healthData.user_id.name}
                     </h3>
                     <h3>ID: {_id}</h3>
                 </div>
@@ -41,8 +41,8 @@ function HealthPopup({ modalDisplayHealth, setModalDisplayHealth, healthData, ke
                     <div className="info">
                         <h1>Status</h1>
                         <div className="symptoms">
-                            {covid ? <p><i class="fas fa-virus"></i>Covid Positived</p> : ""}
-                            {vaccinated ? <p><i class="fas fa-syringe"></i>Vaccinated</p> : ""}
+                            {covid ? <p><i className="fas fa-virus"></i>Covid Positived</p> : ""}
+                            {vaccinated ? <p><i className="fas fa-syringe"></i>Vaccinated</p> : ""}
                         </div>
                     </div>
                 }

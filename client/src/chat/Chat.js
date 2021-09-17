@@ -27,7 +27,7 @@ const Chat = ({ isDoctor, doctorInfo, isPatient, patientInfo }) => {
             {isPatient && (
                 <>
                     <div className="home-container">
-                        <select name="room" id="room" value={roomId} onChange={e => {
+                        {/* <select name="room" id="room" value={roomId} onChange={e => {
                             setRoomId(e.target.value)
                             setPop(true)
                         }}>
@@ -38,7 +38,18 @@ const Chat = ({ isDoctor, doctorInfo, isPatient, patientInfo }) => {
                                 // </Link>
                                 <option key={user._id} value={user._id}>{user.name}</option>
                             ))}
-                        </select>
+                        </select> */}
+                        {user.filter(f => patientInfo.district?._id === f.district?._id).map(user => (
+                            <>
+                                <img src={user.img?.url} onClick={e => {
+                                    setRoomId(user._id)
+                                    setPop(true)
+                                }} />
+                                <h1>{user.name}</h1>
+                            </>
+                        )
+
+                        )}
                     </div>
                     {roomId && <ChatRoom roomId={roomId} doctors={user} currentPatient={patientInfo} isWho={"isPatient"} setRoomId={setRoomId} pop={pop} setPop={setPop} />}
                 </>

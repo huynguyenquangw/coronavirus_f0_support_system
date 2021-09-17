@@ -5,7 +5,9 @@ import MedicinePopup from './MedicinePopup';
 import HealthPopup from './HealthPopup';
 import viewHealth from '../../assets/icons/view-medicine.svg'
 import prescriptions from '../../assets/icons/prescriptions.svg'
+import deleteIcon from '../../assets/icons/delete.svg'
 import { toast } from 'react-toastify'
+import axios from 'axios'
 
 function AllHealth(props) {
     const state = useContext(GlobalState)
@@ -14,6 +16,10 @@ function AllHealth(props) {
     const [trueOrFalse, setTrueOrFalse] = state.getHealthDeclareForPatient.trueOrFalse
     const [page, setPage] = state.getHealthDeclareForPatient.page
     const [realLength] = state.getHealthDeclareForPatient.realLength
+    const [callback, setCallBack] = state.getHealthDeclareForPatient.callback
+
+    const [token] = state.token
+    const [loading, setLoading] = state.loading
 
     const [modalDisplay, setModalDisplay] = useState("")
     const [modalDisplayHealth, setModalDisplayHealth] = useState("")
@@ -37,7 +43,27 @@ function AllHealth(props) {
         if (page > 1) setPage(i => i - 1)
     }
 
-    console.log(healthDeclares)
+    const deleteHealth = async (e) => {
+
+        window.confirm("Do you want to delete " + e.target.value + "?")
+
+        setLoading(!loading)
+        try {
+            await axios.delete(`http://localhost:3000/health/delete/${e.target.value}`, {
+                headers: {
+                    Authorization: token,
+                }
+            })
+            toast("Health declaration " + e.target.value + " has been deleted")
+            setCallBack(!callback)
+        } catch (error) {
+
+        }
+        setLoading(false)
+
+    }
+
+    // console.log(healthDeclares)
 
     return (
         <div>
@@ -86,22 +112,14 @@ function AllHealth(props) {
                         <th>Vaccinated</th>
                         <th>Covid</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 {healthDeclares.map(health => (
                     <tbody key={health._id}>
-                        <tr>
-                            {/* {trueOrFalse === 'true' ? (
-                                <td key={health._id} > {health._id}</td>
-                            ) : (
-                                <td>
-                                    <Link to={`/doctor/prescriptions/medicine/${health._id}`}>
-                                        {health._id}
-                                    </Link>
-                                </td>
-                            )}
-                            <td key={health._id}>{health.doctor_id?.name}</td> */}
-                            <td>{health.createdAt.substring(0,10)}</td>
+                        <tr >
+
+                            <td>{health.createdAt.substring(0, 10)}</td>
                             <td key={health._id} > {health._id}</td>
                             <td>{health.doctor_id?.name}</td>
                             <td> {health.vaccinated ? "true" : "false"}</td>
@@ -111,10 +129,11 @@ function AllHealth(props) {
 
                                 <img onClick={() => { setModalDisplayHealth(health._id) }} className="hover icon" style={{ marginLeft: "1rem" }} src={viewHealth} />
                             </td>
-                        </tr>
-                        <tr>
-                            {trueOrFalse == "true" && <td><MedicinePopup key={health._id} modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} healthData={health} medicineData={health.medicineform_id} /></td>}
+                            {trueOrFalse == "true" && <td><MedicinePopup key={health._id + "medicine"} modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} healthData={health} medicineData={health.medicineform_id} /></td>}
                             <td><HealthPopup key={health._id} modalDisplayHealth={modalDisplayHealth} setModalDisplayHealth={setModalDisplayHealth} healthData={health} /></td>
+                            <td><button value={health._id} className="icon" onClick={deleteHealth}>
+                                <img src={deleteIcon} alt="delete icon" />
+                            </button></td>
                         </tr>
                     </tbody>
 
