@@ -46,6 +46,8 @@ function HealthPopup({ modalDisplayHealth, setModalDisplayHealth, healthData}) {
                         </div>
                     </div>
                 }
+                {fever || cough || breathing || sorethroat || phlegm || runnynose || tiredness || 
+                blocknose || losssmell  || musclepain ? 
                 <div className="info">
                     <h1>Symptoms</h1>
                     <div className="symptoms">
@@ -61,6 +63,7 @@ function HealthPopup({ modalDisplayHealth, setModalDisplayHealth, healthData}) {
                         {musclepain ? <p>Muscle Pain</p> : ""}
                     </div>
                 </div>
+                : ""}
                 {othersymptoms &&
                     <div className="info">
                         <h1>Other Symptoms</h1>

@@ -28,6 +28,7 @@ export default function LoginPatient() {
                 Authorization: token
             }
         })
+        setLoading(!loading)
         return response.data.role === 1 ? window.location.replace('/admin/patients') : window.location.replace('/patient/profile')
     }
 

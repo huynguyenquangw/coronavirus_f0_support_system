@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import useChat from "./useChat";
 import './ChatRoom.css'
 import { useState } from "react/cjs/react.development";
+import profile from '../assets/images/profile.svg'
 
 const ChatRoom = ({ doctors, isWho, currentPatient, roomId, setRoomId, pop, setPop }) => {
     // const { roomId } = props.match.params;
@@ -65,13 +66,13 @@ const ChatRoom = ({ doctors, isWho, currentPatient, roomId, setRoomId, pop, setP
             <div className="chat-header">
                 <div className="logo">
                     {isWho === 'isDoctor' ? (
-                        <>
+                        <h2>
                             Chat with patient
-                        </>
+                        </h2>
                     ) : (
-                        <>
+                        <h2>
                             Chat with {currentDoctor.name}
-                        </>
+                        </h2>
                     )}
                 </div>
 
@@ -95,33 +96,47 @@ const ChatRoom = ({ doctors, isWho, currentPatient, roomId, setRoomId, pop, setP
                 </div>
 
             </div>
+            {isWho === 'isPatient' &&
+                <div className="chat-intro">
+                    <div className="picture-container">
+                        <div style={{ backgroundImage: `url(${currentDoctor.img?.url ? currentDoctor.img?.url : profile}` }} >
+                        </div>
+                    </div>
+                    <h2>You're chatting with Dr.{currentDoctor.name}</h2>
+                </div>
+            }
             <div className="messages-container">
+
                 <div className="wrapper">
-                    <div className="chat-content">
+                    <div className="chat-message">
                         <div className="message">
+
                             {messages.map((message, i) => (
-                                <div key={i} className={`message-row ${message.ownedByCurrentUser ? "my-message" : "other-message"}`}>
-                                    <div className="message-title">
-                                        {message.ownedByCurrentUser ? (
-                                            <>
-                                                {isWho === 'isPatient' ? currentPatient.name : currentDoctor.name}
-                                            </>
-                                        ) : (
-                                            <>
-                                                {isWho !== 'isPatient' ? 'Patient' : currentDoctor.name}
-                                            </>
-                                        )}
-                                        {/* {message.ownedByCurrentUser ? currentPatient.name : currentDoctor.name} */}
-                                    </div>
+                                <>
+                                    <div key={i} className={`message-row ${message.ownedByCurrentUser ? "my-message" : "other-message"}`}>
+                                        <div className="message-title">
+                                            {/* {message.ownedByCurrentUser ? (
+                                                <p>
+                                                    {isWho === 'isPatient' ? currentPatient.name : currentDoctor.name}
+                                                    
+                                                </p>
+                                            ) : (
+                                                <p>
+                                                    {isWho !== 'isPatient' ? 'Patient' : currentDoctor.name}
+                                                </p>
+                                            )} */}
+                                            {/* {message.ownedByCurrentUser ? currentPatient.name : currentDoctor.name} */}
+                                        </div>
 
-                                    <div className="message-text">
-                                        {message.body}
-                                    </div>
+                                        <div className="message-text">
+                                            {message.body}
+                                        </div>
 
-                                    <div className="message-datetime">
-                                        {message.datetime}
+                                        <div className="message-datetime">
+                                            {message.datetime}
+                                        </div>
                                     </div>
-                                </div>
+                                </>
                             ))}
                         </div>
                         <div ref={messageRef}></div>
@@ -130,16 +145,16 @@ const ChatRoom = ({ doctors, isWho, currentPatient, roomId, setRoomId, pop, setP
 
             </div>
             <div className="input-container">
-                <textarea
+                <textarea rows="1"
                     value={newMessage}
                     onChange={handleNewMessageChange}
                     placeholder="Write message..."
                     className="new-message-input-field"
                     onKeyUp={handleKeyUp}
                 />
-                <button disabled={!newMessage} onClick={handleSendMessage} className="send-message-button">
+                {/* <button disabled={!newMessage} onClick={handleSendMessage} className="send-message-button">
                     Send
-                </button>
+                </button> */}
             </div>
         </div>
     );

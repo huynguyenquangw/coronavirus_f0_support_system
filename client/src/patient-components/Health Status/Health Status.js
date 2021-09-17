@@ -82,6 +82,7 @@ function HealthStatus(props) {
         i += 1
     }
 
+
     const updateHealthDeclaration = async (e) => {
         e.preventDefault()
         try {
@@ -102,7 +103,7 @@ function HealthStatus(props) {
             toast(error.response.data.msg)
         }
     }
-
+    
     return (
         <div>
             <Container>
@@ -123,7 +124,7 @@ function HealthStatus(props) {
                         </FieldBig>
                         {render}
                         <TextAreaField>
-                            <h2>Other Symptoms</h2>
+                            <label htmlFor="other">Other Symptoms</label>
                             <textarea name="other" id="other" onChange={onChange}>
 
                             </textarea>

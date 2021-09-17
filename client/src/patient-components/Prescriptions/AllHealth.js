@@ -44,20 +44,20 @@ function AllHealth(props) {
     }
 
     const deleteHealth = async (e) => {
-
-        window.confirm("Do you want to delete " + e.target.value + "?")
+        const id = e.currentTarget.value
+        window.confirm(`Confirm to delete Health Declaration ID: ${id}`)
 
         setLoading(!loading)
         try {
-            await axios.delete(`http://localhost:3000/health/delete/${e.target.value}`, {
+            await axios.delete(`http://localhost:3000/health/delete/${id}`, {
                 headers: {
                     Authorization: token,
                 }
             })
-            toast("Health declaration " + e.target.value + " has been deleted")
+            toast("Health declaration " + id + " has been deleted")
             setCallBack(!callback)
         } catch (error) {
-
+            console.log(error)
         }
         setLoading(false)
 
@@ -82,7 +82,6 @@ function AllHealth(props) {
                 </div>
 
                 <div className="true-false">
-                    {/* <label className="radioStyle" > Check:</label> */}
                     {trueorfalse.map((ToF, i) => (
                         <label key={i} htmlFor={ToF}>
                             {ToF === 'true' ? 'prescribed' : 'unprescribed'}
@@ -113,6 +112,7 @@ function AllHealth(props) {
                         <th>Covid</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 {healthDeclares.map(health => (
@@ -129,11 +129,13 @@ function AllHealth(props) {
 
                                 <img onClick={() => { setModalDisplayHealth(health._id) }} className="hover icon" style={{ marginLeft: "1rem" }} src={viewHealth} />
                             </td>
+                            <td><button className="button-none" value={health._id} onClick={deleteHealth}>
+                                <img  className="icon hover" src={deleteIcon} alt="delete icon" />
+                            </button>
+                            </td>
                             {trueOrFalse == "true" && <td><MedicinePopup key={health._id + "medicine"} modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} healthData={health} medicineData={health.medicineform_id} /></td>}
                             <td><HealthPopup key={health._id} modalDisplayHealth={modalDisplayHealth} setModalDisplayHealth={setModalDisplayHealth} healthData={health} /></td>
-                            <td><button value={health._id} className="icon" onClick={deleteHealth}>
-                                <img src={deleteIcon} alt="delete icon" />
-                            </button></td>
+                            
                         </tr>
                     </tbody>
 

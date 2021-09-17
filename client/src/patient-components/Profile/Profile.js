@@ -15,8 +15,9 @@ function Profile(props) {
 
     const updateInfo = async (e) => {
         e.preventDefault()
+        setLoading(!loading)
         try {
-            setLoading(!loading)
+            
             await fetch("http://localhost:3000/user/update", {
                 method: 'PUT',
                 headers: {
@@ -35,12 +36,13 @@ function Profile(props) {
                 .then(resp => resp.json())
                 .then(data => {
                     toast(data.msg)
-                    setLoading(false)
+                    
                 })
                 .then(setCallback(!callback))
         } catch (error) {
             toast(error.response.data.msg)
         }
+        setLoading(false)
     }
 
     return (
