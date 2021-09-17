@@ -87,7 +87,7 @@ function HealthStatus(props) {
         e.preventDefault()
         try {
             setLoading(!loading)
-            await axios.post("http://localhost:3000/health/add", {
+            await axios.post("https://chat-app-test-lwk.herokuapp.com/health/add", {
                 ...health,
                 user_id: info._id,
                 doctor_id: selectedDoctor

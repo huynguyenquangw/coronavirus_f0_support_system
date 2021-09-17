@@ -49,7 +49,7 @@ function AllHealth(props) {
 
         setLoading(!loading)
         try {
-            await axios.delete(`http://localhost:3000/health/delete/${id}`, {
+            await axios.delete(`https://chat-app-test-lwk.herokuapp.com/health/delete/${id}`, {
                 headers: {
                     Authorization: token,
                 }

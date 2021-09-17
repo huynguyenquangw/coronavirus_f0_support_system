@@ -1,15 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Layout from '../Layout'
-import { GlobalState } from '../GlobalState'
 import DoctorSidebarItems from '../sidebar/DoctorSidebarItems'
-import Chat from '../chat/Chat'
+import DocChatPatient from '../chat/DocChatPatient'
 
 function PatientRoutes() {
-    const state = useContext(GlobalState)
-    const [doctorInfo] = state.doctorAPI.doctorInfo
-    const [isDoctor] = state.doctorAPI.doctor
-
     const AllRoute = []
 
     if (DoctorSidebarItems && DoctorSidebarItems.length > 0) {
@@ -23,7 +18,7 @@ function PatientRoutes() {
 
         <Route render={(props) => (
             <Layout {...props}>
-                <Chat isDoctor={isDoctor} doctorInfo={doctorInfo} />
+                <DocChatPatient />
                 <Switch>
                     {AllRoute}
                 </Switch>

@@ -48,7 +48,7 @@ function ProfilePicture({ info, token, callback, setCallback, setLoading }) {
         public_id: ""
     })
 
-    const endPoint = "http://localhost:3000"
+    const endPoint = "https://chat-app-test-lwk.herokuapp.com"
 
     const editImage = async (e) => {
         e.preventDefault()
@@ -87,7 +87,7 @@ function ProfilePicture({ info, token, callback, setCallback, setLoading }) {
     const updateImage = async (cloudinary) => {
 
         try {
-            await fetch("http://localhost:3000/user/update", {
+            await fetch("https://chat-app-test-lwk.herokuapp.com/user/update", {
                 method: 'PUT',
                 headers: {
                     "Authorization": token,

@@ -6,7 +6,7 @@ export default function DistrictAPI() {
 
     const getDistrict = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/district")
+            const response = await axios.get("https://chat-app-test-lwk.herokuapp.com/district")
             setDistrict(response.data)
 
         } catch (error) {

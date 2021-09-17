@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { GlobalState } from "../GlobalState";
 
 export default function LoginPatient() {
-    const endPoint = "http://localhost:3000"
+    const endPoint = "https://chat-app-test-lwk.herokuapp.com"
 
     const state = useContext(GlobalState)
     const [loading, setLoading] = state.loading
@@ -23,7 +23,7 @@ export default function LoginPatient() {
     }
 
     const getRole = async (token) => {
-        const response = await axios.get("http://localhost:3000/user/info", {
+        const response = await axios.get("https://chat-app-test-lwk.herokuapp.com/user/info", {
             headers: {
                 Authorization: token
             }

@@ -8,7 +8,6 @@
     border-radius: 50px;
 }
 
-
 /* chat room */
 
 .chat-room-container {
@@ -123,7 +122,6 @@
     }
 }
 
-
 /* message box */
 
 .messages-container {
@@ -166,7 +164,7 @@
 .message-title p {
     text-transform: capitalize;
     font-size: 0.8rem;
-    color: #a0a0a0
+    color: #a0a0a0;
 }
 
 .my-message {
@@ -208,7 +206,6 @@
     font-size: 0.7rem;
     color: #a0a0a0;
 }
-
 
 /* input text field */
 

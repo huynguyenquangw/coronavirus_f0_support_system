@@ -9,7 +9,7 @@ function PatientAPI(token) {
 
     const getInfo = async () => {
         // try {
-        const response = await axios.get(`http://localhost:3000/user/info`, {
+        const response = await axios.get(`https://chat-app-test-lwk.herokuapp.com/user/info`, {
             headers: {
                 Authorization: token
             }

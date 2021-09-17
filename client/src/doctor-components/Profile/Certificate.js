@@ -46,7 +46,7 @@ function Certificate({ doctorInfo, doctorToken, callbackDoctor, setCallbackDocto
         public_id: ""
     })
 
-    const endPoint = "http://localhost:3000"
+    const endPoint = "https://chat-app-test-lwk.herokuapp.com"
 
     const editCertificate = async (e) => {
         e.preventDefault()
@@ -85,7 +85,7 @@ function Certificate({ doctorInfo, doctorToken, callbackDoctor, setCallbackDocto
     const updateCertificate = async (cloudinaryCertificate) => {
 
         try {
-            await fetch("http://localhost:3000/doctor/update/certificate", {
+            await fetch("https://chat-app-test-lwk.herokuapp.com/doctor/update/certificate", {
                 method: 'PUT',
                 headers: {
                     "Authorization": doctorToken,

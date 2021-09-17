@@ -10,7 +10,7 @@ function DoctorAPI(doctorToken) {
 
     const getDoctorInfo = async () => {
         // try {
-        const response = await axios.get("http://localhost:3000/doctor/info", {
+        const response = await axios.get("https://chat-app-test-lwk.herokuapp.com/doctor/info", {
             headers: {
                 Authorization: doctorToken
             }

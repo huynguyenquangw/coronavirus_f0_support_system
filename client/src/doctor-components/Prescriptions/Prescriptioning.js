@@ -59,7 +59,7 @@ function Prescriptioning() {
     //get all medicines
     const getMedicine = async (e) => {
         try {
-            const response = await axios.get("http://localhost:3000/medicine")
+            const response = await axios.get("https://chat-app-test-lwk.herokuapp.com/medicine")
             setMedicines(response.data)
         } catch (error) {
             toast(error.response.data.msg)
@@ -75,7 +75,7 @@ function Prescriptioning() {
     const updateMedicine = async (data) => {
         try {
             if (param.id) {
-                await axios.put(`http://localhost:3000/health/update/medicine/${param.id}`, {
+                await axios.put(`https://chat-app-test-lwk.herokuapp.com/health/update/medicine/${param.id}`, {
                     medicineform_id: data,
                     status: true
                 }, {
@@ -93,7 +93,7 @@ function Prescriptioning() {
     const saveMedicineForm = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.post('http://localhost:3000/form', { ...prescriptionForm }, {
+            const res = await axios.post('https://chat-app-test-lwk.herokuapp.com/form', { ...prescriptionForm }, {
                 headers: { Authorization: doctorToken }
             })
             updateMedicine(res.data.data._id)

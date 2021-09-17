@@ -15,7 +15,7 @@ function Doctors(props) {
     const [sort, setSort] = state.getAllDoctorAPI.sort
     console.log(sort)
     console.log((token))
-    const endPoint = "http://localhost:3000"
+    const endPoint = "https://chat-app-test-lwk.herokuapp.com"
     const history = useHistory()
     const [doctor, setDoctor] = useState({
         name: '',

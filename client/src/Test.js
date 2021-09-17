@@ -6,7 +6,7 @@ export default function Test(props) {
     const getrf = async () => {
         console.log(token)
 
-        // fetch("http://localhost:3000/user/refresh_token", {
+        // fetch("https://chat-app-test-lwk.herokuapp.com/user/refresh_token", {
         //     credentials: 'include'
         // })
         //     .then(resp => resp.json())
@@ -21,7 +21,7 @@ export default function Test(props) {
     const login = async () => {
         await Login("entaimagi@gmail.com","Huy860.Q")
 
-        // await fetch('http://localhost:3000/user/login', {
+        // await fetch('https://chat-app-test-lwk.herokuapp.com/user/login', {
         //     method: 'POST',
         //     headers: { 'Content-Type': 'application/json' },
         //     body: JSON.stringify({
@@ -44,7 +44,7 @@ export default function Test(props) {
 
         await GetPatientInfo()
 
-        // await fetch("http://localhost:3000/user/info", {
+        // await fetch("https://chat-app-test-lwk.herokuapp.com/user/info", {
         //     method: 'GET',
         //     headers: {
         //         'Authorization': token,
@@ -62,7 +62,7 @@ export default function Test(props) {
         await Logout()
 
     //     try {
-    //         await fetch('http://localhost:3000/user/logout')
+    //         await fetch('https://chat-app-test-lwk.herokuapp.com/user/logout')
     //         localStorage.clear()
     //         // window.location.reload()
     //     } catch (error) {
@@ -75,7 +75,7 @@ export default function Test(props) {
     }
 
     const update = async () => {
-        await fetch('http://localhost:3000/user/login', {
+        await fetch('https://chat-app-test-lwk.herokuapp.com/user/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

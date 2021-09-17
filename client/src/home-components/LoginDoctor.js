@@ -8,7 +8,7 @@ import { GlobalState } from "../GlobalState";
 
 toast.configure()
 export default function LoginDoctor() {
-    const endPoint = "http://localhost:3000"
+    const endPoint = "https://chat-app-test-lwk.herokuapp.com"
 
     const state = useContext(GlobalState)
     const [loading, setLoading] = state.loading

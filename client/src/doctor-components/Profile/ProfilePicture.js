@@ -47,7 +47,7 @@ function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDo
         public_id: ""
     })
 
-    const endPoint = "http://localhost:3000"
+    const endPoint = "https://chat-app-test-lwk.herokuapp.com"
 
     const editImage = async (e) => {
         e.preventDefault()
@@ -86,7 +86,7 @@ function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDo
     const updateImage = async (cloudinary) => {
 
         // try {
-        await fetch("http://localhost:3000/doctor/update/img", {
+        await fetch("https://chat-app-test-lwk.herokuapp.com/doctor/update/img", {
             method: 'PUT',
             headers: {
                 "Authorization": doctorToken,

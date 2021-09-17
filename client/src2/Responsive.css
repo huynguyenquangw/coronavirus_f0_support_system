@@ -1,0 +1,39 @@
+@media screen and (max-width: 600px) {
+    /*HOMPAGE*/
+    /*Navbar*/
+    .nav-container {
+        flex-flow: column wrap;
+        width: 100vw;
+        max-width: 100vw;
+        margin: auto;
+        max-height: 100vh;
+    }
+    .nav-container>* {
+        width: 100%;
+        flex-basis: 100%;
+    }
+    .nav-container .logo-container {
+        justify-content: space-between;
+    }
+    .nav-container .logo {
+        width: 60%;
+        padding: 1rem;
+    }
+    .nav-container .menu {
+        flex-flow: column wrap;
+    }
+    .nav-container .button-container {
+        flex-flow: column wrap;
+        margin-top: 2rem;
+    }
+    .nav-container .button-container #register {
+        margin-left: 0;
+        margin-top: 0.8rem;
+    }
+    .nav-container .hamburger {
+        display: block;
+    }
+    .nav-container .hamburger-close {
+        display: block;
+    }
+}

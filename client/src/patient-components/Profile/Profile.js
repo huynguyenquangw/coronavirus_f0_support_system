@@ -18,7 +18,7 @@ function Profile(props) {
         setLoading(!loading)
         try {
             
-            await fetch("http://localhost:3000/user/update", {
+            await fetch("https://chat-app-test-lwk.herokuapp.com/user/update", {
                 method: 'PUT',
                 headers: {
                     "Authorization": token,

@@ -16,7 +16,7 @@ export default function FilterDoctor() {
     const totalPages = Math.ceil(realDoctorDataLength / (limit * 5))
 
     const getAll = async () => {
-        const response = await axios.get(`http://localhost:3000/doctor?limit=999999999`)
+        const response = await axios.get(`https://chat-app-test-lwk.herokuapp.com/doctor?limit=999999999`)
         setRealDoctorDataLength(response.data.data.length)
     }
 

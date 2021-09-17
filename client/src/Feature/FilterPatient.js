@@ -16,7 +16,7 @@ export default function FilterPatient() {
     const totalPages = Math.ceil(realPatientDataLength / (limit * 5))
 
     const getAll = async () => {
-        const response = await axios.get(`http://localhost:3000/user?limit=999999999`)
+        const response = await axios.get(`https://chat-app-test-lwk.herokuapp.com/user?limit=999999999`)
         setRealPatientDataLength(response.data.data.length)
     }
 

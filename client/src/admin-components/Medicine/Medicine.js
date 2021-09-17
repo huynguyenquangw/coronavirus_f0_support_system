@@ -9,7 +9,7 @@ export default function Medicine(props) {
 
     const state = useContext(GlobalState)
     const [token, setToken] = state.token
-    const endPoint = "http://localhost:3000"
+    const endPoint = "https://chat-app-test-lwk.herokuapp.com"
     const history = useHistory()
     const [medicine, setMedicine] = useState({
         name: '',

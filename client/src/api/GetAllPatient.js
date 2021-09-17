@@ -12,7 +12,7 @@ export default function GetAllPatient(props) {
     const [filter, setFilter] = useState('')
 
     const getAll = async () => {
-        const response = await axios.get(`http://localhost:3000/user?limit=${limit * 5}&name[regex]=${search}&${sort}&page=${page}&${filter}`)
+        const response = await axios.get(`https://chat-app-test-lwk.herokuapp.com/user?limit=${limit * 5}&name[regex]=${search}&${sort}&page=${page}&${filter}`)
         setPatients(response.data.data)
     }
 

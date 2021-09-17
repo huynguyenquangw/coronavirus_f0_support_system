@@ -1,17 +1,11 @@
 import React from 'react'
-import { useContext } from 'react/cjs/react.development'
-import Chat from '../../chat/Chat'
-import { GlobalState } from '../../GlobalState'
-
+import Home from '../../chat/Home'
 
 function DoctorChat(props) {
-    const state = useContext(GlobalState)
-    const [patientInfo] = state.patientAPI.info
-    const [isPatient] = state.patientAPI.patient
 
     return (
         <div>
-            <Chat isPatient={isPatient} patientInfo={patientInfo} />
+            <Home />
         </div>
     )
 }

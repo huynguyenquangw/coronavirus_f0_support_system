@@ -18,7 +18,7 @@ function Profile(props) {
     const updateInfo = async (e) => {
         e.preventDefault()
         setLoading(!loading)
-        await fetch("http://localhost:3000/doctor/update", {
+        await fetch("https://chat-app-test-lwk.herokuapp.com/doctor/update", {
             method: 'PUT',
             headers: {
                 "Authorization": doctorToken,
