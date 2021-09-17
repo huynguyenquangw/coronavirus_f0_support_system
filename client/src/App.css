@@ -624,3 +624,11 @@ li {
     background-position: 50% 50%;
     background-size: 6rem auto;
 }
+
+
+/*Paginating*/
+
+inputPage {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}

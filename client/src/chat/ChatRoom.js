@@ -115,16 +115,16 @@ const ChatRoom = ({ doctors, isWho, currentPatient, roomId, setRoomId, pop, setP
                                 <>
                                     <div key={i} className={`message-row ${message.ownedByCurrentUser ? "my-message" : "other-message"}`}>
                                         <div className="message-title">
-                                            {/* {message.ownedByCurrentUser ? (
+                                            {message.ownedByCurrentUser ? (
                                                 <p>
-                                                    {isWho === 'isPatient' ? currentPatient.name : currentDoctor.name}
+                                                    {isWho === 'isPatient' ? currentPatient.name : `Dr.${currentDoctor.name}`}
                                                     
                                                 </p>
                                             ) : (
                                                 <p>
                                                     {isWho !== 'isPatient' ? 'Patient' : currentDoctor.name}
                                                 </p>
-                                            )} */}
+                                            )}
                                             {/* {message.ownedByCurrentUser ? currentPatient.name : currentDoctor.name} */}
                                         </div>
 
