@@ -9,7 +9,7 @@ import { GlobalState } from '../GlobalState';
 
 toast.configure()
 export default function Register() {
-    const endPoint = "https://chat-app-test-lwk.herokuapp.com"
+    const endPoint = "http://localhost:3000"
 
     const state = useContext(GlobalState)
     const [loading, setLoading] = state.loading
@@ -83,7 +83,7 @@ export default function Register() {
     }
 
     return (
-        <div>
+        <div style={{ height: "100vh", width: "100vw" }}>
             <Navbar />
             <div className="grid-container2">
                 <div className="item1"></div>

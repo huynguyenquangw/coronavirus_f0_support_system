@@ -16,7 +16,7 @@ export default function FilterPatient() {
     const totalPages = Math.ceil(realPatientDataLength / (limit * 5))
 
     const getAll = async () => {
-        const response = await axios.get(`https://chat-app-test-lwk.herokuapp.com/user?limit=999999999`)
+        const response = await axios.get(`http://localhost:3000/user?limit=999999999`)
         setRealPatientDataLength(response.data.data.length)
     }
 
@@ -53,13 +53,13 @@ export default function FilterPatient() {
             </div>
 
             <div className="filterring">
-                <label htmlFor="" onClick={() => setFilter('')}>Filter: </label>
+                <label htmlFor="" onClick={() => setFilter('')}>Filter by District: </label>
                 <select className='filterByDistrict' name="district" id="district" value={filter} onChange={e => {
                     setFilter(e.target.value)
                     setPage(1)
                     setSearch('')
                 }}>
-                    <option value="">by District</option>
+                    <option value="">Select a district</option>
                     {districts.map(p =>
                         <option value={`district=${p._id}`}>{p.name}</option>
                     )}

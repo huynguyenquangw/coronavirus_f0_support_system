@@ -59,7 +59,7 @@ function Prescriptioning() {
     //get all medicines
     const getMedicine = async (e) => {
         try {
-            const response = await axios.get("https://chat-app-test-lwk.herokuapp.com/medicine")
+            const response = await axios.get("http://localhost:3000/medicine")
             setMedicines(response.data)
         } catch (error) {
             toast(error.response.data.msg)
@@ -75,7 +75,7 @@ function Prescriptioning() {
     const updateMedicine = async (data) => {
         try {
             if (param.id) {
-                await axios.put(`https://chat-app-test-lwk.herokuapp.com/health/update/medicine/${param.id}`, {
+                await axios.put(`http://localhost:3000/health/update/medicine/${param.id}`, {
                     medicineform_id: data,
                     status: true
                 }, {
@@ -93,7 +93,7 @@ function Prescriptioning() {
     const saveMedicineForm = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.post('https://chat-app-test-lwk.herokuapp.com/form', { ...prescriptionForm }, {
+            const res = await axios.post('http://localhost:3000/form', { ...prescriptionForm }, {
                 headers: { Authorization: doctorToken }
             })
             updateMedicine(res.data.data._id)
@@ -127,11 +127,11 @@ function Prescriptioning() {
     // console.log(prescriptionForm)
 
     return (
-        <Container>
-            <Row>
-                <Header>New Prescription</Header>
-                <Form>
-                    <FieldBig>
+        <div className="dashboardmain-container">
+            <div className="row">
+                <div className="header">New Prescription</div>
+                <div className="dashboardinput-container">
+                    <div className="fieldbig">
                         <label htmlFor="user_id">Patient in {doctorInfo.district?.name}</label>
                         <select id="user_id" name="user_id" value={prescriptionForm.user_id} onChange={handleChange}>
                             <option>Select Patient</option>
@@ -139,12 +139,12 @@ function Prescriptioning() {
                                 <option key={i._id} value={i._id}>{i.name}</option>
                             )}
                         </select>
-                    </FieldBig>
+                    </div>
 
-                    <TextAreaField>
+                    <div className="dashboardtextarea">
                         <label htmlFor="diagnostic">Diagnostic</label>
                         <textarea name="diagnostic" id="diagnostic" onChange={handleChange}></textarea>
-                    </TextAreaField>
+                    </div>
 
                     <div className='medicine-container'>
                         <div className="medicine-controller">
@@ -156,21 +156,25 @@ function Prescriptioning() {
                                     )}
                                 </select>
                             </div>
-                            <div style={{ flexBasis: "10%" }}>
-                                <label htmlFor="quantity">Quantity</label>
-                                <input type="number" name="quantity"
-                                    value={prescriptionMedicine.quantity}
-                                    onChange={handleChangeMedicine}
-                                    onKeyUp={handleKeyUp}
-                                />
+                            <div className="dashboardinput-container" style={{ flexBasis: "10%" }}>
+                                <div className="field" style={{flexBasis: "100%"}}>
+                                    <label htmlFor="quantity">Quantity</label>
+                                    <input type="number" name="quantity"
+                                        value={prescriptionMedicine.quantity}
+                                        onChange={handleChangeMedicine}
+                                        onKeyUp={handleKeyUp}
+                                    />
+                                </div>
                             </div>
-                            <div style={{ flexBasis: "40%" }}>
+                            <div className="dashboardinput-container" style={{ flexBasis: "35%" }}>
+                            <div className="field" style={{flexBasis: "100%"}}>
                                 <label htmlFor="frequency">Dosage</label>
                                 <input type="text" name="frequency"
                                     value={prescriptionMedicine.frequency}
                                     onChange={handleChangeMedicine}
                                     onKeyUp={handleKeyUp}
                                 />
+                                </div>
                             </div>
                             <div style={{ flexBasis: "10%" }}>
                                 <button className="button blue" onClick={addNewMedicine}>Add Medicine</button>
@@ -199,19 +203,14 @@ function Prescriptioning() {
                             </h2>
                         ))}
                     </div>
-
-                    {/* <div className="medicine-note">
-                        medicine note
-                        <textarea name="note" id="note" onChange={handleChange}></textarea>
-                    </div> */}
-                    <TextAreaField>
+                    <div className="dashboardtextarea">
                         <label htmlFor="note">Notes for patient</label>
                         <textarea name="note" id="note" onChange={handleChange}></textarea>
-                    </TextAreaField>
-                </Form>
+                    </div>
+                </div>
                 <button className="button green " onClick={saveMedicineForm}>Save</button>
-            </Row>
-        </Container>
+            </div>
+        </div>
     )
 }
 

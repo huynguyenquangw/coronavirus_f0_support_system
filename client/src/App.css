@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap');
-:root {
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700;800&display=swap');
+ :root {
     --shadow-green: 0px 0px 1rem rgba(30, 222, 125, 0.3);
     --shadow-blue: 0px 0px 1rem rgba(23, 123, 208, 0.3);
     --gradient-green: linear-gradient(281.8deg, #00A473 0%, #24E97E 100%);
@@ -8,18 +8,24 @@
 
 html {
     font-size: 16px;
-    @media screen and (min-width: 900px) {
-        font-size: 18px;
+}
+
+@media screen and (min-width: 900px) {
+    html {
+        font-size: 16px;
     }
-    @media screen and (min-width: 1200px) {
+}
+
+@media screen and (min-width: 1200px) {
+    html {
         font-size: 20px;
     }
 }
 
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
+v2.0 | 20110126
+License: none (public domain)
 */
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
@@ -43,10 +49,9 @@ button {
 }
 
 body {
-    position: fixed;
     line-height: 1;
     background-color: #F4FCFF;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 ol, ul {
@@ -79,7 +84,7 @@ h1, h2, h3 {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 2.7rem;
 }
 
 h2 {
@@ -96,7 +101,7 @@ a {
 }
 
 .button {
-    line-height: 1.3rem;
+    line-height: 120%;
     font-weight: 700;
     color: #ffffff;
     display: inline-block;
@@ -168,8 +173,9 @@ a {
     justify-content: space-between;
     width: 100%;
     max-width: 75rem;
-    margin: auto;
+    margin: 1rem auto;
     max-height: 9rem;
+    flex: 0;
 }
 
 .nav-container>* {
@@ -183,6 +189,7 @@ a {
 .nav-container .logo-container {
     display: flex;
     justify-content: center;
+    z-index: 25;
 }
 
 .nav-container .logo {
@@ -191,6 +198,8 @@ a {
     max-width: 18rem;
     padding: 2rem;
     z-index: 1;
+    margin-left: 0;
+    cursor: pointer;
 }
 
 .nav-container .menu {
@@ -208,11 +217,37 @@ a {
     padding: 1rem;
 }
 
+.nav-container .menu.mobile {
+    z-index: 25;
+    transition: 0.5s ease;
+}
+
+.nav-container .menu.mobile.active {
+    transform: translateX(100%);
+}
+
+.nav-container .menu.desktop {
+    display: flex;
+}
+
 .nav-container .button-container {
     display: flex;
     flex: row nowrap;
     justify-content: center;
     align-items: center;
+}
+
+.nav-container .button-container.mobile {
+    z-index: 25;
+    transition: 0.5s ease;
+}
+
+.nav-container .button-container.mobile.active {
+    transform: translateY(200%);
+}
+
+.nav-container .button-container.desktop {
+    display: flex;
 }
 
 .nav-container .button-container #register {
@@ -222,6 +257,7 @@ a {
 .nav-container .hamburger {
     padding: 1rem;
     display: none;
+    z-index: 2;
 }
 
 .nav-container .hamburger-bg {
@@ -229,16 +265,139 @@ a {
     height: 100vh;
     width: 100vw;
     position: fixed;
-    display: none;
+    display: block;
+    z-index: 15;
+    transition: 0.5s ease;
+}
+
+.hamburger-bg.active {
+    transform: translateY(-200%)
 }
 
 .nav-container .hamburger-close {
     position: absolute;
     padding: 1rem;
-    z-index: 1;
+    z-index: 25;
     top: 0;
     right: 0;
     display: none;
+}
+
+
+/*Homepage Content*/
+
+.homepage-container {
+    width: 100%;
+    max-width: 75rem;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+}
+
+.homepage-container>div {
+    display: inline-block;
+}
+
+.homepage-container .text-container {
+    margin-left: 3rem;
+    flex-basis: 55%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+
+.homepage-container .text-container * {
+    flex-basis: 100%;
+    margin-bottom: 1rem;
+}
+
+.homepage-container .text-container a {
+    font-weight: 700;
+    color: #ffffff;
+    display: inline-block;
+    text-align: center;
+    width: 30%;
+    padding: 1rem 3rem;
+    border-radius: 0.4rem;
+    transition: 0.1s;
+    background: var(--gradient-green);
+    box-shadow: var(--shadow-green);
+}
+
+.homepage-container .image-container {
+    flex-basis: 35%;
+    height: 30rem;
+}
+
+.homepage-container .image-container img {
+    height: 100%;
+}
+
+.homepage-container .text1 {
+    color: #0076DA;
+    font-weight: 800;
+    font-size: 1.8rem;
+}
+
+.homepage-container .text2 {
+    color: #002341;
+    font-weight: 800;
+}
+
+.homepage-container .text2.mobile {
+    display: none;
+}
+
+.homepage-container .text2.desktop {
+    display: block
+}
+
+.homepage-container .text3 {
+    color: #98A8B5;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+}
+
+
+/*Login*/
+
+.login-portal {
+    width: 35%;
+    max-width: 20rem;
+    margin: auto;
+}
+
+.login-portal a {
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.login-container {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    width: 50%;
+    margin: auto;
+}
+
+.login-container * {
+    flex-basis: 100%;
+}
+
+.login-container h1 {
+    text-align: center;
+}
+
+.login-container .divider {
+    border-bottom: 5px solid #0076DA;
+    width: 30%;
+    margin: 2rem auto;
+}
+
+.login-form div * {
+    margin-bottom: 1.5rem;
 }
 
 .App-header {
@@ -448,6 +607,295 @@ li {
 }
 
 
+/*Dashboard Layout*/
+
+.dashboard-container {
+    width: 100vw;
+    max-width: 75rem;
+}
+
+.dashboard-container .main-container {
+    box-sizing: border-box;
+    padding: 2rem 3rem;
+    display: inline-block;
+    width: 80%;
+    max-width: 60rem;
+}
+
+.dashboard-container .spacer {
+    display: inline-block;
+    width: 20%;
+    max-width: 15rem;
+}
+
+.dashboard-container .heading-container {
+    display: flex;
+    color: #002341;
+    height: 10%;
+    max-height: 4.5rem;
+    margin-bottom: 3rem !important;
+}
+
+.dashboard-container .heading-container * {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.dashboard-container .heading-container .heading-icon {
+    height: 2.8rem;
+}
+
+.dashboard-container .heading-container h1 {
+    margin: 0.1rem 0 0 1rem;
+}
+
+.dashboard-container .heading-container {
+    margin: 0.1rem 0 0 1rem;
+}
+
+.dashboard-container .heading-container .menu {
+    display: none;
+}
+
+
+/*Sidebar*/
+
+.sidebar-container {
+    background-color: #FFFFFF;
+    box-shadow: var(--shadow-green);
+    position: fixed;
+    height: 100vh;
+    width: 20%;
+    max-width: 15rem;
+    min-width: 10rem;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    z-index: 23;
+    /* display: none; */
+}
+
+.sidebar-container.active {
+    transform: translateX(-120%);
+}
+
+.sidebar-container .item {
+    width: 100%;
+    height: 10%;
+    max-height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-container .item.top .close {
+    display: none;
+}
+
+.sidebar-container .logo {
+    margin: 0;
+    width: 80%;
+    max-width: 12rem;
+}
+
+
+/*Sidebar Menu*/
+
+.sidebar-container .menu-container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    height: 50%;
+    max-height: 23rem;
+}
+
+
+/*Dashboard Main*/
+
+.dashboardmain-container {
+    width: 100%;
+}
+
+.dashboardmain-container .row {
+    display: block;
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+.dashboardmain-container .row * {
+    margin-bottom: 0.8rem;
+}
+
+.dashboardmain-container .header {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #00A473;
+    width: 100%;
+    text-align: left;
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+.dashboardinput-container {
+    display: flex !important;
+    flex-flow: row wrap;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.dashboardinput-container * {
+    margin-left: 1rem;
+}
+
+.dashboardinput-container label {
+    font-size: 0.8rem;
+    color: #002341;
+}
+
+.dashboardinput-container input, .dashboardinput-container select {
+    color: #002341;
+    font-family: Nunito, sans-serif;
+    font-weight: 700;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+    padding: 0.2rem 0.7rem 0.7rem 0.7rem;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 2px solid #afcbe4;
+}
+
+.dashboardinput-container select {
+    padding: 0.5rem;
+    border: 3px solid #afcbe4;
+}
+
+.dashboardinput-container select:focus, select:hover {
+    color: #00A473;
+    border: 3px solid #00A473;
+}
+
+.dashboardinput-container .field {
+    flex-basis: 45%;
+}
+
+.dashboardinput-container .fieldbig {
+    flex-basis: 45%;
+}
+
+.dashboardinput-container .uneditable {
+    color: #869eb4;
+}
+
+.dashboardinput-container .editable:focus, .dashboardinput-container .editable:hover {
+    color: #00A473;
+    border-bottom: 3px solid #00A473;
+}
+
+.dashboardinput-container select {
+    padding: 0.5rem;
+    border: 3px solid #afcbe4;
+}
+
+.dashboardinput-container select:focus, .dashboardinput-container select:hover {
+    color: #00A473;
+    border: 3px solid #00A473;
+}
+
+.checkbox-field {
+    flex-basis: 33%;
+    box-sizing: border-box;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.dashboardcheckbox-container input {
+    border: 1.3px solid #afcbe4;
+    background-color: #ffffff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    width: 0.3rem;
+    margin-left: 1rem;
+    transform: scale(2);
+    -ms-transform: scale(2);
+    -webkit-transform: scale(2);
+    padding: 0.3rem;
+    line-height: 0;
+    -webkit-transition: background-color 0.2s ease-out;
+    -moz-transition: background-color 0.2s ease-out;
+    -o-transition: background-color 0.2s ease-out;
+    transition: background-color 0.2s ease-out;
+}
+
+.dashboardcheckbox-container h2 {
+    display: inline-block !important;
+    font-size: 1.2rem;
+    width: 80%;
+}
+
+.dashboardcheckbox-container input:hover, .dashboardcheckbox-container input:checked {
+    cursor: pointer;
+    border: 2px solid #00A473;
+}
+
+.dashboardcheckbox-container input:checked {
+    background-color: #00A473;
+}
+
+#photo-upload, #certificate-upload {
+    display: none;
+}
+
+.dashboardtextarea {
+    flex-basis: 100%;
+    box-sizing: border-box;
+}
+
+.dashboardtextarea textarea {
+    width: 100%;
+    color: #002341;
+    font-size: 1.2rem;
+    line-height: 1.3rem;
+    box-sizing: border-box;
+    padding: 0.7rem;
+    border: 3px solid #afcbe4;
+}
+
+.dashboardtextarea textarea:focus, .dashboardtextarea textarea:hover {
+    border: 3px solid #00A473;
+    outline: none;
+}
+
+.dashboardtextarea h2 {
+    font-size: 1.2rem;
+}
+
+
+/*Profile Picture*/
+
+.dashboardmain-container .profilepicture-container {
+    position: relative;
+    box-sizing: border-box;
+    max-width: 15rem;
+    max-height: 15rem;
+    height: 40vw;
+    width: 40vw;
+    border-radius: 15%;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 101% 101%;
+}
+
+.dashboardmain-container .certificate-container {
+    position: relative;
+    max-width: 35rem;
+}
+
+
 /*doctor/prescriptions*/
 
 .medicine-container, .medicine-controller {
@@ -462,8 +910,13 @@ li {
 }
 
 .medicine-controller>div {
+    margin-left: 0;
     margin-bottom: 0;
     display: inline-block;
+}
+
+.medicine-controller select, .medicine-controller .field, .medicine-controller .field * {
+    margin: 0;
 }
 
 .medicine-display>h2 {
@@ -521,6 +974,7 @@ li {
 /* Modal Content */
 
 .modal-content {
+    box-sizing: border-box;
     border-radius: 1rem;
     padding: 2rem;
     background-color: #fefefe;
@@ -590,11 +1044,18 @@ li {
 }
 
 
+/*Prescriptioning*/
+
+.prescriptioning-container {
+    width: 100%;
+    display: flex;
+}
+
+
 /*Chat*/
 
 .home-container {
     width: 100%;
-    height: 12rem;
     background-color: #ffffff;
     border-radius: 1rem;
     display: flex;
@@ -662,7 +1123,7 @@ li {
     border-radius: 50%;
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    background-size: 6rem auto;
+    background-size: 110% 110%;
 }
 
 .doctor-container .info-container {

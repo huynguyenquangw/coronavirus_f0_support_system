@@ -36,7 +36,7 @@ color: ${props => props.active ? "#ffffff" : "#00A473"};
 function MenuItem({ title, icon, link, active }) {
 
     return (
-        <Container active={active}>
+        <Container className="menu-item " active={active}>
             {<Icon src={icon} />}
             <Link to={link}>
                 <Item active={active}>{title}</Item>

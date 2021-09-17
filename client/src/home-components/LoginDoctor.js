@@ -5,10 +5,11 @@ import { toast } from 'react-toastify';
 import axios from "axios";
 import 'react-toastify/dist/ReactToastify.css';
 import { GlobalState } from "../GlobalState";
+import { Container } from "../css-template/Input";
 
 toast.configure()
 export default function LoginDoctor() {
-    const endPoint = "https://chat-app-test-lwk.herokuapp.com"
+    const endPoint = "http://localhost:3000"
 
     const state = useContext(GlobalState)
     const [loading, setLoading] = state.loading
@@ -43,27 +44,25 @@ export default function LoginDoctor() {
     }
 
     return (
-        <div>
+        <div style={{ height: "100vh", width: "100vw" }} >
             <Navbar />
 
-            <div className="grid-container2">
-                <div className="item1"></div>
-                <div className="item2">   <div className='reg1'>
+            <div className="login-container">
+                <h1 className='asdas'>
                     Login as a doctor account
+                </h1>
+                <div className='divider'>
                 </div>
-                    <div className='reg2'>
+                <div className="login-form">
+                    <div className="dashboardinput-container">
+                        <input className="editable" type="email" id="email" name="email" value={doctor.email} onChange={onChangeValue} placeholder="Email.." />
+                        <br />
+                        <input className="editable" type="text" id="password" name="password" value={doctor.password} onChange={onChangeValue} placeholder="Password.." />
+                        <br />
+                        {/* <input type="submit" value="Log In" className="button blue" /> */}
+                        <button className="button blue" onClick={loginSubmit}>Login</button>
                     </div>
-                    <br />
-                    <div style={{ width: "70%", margin: "auto" }}>
-                        <form onSubmit={loginSubmit}>
-                            <input type="email" className="no3" id="email" name="email" value={doctor.email} onChange={onChangeValue} placeholder="Email.." />
-                            <br />
-                            <input type="text" className="no3" id="password" name="password" value={doctor.password} onChange={onChangeValue} placeholder="Password.." />
-                            <br />
-                            <input type="submit" value="Log In" className="button blue" />
-                        </form>
-                    </div></div>
-                <div className="item3"></div>
+                </div>
             </div>
         </div>
 

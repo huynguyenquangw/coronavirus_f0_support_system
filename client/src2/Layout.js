@@ -81,7 +81,7 @@ function Layout(props) {
     }
 
     return (
-        <Container>
+        <div className="dashboardmain-container">
             <Sidebar />
 
             <Spacer></Spacer>
@@ -96,7 +96,7 @@ function Layout(props) {
 
             </MainContainer>
 
-        </Container>
+        </div>
     )
 }
 

@@ -49,7 +49,7 @@ function AllHealth(props) {
 
         setLoading(!loading)
         try {
-            await axios.delete(`https://chat-app-test-lwk.herokuapp.com/health/delete/${id}`, {
+            await axios.delete(`http://localhost:3000/health/delete/${id}`, {
                 headers: {
                     Authorization: token,
                 }
@@ -102,6 +102,7 @@ function AllHealth(props) {
                 </div>
             </div>
             {/* <div className="display"> */}
+            <div className="healthdeclare-container">
             <table className="display">
                 <thead>
                     <tr>
@@ -120,7 +121,7 @@ function AllHealth(props) {
                         <tr >
 
                             <td>{health.createdAt.substring(0, 10)}</td>
-                            <td key={health._id} > {health._id}</td>
+                            <td style={{ color: "#00A473", cursor: "pointer" }} onClick={() => { setModalDisplayHealth(health._id) }}>{health._id}</td>
                             <td>{health.doctor_id?.name}</td>
                             <td> {health.vaccinated ? "true" : "false"}</td>
                             <td> {health.covid ? "true" : "false"}</td>
@@ -142,7 +143,7 @@ function AllHealth(props) {
                 ))}
 
             </table>
-
+                    </div>
 
             {/* </div> */}
         </div>

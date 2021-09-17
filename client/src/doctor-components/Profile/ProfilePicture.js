@@ -5,12 +5,6 @@ import photoEdit from '../../assets/icons/profile-picture-edit.svg'
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-const Container = styled.div`
-    input{
-        visibility: hidden;
-    }
-`
-
 const PhotoContainer = styled.div`
     position: relative;
     box-sizing: border-box;
@@ -47,7 +41,7 @@ function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDo
         public_id: ""
     })
 
-    const endPoint = "https://chat-app-test-lwk.herokuapp.com"
+    const endPoint = "http://localhost:3000"
 
     const editImage = async (e) => {
         e.preventDefault()
@@ -86,7 +80,7 @@ function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDo
     const updateImage = async (cloudinary) => {
 
         // try {
-        await fetch("https://chat-app-test-lwk.herokuapp.com/doctor/update/img", {
+        await fetch("http://localhost:3000/doctor/update/img", {
             method: 'PUT',
             headers: {
                 "Authorization": doctorToken,
@@ -118,15 +112,15 @@ function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDo
     }, [])
 
     return (
-        <Container>
-            <PhotoContainer style={{ backgroundImage: `url(${doctorInfo.img?.url || profile})` }}>
+        <div className="dashboardmain-container">
+            <div className="profilepicture-container" style={{ backgroundImage: `url(${doctorInfo.img?.url || profile})` }}>
                 <ActionContainer htmlFor="photo-upload">
                     <PhotoAction src={photoEdit} />
                 </ActionContainer>
-            </PhotoContainer>
+            </div>
 
             <input id="photo-upload" type="file" onChange={editImage} />
-        </Container>
+        </div>
     )
 }
 

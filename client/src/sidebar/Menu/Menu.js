@@ -5,16 +5,7 @@ import { useLocation } from 'react-router-dom';
 import PatientSidebarItems from '../PatientSidebarItems';
 import DoctorSidebarItems from '../DoctorSidebarItems'
 import AdminSidebarItems from '../AdminSidebarItems'
-
-const Container = styled.div`
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    height: 50%;
-    max-height: 23rem;
-`
-
-function Menu() {
+function Menu({}) {
     const location = useLocation();
 
     const SidebarItemsRender = [];
@@ -94,9 +85,9 @@ function Menu() {
 
 
     return ( 
-        <Container>
+        <div className="menu-container">
             {SidebarItemsRender}
-        </Container>
+        </div>
     )
 }
 

@@ -17,7 +17,7 @@ export const DataProvider = ({ children }) => {
     const [loading, setLoading] = useState(false)
 
     const getrf = async () => {
-        await fetch("https://chat-app-test-lwk.herokuapp.com/user/refresh_token", {
+        await fetch("http://localhost:3000/user/refresh_token", {
             credentials: 'include'
         })
             .then(resp => resp.json())
@@ -27,7 +27,7 @@ export const DataProvider = ({ children }) => {
     }
 
     const getDoctorRf = async () => {
-        await fetch("https://chat-app-test-lwk.herokuapp.com/doctor/refresh_token", {
+        await fetch("http://localhost:3000/doctor/refresh_token", {
             credentials: 'include'
         })
             .then(resp => resp.json())

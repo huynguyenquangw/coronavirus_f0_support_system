@@ -15,7 +15,7 @@ function Doctors(props) {
     const [sort, setSort] = state.getAllDoctorAPI.sort
     console.log(sort)
     console.log((token))
-    const endPoint = "https://chat-app-test-lwk.herokuapp.com"
+    const endPoint = "http://localhost:3000"
     const history = useHistory()
     const [doctor, setDoctor] = useState({
         name: '',
@@ -88,6 +88,7 @@ function Doctors(props) {
             <h2 class="list" style={{paddingTop:"1rem"}}> Doctor List</h2>
             <FilterDoctor />
             <div >
+            <div className="healthdeclare-container">
                 <table style={{ width: "100%" }}>
                     <tr>
                         <th>
@@ -138,6 +139,7 @@ function Doctors(props) {
                     ))}
 
                 </table>
+                </div>
             </div>
 
 

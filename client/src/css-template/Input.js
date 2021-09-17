@@ -52,11 +52,10 @@ export const Container = styled.div`
 
 export const Field = styled.div`
     flex-basis: 45%;
-
 `;
 
 export const FieldBig = styled.div`
-flex-basis: 100%;
+    flex-basis: 100%;
 `
 
 export const CheckboxField = styled.div`

@@ -42,27 +42,27 @@ function Profile(props) {
     }
 
     return (
-        <Container>
-            <Row>
-                <Header>PROFILE PICTURE</Header>
+        <div className="dashboardmain-container">
+            <div className="row">>
+                <div>PROFILE PICTURE</div>
                 <ProfilePicture setLoading={setLoading} doctorInfo={doctorInfo} doctorToken={doctorToken} callbackDoctor={callbackDoctor} setCallbackDoctor={setCallbackDoctor} />
-            </Row>
-            <Row>
-                <Header>PERSONAL INFORMATION</Header>
+            <div>
+            <div className="row">>
+                <div>PERSONAL INFORMATION</div>
                 <PersonalInfo doctorInfo={doctorInfo} />
-            </Row>
-            <Row>
-                <Header>CERTIFICATE</Header>
+            <div>
+            <div className="row">>
+                <div>CERTIFICATE</div>
                 <Certificate setLoading={setLoading} doctorInfo={doctorInfo} doctorToken={doctorToken} callbackDoctor={callbackDoctor} setCallbackDoctor={setCallbackDoctor} />
-            </Row>
-            <Row>
-                <Header>ASSIGNED LOCATION</Header>
+            <div>
+            <div className="row">>
+                <div>ASSIGNED LOCATION</div>
                 <Location doctorInfo={doctorInfo} />
-            </Row>
-            <Row>
+            <div>
+            <div className="row">>
                 <button className="button green " onClick={updateInfo}>Save</button>
-            </Row>
-        </Container>
+            <div>
+        </div>
     )
 }
 

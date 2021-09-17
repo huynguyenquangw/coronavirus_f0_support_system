@@ -118,15 +118,15 @@ function ProfilePicture({ doctorInfo, doctorToken, callbackDoctor, setCallbackDo
     }, [])
 
     return (
-        <Container>
-            <PhotoContainer style={{ backgroundImage: `url(${doctorInfo.img?.url || profile})` }}>
+        <div className="dashboardmain-container">
+            <div className="profilepicture-container" style={{ backgroundImage: `url(${doctorInfo.img?.url || profile})` }}>
                 <ActionContainer htmlFor="photo-upload">
                     <PhotoAction src={photoEdit} />
                 </ActionContainer>
-            </PhotoContainer>
+            </div>
 
             <input id="photo-upload" type="file" onChange={editImage} />
-        </Container>
+        </div>
     )
 }
 

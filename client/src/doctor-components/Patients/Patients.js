@@ -12,16 +12,16 @@ function Patients(props) {
         <div>
             <h2 className="list"> Patient List</h2>
             <FilterPatient />
-            <div >
+            <div class="patients-container">
                 <table style={{ width: "100%" }}>
                     <tr>
                         <th>
                             {sort === '' || sort === 'sort=+name' || sort === undefined
-                                ? <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                ? <button 
                                     value="sort=-name" onClick={e => setSort(e.target.value)}>
                                     Name <i className="fas fa-arrow-down"></i>
                                 </button>
-                                : <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                : <button 
                                     value="sort=+name" onClick={e => setSort(e.target.value)}>
                                     Name <i className="fas fa-arrow-up"></i>
                                 </button>
@@ -29,11 +29,11 @@ function Patients(props) {
                         </th>
                         <th>
                             {sort === '' || sort === 'sort=+email' || sort === undefined
-                                ? <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                ? <button
                                     value="sort=-email" onClick={e => setSort(e.target.value)}>
                                     Email <i className="fas fa-arrow-down"></i>
                                 </button>
-                                : <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                : <button
                                     value="sort=+email" onClick={e => setSort(e.target.value)}>
                                     Email <i className="fas fa-arrow-up"></i>
                                 </button>
@@ -41,11 +41,11 @@ function Patients(props) {
                         </th>
                         <th>
                             {sort === '' || sort === 'sort=+phone' || sort === undefined
-                                ? <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                ? <button 
                                     value="sort=-phone" onClick={e => setSort(e.target.value)}>
                                     Phone <i className="fas fa-arrow-down"></i>
                                 </button>
-                                : <button style={{ background: 'transparent', border: 'none', outline: 'none', color: '#88A7C1', fontWeight: 800, fontSize: '16px' }}
+                                : <button 
                                     value="sort=+phone" onClick={e => setSort(e.target.value)}>
                                     Phone <i className="fas fa-arrow-up"></i>
                                 </button>

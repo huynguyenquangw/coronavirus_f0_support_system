@@ -116,16 +116,16 @@ function Certificate({ doctorInfo, doctorToken, callbackDoctor, setCallbackDocto
     }, [])
 
     return (
-        <Container>
-            <PhotoContainer>
+        <div className="dashboardmain-container">
+            <div className="profilepicture-container">
                 <Photo src={doctorInfo.certificate?.url || certificate} />
                 <ActionContainer htmlFor="certificate-upload">
                     <PhotoAction src={photoEdit} />
                 </ActionContainer>
-            </PhotoContainer>
+            </div>
 
             <input id="certificate-upload" type="file" onChange={editCertificate} />
-        </Container>
+        </div>
     )
 }
 

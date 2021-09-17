@@ -94,9 +94,9 @@ function Menu() {
 
 
     return ( 
-        <Container>
+        <div className="dashboardmain-container">
             {SidebarItemsRender}
-        </Container>
+        </div>
     )
 }
 

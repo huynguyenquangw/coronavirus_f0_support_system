@@ -73,11 +73,11 @@ function HealthStatus(props) {
     var i = 0
     for (var e = 0; e < keys.length - 1; e++) {
         render.push(
-            <CheckboxField>
+            <div className="dashboardcheckbox-container">
                 <h2>{headings[i]}</h2>
                 <input name={[keys[e]]} id={[keys[e]]} type="checkbox"
                     checked={health[keys[e]]} onChange={onChangeCheck}></input>
-            </CheckboxField>
+            </div>
         )
         i += 1
     }
@@ -106,11 +106,11 @@ function HealthStatus(props) {
     
     return (
         <div>
-            <Container>
-                <Row>
-                    <Header>Your Health Status</Header>
+            <div className="dashboardmain-container">
+                <div className="row">
+                    <div>Your Health Status</div>
                     <Form>
-                        <FieldBig style={{ flexBasis: "100%" }}>
+                        <div className="fieldbig" style={{ flexBasis: "100%" }}>
                             <label htmlFor="doctor">Doctor in {info.district.name}</label>
                             <select id="doctor" value={selectedDoctor} onChange={onChangeDoctor}>
                                 <option value="">Please select doctor</option>
@@ -121,18 +121,18 @@ function HealthStatus(props) {
                                         </option> : ""
                                 )}
                             </select>
-                        </FieldBig>
+                        </div>
                         {render}
-                        <TextAreaField>
+                        <div className="dashboardtextarea">
                             <label htmlFor="other">Other Symptoms</label>
                             <textarea name="other" id="other" onChange={onChange}>
 
                             </textarea>
-                        </TextAreaField>
+                        </div>
                     </Form>
                     <button className="button green " onClick={updateHealthDeclaration}>Save</button>
-                </Row>
-            </Container>
+                </div>
+            </div>
         </div>
     )
 }

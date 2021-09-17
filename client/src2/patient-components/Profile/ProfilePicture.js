@@ -124,15 +124,15 @@ function ProfilePicture({ info, token, callback, setCallback, setLoading }) {
     }, [])
 
     return (
-        <Container>
-            <PhotoContainer style={{ backgroundImage: `url(${info.img?.url || profile})` }}>
+        <div className="dashboardmain-container">
+            <div className="profilepicture-container" style={{ backgroundImage: `url(${info.img?.url || profile})` }}>
                 <ActionContainer htmlFor="photo-upload">
                     <PhotoAction src={photoEdit} />
                 </ActionContainer>
-            </PhotoContainer>
+            </div>
 
             <input id="photo-upload" type="file" onChange={editImage} />
-        </Container>
+        </div>
     )
 }
 

@@ -37,7 +37,7 @@ function HealthPopup({ modalDisplayHealth, setModalDisplayHealth, healthData}) {
                     </h3>
                     <h3>ID: {_id}</h3>
                 </div>
-                {covid && vaccinated &&
+                {covid || vaccinated ?
                     <div className="info">
                         <h1>Status</h1>
                         <div className="symptoms">
@@ -45,6 +45,7 @@ function HealthPopup({ modalDisplayHealth, setModalDisplayHealth, healthData}) {
                             {vaccinated ? <p><i className="fas fa-syringe"></i>Vaccinated</p> : ""}
                         </div>
                     </div>
+                    : ""
                 }
                 {fever || cough || breathing || sorethroat || phlegm || runnynose || tiredness || 
                 blocknose || losssmell  || musclepain ? 

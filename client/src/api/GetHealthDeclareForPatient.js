@@ -11,14 +11,14 @@ export default function GetHealthDeclareForPatient(token) {
     const [realLength, setRealLength] = useState(0)
 
     const getHealth = async () => {
-        const res = await axios.get(`https://chat-app-test-lwk.herokuapp.com/health/user?limit=9999&${filter}=${trueOrFalse}&page=${page}`, {
+        const res = await axios.get(`http://localhost:3000/health/user?limit=9999&${filter}=${trueOrFalse}&page=${page}`, {
             headers: { Authorization: token }
         })
         setHealths(res.data.data)
     }
 
     const getRealLength = async () => {
-        const res = await axios.get(`https://chat-app-test-lwk.herokuapp.com/health/user?limit=999999`, {
+        const res = await axios.get(`http://localhost:3000/health/user?limit=999999`, {
             headers: { Authorization: token }
         })
         setRealLength(res.data.data.length)

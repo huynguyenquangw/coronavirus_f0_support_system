@@ -73,11 +73,11 @@ function HealthStatus(props) {
     var i = 0
     for (var e = 0; e < keys.length - 1; e++) {
         render.push(
-            <CheckboxField>
+            <div className="dashboardcheckbox-container">
                 <h2>{headings[i]}</h2>
                 <input name={[keys[e]]} id={[keys[e]]} type="checkbox"
                     checked={health[keys[e]]} onChange={onChangeCheck}></input>
-            </CheckboxField>
+            </div>
         )
         i += 1
     }
@@ -87,7 +87,7 @@ function HealthStatus(props) {
         e.preventDefault()
         try {
             setLoading(!loading)
-            await axios.post("https://chat-app-test-lwk.herokuapp.com/health/add", {
+            await axios.post("http://localhost:3000/health/add", {
                 ...health,
                 user_id: info._id,
                 doctor_id: selectedDoctor
@@ -105,12 +105,12 @@ function HealthStatus(props) {
     }
     
     return (
-        <div>
-            <Container>
-                <Row>
-                    <Header>Your Health Status</Header>
-                    <Form>
-                        <FieldBig style={{ flexBasis: "100%" }}>
+        <div class="patient-addhealth">
+            <div className="dashboardmain-container">
+                <div className="row">
+                    <div className="header">Your Health Status</div>
+                    <div className="dashboardinput-container">
+                        <div className="fieldbig" style={{ flexBasis: "100%" }}>
                             <label htmlFor="doctor">Doctor in {info.district.name}</label>
                             <select id="doctor" value={selectedDoctor} onChange={onChangeDoctor}>
                                 <option value="">Please select doctor</option>
@@ -121,18 +121,18 @@ function HealthStatus(props) {
                                         </option> : ""
                                 )}
                             </select>
-                        </FieldBig>
+                        </div>
                         {render}
-                        <TextAreaField>
+                        <div className="dashboardtextarea">
                             <label htmlFor="other">Other Symptoms</label>
                             <textarea name="other" id="other" onChange={onChange}>
 
                             </textarea>
-                        </TextAreaField>
-                    </Form>
+                        </div>
+                    </div>
                     <button className="button green " onClick={updateHealthDeclaration}>Save</button>
-                </Row>
-            </Container>
+                </div>
+            </div>
         </div>
     )
 }

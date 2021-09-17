@@ -46,23 +46,23 @@ function Profile(props) {
     }
 
     return (
-        <Container>
-            <Row>
-                <Header>PROFILE PICTURE</Header>
+        <div className="dashboardmain-container">
+            <div className="row">>
+                <div>PROFILE PICTURE</div>
                 <ProfilePicture setLoading={setLoading} info={info} token={token} callback={callback} setCallback={setCallback} />
-            </Row>
-            <Row>
-                <Header>PERSONAL INFORMATION</Header>
+            <div>
+            <div className="row">>
+                <div>PERSONAL INFORMATION</div>
                 <PersonalInfo setLoading={setLoading} info={info} />
-            </Row>
-            <Row>
-                <Header>HOME ADDRESS</Header>
+            <div>
+            <div className="row">>
+                <div>HOME ADDRESS</div>
                 <HomeAddress setLoading={setLoading} info={info} />
-            </Row>
-            <Row>
+            <div>
+            <div className="row">>
                 <button className="button green" onClick={updateInfo}>Save</button>
-            </Row>
-        </Container>
+            <div>
+        </div>
     )
 }
 

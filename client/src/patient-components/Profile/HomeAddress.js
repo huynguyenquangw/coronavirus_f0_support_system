@@ -35,9 +35,9 @@ function HomeAddress({ info }) {
     }, [selectedDistrict])
     
     return (
-        <Container>
+        <div className="dashboardinput-container">
 
-            <Field>
+            <div className="field">
 
                 <label htmlFor="district">District</label>
                 <select id="district" value={selectedDistrict} onChange={handleChange}>
@@ -45,20 +45,20 @@ function HomeAddress({ info }) {
                         <option value={i._id}>{i.name}</option>
                     )}
                 </select>
-            </Field>
+            </div>
 
-            <Field style={{ userSelect: "none" }}>
+            <div className="field" style={{ userSelect: "none" }}>
                 <label htmlFor="city">City</label>
                 <input className="uneditable" id="city" type="text" placeholder="City" value={followingInfo.name} readOnly />
-            </Field>
+            </div>
 
-            <Field style={{ userSelect: "none" }}>
+            <div className="field" style={{ userSelect: "none" }}>
                 <label htmlFor="postcode">Postcode</label>
                 <input className="uneditable" id="postcode" type="text" placeholder="Full Name" value={followingInfo.postcode} readOnly />
-            </Field>
+            </div>
 
 
-        </Container>
+        </div>
     )
 }
 

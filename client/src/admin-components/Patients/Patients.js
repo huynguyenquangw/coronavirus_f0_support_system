@@ -16,6 +16,7 @@ function Patients(props) {
             <FilterPatient />
             <br />
             <div >
+            <div className="healthdeclare-container">
                 <table style={{ width: "100%" }}>
                     <tr>
                         <th>
@@ -74,6 +75,7 @@ function Patients(props) {
                     )}
 
                 </table>
+                </div>
             </div>
 
         </div>

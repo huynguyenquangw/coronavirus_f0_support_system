@@ -18,7 +18,7 @@ function Profile(props) {
         setLoading(!loading)
         try {
             
-            await fetch("https://chat-app-test-lwk.herokuapp.com/user/update", {
+            await fetch("http://localhost:3000/user/update", {
                 method: 'PUT',
                 headers: {
                     "Authorization": token,
@@ -46,23 +46,23 @@ function Profile(props) {
     }
 
     return (
-        <Container>
-            <Row>
-                <Header>PROFILE PICTURE</Header>
+        <div className="dashboardmain-container">
+            <div className="row">
+                <div className="header">PROFILE PICTURE</div>
                 <ProfilePicture setLoading={setLoading} info={info} token={token} callback={callback} setCallback={setCallback} />
-            </Row>
-            <Row>
-                <Header>PERSONAL INFORMATION</Header>
+            </div>
+            <div className="row">
+                <div className="header">PERSONAL INFORMATION</div>
                 <PersonalInfo setLoading={setLoading} info={info} />
-            </Row>
-            <Row>
-                <Header>HOME ADDRESS</Header>
+            </div>
+            <div className="row">
+                <div className="header">HOME ADDRESS</div>
                 <HomeAddress setLoading={setLoading} info={info} />
-            </Row>
-            <Row>
+            </div>
+            <div className="row">
                 <button className="button green" onClick={updateInfo}>Save</button>
-            </Row>
-        </Container>
+            </div>
+        </div>
     )
 }
 

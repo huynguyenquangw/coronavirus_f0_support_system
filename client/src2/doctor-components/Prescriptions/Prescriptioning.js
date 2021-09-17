@@ -127,11 +127,11 @@ function Prescriptioning() {
     // console.log(prescriptionForm)
 
     return (
-        <Container>
-            <Row>
-                <Header>New Prescription</Header>
+        <div className="dashboardmain-container">
+            <div className="row">
+                <div>New Prescription</div>
                 <Form>
-                    <FieldBig>
+                    <div className="fieldbig">
                         <label htmlFor="user_id">Patient in {doctorInfo.district?.name}</label>
                         <select id="user_id" name="user_id" value={prescriptionForm.user_id} onChange={handleChange}>
                             <option>Select Patient</option>
@@ -139,12 +139,12 @@ function Prescriptioning() {
                                 <option key={i._id} value={i._id}>{i.name}</option>
                             )}
                         </select>
-                    </FieldBig>
+                    </div>
 
-                    <TextAreaField>
+                    <div className="dashboardtextarea">
                         <label htmlFor="diagnostic">Diagnostic</label>
                         <textarea name="diagnostic" id="diagnostic" onChange={handleChange}></textarea>
-                    </TextAreaField>
+                    </div>
 
                     <div className='medicine-container'>
                         <div className="medicine-controller">
@@ -204,14 +204,14 @@ function Prescriptioning() {
                         medicine note
                         <textarea name="note" id="note" onChange={handleChange}></textarea>
                     </div> */}
-                    <TextAreaField>
+                    <div className="dashboardtextarea">
                         <label htmlFor="note">Notes for patient</label>
                         <textarea name="note" id="note" onChange={handleChange}></textarea>
-                    </TextAreaField>
+                    </div>
                 </Form>
                 <button className="button green " onClick={saveMedicineForm}>Save</button>
-            </Row>
-        </Container>
+            </div>
+        </div>
     )
 }
 

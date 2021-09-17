@@ -46,7 +46,7 @@ function Certificate({ doctorInfo, doctorToken, callbackDoctor, setCallbackDocto
         public_id: ""
     })
 
-    const endPoint = "https://chat-app-test-lwk.herokuapp.com"
+    const endPoint = "http://localhost:3000"
 
     const editCertificate = async (e) => {
         e.preventDefault()
@@ -85,7 +85,7 @@ function Certificate({ doctorInfo, doctorToken, callbackDoctor, setCallbackDocto
     const updateCertificate = async (cloudinaryCertificate) => {
 
         try {
-            await fetch("https://chat-app-test-lwk.herokuapp.com/doctor/update/certificate", {
+            await fetch("http://localhost:3000/doctor/update/certificate", {
                 method: 'PUT',
                 headers: {
                     "Authorization": doctorToken,
@@ -116,16 +116,16 @@ function Certificate({ doctorInfo, doctorToken, callbackDoctor, setCallbackDocto
     }, [])
 
     return (
-        <Container>
-            <PhotoContainer>
+        <div className="dashboardmain-container">
+            <div className="certificate-container">
                 <Photo src={doctorInfo.certificate?.url || certificate} />
                 <ActionContainer htmlFor="certificate-upload">
                     <PhotoAction src={photoEdit} />
                 </ActionContainer>
-            </PhotoContainer>
+            </div>
 
             <input id="certificate-upload" type="file" onChange={editCertificate} />
-        </Container>
+        </div>
     )
 }
 

@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 toast.configure()
 
 function Pharmacies(props) {
-    const endPoint = "https://chat-app-test-lwk.herokuapp.com"
+    const endPoint = "http://localhost:3000"
     const [data, setData] = useState([]);
     const history = useHistory()
     const [pharmacy, setPharmacy] = useState({

@@ -19,10 +19,10 @@ const PhotoContainer = styled.div`
     height: 40vw;
     width: 40vw;
     border-radius: 15%;
-
+    
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    background-size: 101% auto;
+    background-size: 101% 101%;
 `
 
 const ActionContainer = styled.label`
@@ -48,7 +48,7 @@ function ProfilePicture({ info, token, callback, setCallback, setLoading }) {
         public_id: ""
     })
 
-    const endPoint = "https://chat-app-test-lwk.herokuapp.com"
+    const endPoint = "http://localhost:3000"
 
     const editImage = async (e) => {
         e.preventDefault()
@@ -87,7 +87,7 @@ function ProfilePicture({ info, token, callback, setCallback, setLoading }) {
     const updateImage = async (cloudinary) => {
 
         try {
-            await fetch("https://chat-app-test-lwk.herokuapp.com/user/update", {
+            await fetch("http://localhost:3000/user/update", {
                 method: 'PUT',
                 headers: {
                     "Authorization": token,
@@ -124,15 +124,15 @@ function ProfilePicture({ info, token, callback, setCallback, setLoading }) {
     }, [])
 
     return (
-        <Container>
-            <PhotoContainer style={{ backgroundImage: `url(${info.img?.url || profile})` }}>
+        <div className="dashboardmain-container">
+            <div className="profilepicture-container" style={{ backgroundImage: `url(${info.img?.url || profile})` }}>
                 <ActionContainer htmlFor="photo-upload">
                     <PhotoAction src={photoEdit} />
                 </ActionContainer>
-            </PhotoContainer>
+            </div>
 
             <input id="photo-upload" type="file" onChange={editImage} />
-        </Container>
+        </div>
     )
 }
 

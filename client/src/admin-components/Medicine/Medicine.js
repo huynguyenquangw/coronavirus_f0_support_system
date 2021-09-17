@@ -9,7 +9,7 @@ export default function Medicine(props) {
 
     const state = useContext(GlobalState)
     const [token, setToken] = state.token
-    const endPoint = "https://chat-app-test-lwk.herokuapp.com"
+    const endPoint = "http://localhost:3000"
     const history = useHistory()
     const [medicine, setMedicine] = useState({
         name: '',
@@ -52,7 +52,8 @@ export default function Medicine(props) {
             <br />
             <input type="text" className="no3" id="link" name="link" placeholder="Link.." value={medicine.link} onChange={onChangeValue} />
             <br />
-            <input type="submit" value="Register" className="button green" />
+            {/* <input type="submit" value="Register" className="button green" /> */}
+            <button style={{width: "100%"}}className="button green " onClick={registerSubmit}>Register</button>
         </form>
     </div>
     )

@@ -20,24 +20,24 @@ function PersonalInfo({ doctorInfo }) {
     }, [doctorInfo])
 
     return (
-        <Container>
-            <Field>
+        <div className="dashboardmain-container">
+            <div className="field">
                 <label htmlFor="name">Name</label>
                 <input className="editable" name="name" id="name" type="text" placeholder="Full Name" value={user.name} onChange={onChangeValue}></input>
-            </Field>
-            <Field>
+            </div>
+            <div className="field">
                 <label htmlFor="email">Email</label>
                 <input className="uneditable" name="email" id="email" type="text" placeholder="Email Address" value={user.email} onChange={onChangeValue} readOnly></input>
-            </Field>
-            <Field>
+            </div>
+            <div className="field">
                 <label htmlFor="name">Phone</label>
                 <input className="editable" name="phone" id="phone" type="text" placeholder="Full Name" value={user.phone} onChange={onChangeValue}></input>
-            </Field>
-            <TextAreaField>
+            </div>
+            <div className="dashboardtextarea">
                 <h2>Experiences</h2>
                 <textarea name="experience" id="experience" value={user.experience} onChange={onChangeValue}></textarea>
-            </TextAreaField>
-        </Container>
+            </div>
+        </div>
     )
 }
 

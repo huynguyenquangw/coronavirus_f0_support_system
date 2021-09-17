@@ -2,28 +2,30 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
-button,
-select {
+
+button, select {
     cursor: pointer;
 }
+
 label {
     font-weight: bold;
 }
-.search input,
-.filterByDistrict,
-.inputPage {
+
+.search input, .filterByDistrict, .inputPage {
     padding: 4px 8px;
     outline: none;
     border-radius: 10px;
     border: 1px solid grey;
 }
+
 .paginate {
     display: flex;
     gap: 0.3rem;
     align-items: center;
 }
+
 .paginate button {
     padding: 4px 8px;
     outline: none;
@@ -33,6 +35,13 @@ label {
     font-weight: bold;
     transition: 0.25s;
 }
+
+.patients-container {
+    width: 100%;
+    overflow-x: scroll;
+}
+
+
 /* .btn-prev {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -41,17 +50,19 @@ label {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 } */
+
 .paginate button:hover {
     letter-spacing: 1px;
 }
+
 .paginate .inputPage {
     width: 20px;
     text-align: center;
     font-weight: bold;
     /* border-radius: 0px; */
 }
-.paginate input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+
+.paginate input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     appearance: none;
     margin: 0;
 }

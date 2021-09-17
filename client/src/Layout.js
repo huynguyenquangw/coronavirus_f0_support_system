@@ -1,57 +1,16 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom';
 import Sidebar from './sidebar/Sidebar'
 import PatientSidebarItems from './sidebar/PatientSidebarItems'
 import AdminSidebarItems from './sidebar/AdminSidebarItems'
 import DoctorSidebarItems from './sidebar/DoctorSidebarItems'
-
-const Container = styled.div`
-    width: 100vw;
-    max-width: 75rem ;
-`
-
-const MainContainer = styled.div`
-    box-sizing: border-box;
-    padding: 2rem 3rem;
-    display: inline-block;
-    width: 80%;
-    max-width: 60rem;
-
-   
-`
-
-const Spacer = styled.div`
-    display: inline-block;
-    width: 20%;
-    max-width: 15rem;
-`
-
-const HeadingContainer = styled.div`
-    color: #002341;
-    height: 10%;
-    max-height: 4.5rem;
-    margin-bottom: 3rem;
-
-    *{
-        display: inline-block;
-        vertical-align: middle;
-
-    }
-
-    img{
-        height: 2.8rem;
-    }
-
-    h1{
-    margin: 0.1rem 0 0 1rem;
-    }
-`
+import menuIcon from './assets/icons/menu.svg'
 
 function Layout(props) {
     const location = useLocation();
     let HeadingTitle = ""
     let HeadingIcon = ""
+    const [toggle,setToggle] =useState(false)
 
     if (location.pathname.startsWith("/patient")) {
         for (let i = 0; i < PatientSidebarItems.length; i++) {
@@ -81,22 +40,22 @@ function Layout(props) {
     }
 
     return (
-        <Container>
-            <Sidebar />
-
-            <Spacer></Spacer>
-
-            <MainContainer>
-
-                <HeadingContainer>
-                    <img src={HeadingIcon} alt='headingicon' />
-                    <h1>{HeadingTitle}</h1>
-                </HeadingContainer>
-                {props.children}
-
-            </MainContainer>
-
-        </Container>
+        <div style={{ width: "100vw" }} >
+            <div className="dashboard-container">
+                <Sidebar toggle={toggle} setToggle={setToggle} />
+                <div className="spacer"></div>
+                <div className="main-container">
+                    <div className="heading-container">
+                        <div>
+                            <img className="heading-icon" src={HeadingIcon} alt='headingicon' />
+                            <h1>{HeadingTitle}</h1>
+                        </div>
+                        <img className="menu" src={menuIcon} alt="menu" onClick={()=>{setToggle(false)}}/>
+                    </div>
+                    {props.children}
+                </div>
+            </div>
+        </div>
     )
 }
 

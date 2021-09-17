@@ -7,6 +7,7 @@ import MedicinePopup from '../../patient-components/Prescriptions/MedicinePopup'
 import HealthPopup from '../../patient-components/Prescriptions/HealthPopup';
 import viewHealth from '../../assets/icons/view-medicine.svg'
 import prescriptions from '../../assets/icons/prescriptions.svg'
+import '../../admin-components/Doctors/doctor.css'
 
 function Patients(props) {
     const state = useContext(GlobalState)
@@ -76,46 +77,47 @@ function Patients(props) {
                     <button className='btn-next' onClick={pageIncrease}> Next page <i className="fas fa-chevron-right"></i> </button>
                 </div>
             </div>
-
-            <table className="display">
-                <thead>
-                    <tr>
-                        <th>health declaration ID</th>
-                        <th>patient</th>
-                        <th>covid</th>
-                        <th>vaccinated</th>
-                        <th>status</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                {healthDeclares.map(health => (
-                    <tbody key={health._id}>
-                        <tr >
-                            <td>{health._id}</td>
-                            <td>{health.user_id?.name}</td>
-                            <td>{health.covid ? 'positive' : 'negative'}</td>
-                            <td>{health.vaccinated ? 'approved' : 'disapproved'}</td>
-                            <td>{health.status ? 'got medicine' : 'no medicine'}</td>
-                            <td style={{ cursor: "pointer", textAlign: "center" }} >
-                            <img onClick={() => { setModalDisplayHealth(health._id) }} className="hover icon" src={viewHealth} />
-                            </td>
-                            <td>
-                                {trueOrFalse === 'false' && filter === "status" &&
-                                    <Link className="button green" to={`/doctor/prescriptions/medicine/${health._id}`}>
-                                        Add medicine
-                                    </Link>
-                                }
-                                {trueOrFalse === 'true' &&
-                                    <img onClick={() => {setModalDisplay(health._id)}} className="hover icon" src={prescriptions} />
-                                }
-                            </td>
-                            {trueOrFalse == "true" && <td><MedicinePopup key={health._id + "medicineDoctor"} modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} healthData={health} medicineData={health.medicineform_id} /></td>}
-                        <td><HealthPopup key={health._id} modalDisplayHealth={modalDisplayHealth} setModalDisplayHealth={setModalDisplayHealth} healthData={health} /></td>
+            <div className="healthdeclare-container">
+                <table className="display">
+                    <thead>
+                        <tr>
+                            <th>health declaration ID</th>
+                            <th>patient</th>
+                            <th>covid</th>
+                            <th>vaccinated</th>
+                            <th>status</th>
+                            <th></th>
+                            <th></th>
                         </tr>
-                    </tbody>
-                ))}
-            </table>
+                    </thead>
+                    {healthDeclares.map(health => (
+                        <tbody key={health._id}>
+                            <tr >
+                                <td style={{ color: "#00A473", cursor: "pointer" }} onClick={() => { setModalDisplayHealth(health._id) }}>{health._id}</td>
+                                <td>{health.user_id?.name}</td>
+                                <td>{health.covid ? 'positive' : 'negative'}</td>
+                                <td>{health.vaccinated ? 'approved' : 'disapproved'}</td>
+                                <td>{health.status ? 'got medicine' : 'no medicine'}</td>
+                                <td style={{ cursor: "pointer", textAlign: "center" }} >
+                                    <img onClick={() => { setModalDisplayHealth(health._id) }} className="hover icon" src={viewHealth} />
+                                </td>
+                                <td>
+                                    {trueOrFalse === 'false' && filter === "status" &&
+                                        <Link className="button green small" to={`/doctor/prescriptions/medicine/${health._id}`}>
+                                            Add medicine
+                                        </Link>
+                                    }
+                                    {trueOrFalse === 'true' &&
+                                        <img onClick={() => { setModalDisplay(health._id) }} className="hover icon" src={prescriptions} />
+                                    }
+                                </td>
+                                {trueOrFalse == "true" && <td><MedicinePopup key={health._id + "medicineDoctor"} modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} healthData={health} medicineData={health.medicineform_id} /></td>}
+                                <td><HealthPopup key={health._id} modalDisplayHealth={modalDisplayHealth} setModalDisplayHealth={setModalDisplayHealth} healthData={health} /></td>
+                            </tr>
+                        </tbody>
+                    ))}
+                </table>
+            </div>
         </div>
     )
 }

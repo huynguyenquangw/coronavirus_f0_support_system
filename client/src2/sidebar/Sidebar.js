@@ -41,7 +41,7 @@ function Sidebar({ active }) {
     }
 
     return (
-        <Container>
+        <div className="dashboardmain-container">
             <Item>
                 <Logo src={logo} />
             </Item>
@@ -53,7 +53,7 @@ function Sidebar({ active }) {
                 <h2 style={{ color: "#616161", cursor: "pointer" }} onClick={Out}>Log out</h2>
 
             </Item>
-        </Container>
+        </div>
     )
 }
 

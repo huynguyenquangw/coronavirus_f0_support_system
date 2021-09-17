@@ -18,7 +18,7 @@ function Profile(props) {
     const updateInfo = async (e) => {
         e.preventDefault()
         setLoading(!loading)
-        await fetch("https://chat-app-test-lwk.herokuapp.com/doctor/update", {
+        await fetch("http://localhost:3000/doctor/update", {
             method: 'PUT',
             headers: {
                 "Authorization": doctorToken,
@@ -42,27 +42,27 @@ function Profile(props) {
     }
 
     return (
-        <Container>
-            <Row>
-                <Header>PROFILE PICTURE</Header>
+        <div className="dashboardmain-container">
+            <div className="row">
+                <div className="header">PROFILE PICTURE</div>
                 <ProfilePicture setLoading={setLoading} doctorInfo={doctorInfo} doctorToken={doctorToken} callbackDoctor={callbackDoctor} setCallbackDoctor={setCallbackDoctor} />
-            </Row>
-            <Row>
-                <Header>PERSONAL INFORMATION</Header>
+            </div>
+            <div className="row">
+                <div className="header">PERSONAL INFORMATION</div>
                 <PersonalInfo doctorInfo={doctorInfo} />
-            </Row>
-            <Row>
-                <Header>CERTIFICATE</Header>
+            </div>
+            <div className="row">
+                <div className="header">CERTIFICATE</div>
                 <Certificate setLoading={setLoading} doctorInfo={doctorInfo} doctorToken={doctorToken} callbackDoctor={callbackDoctor} setCallbackDoctor={setCallbackDoctor} />
-            </Row>
-            <Row>
-                <Header>ASSIGNED LOCATION</Header>
+            </div>
+            <div className="row">
+                <div className="header">ASSIGNED LOCATION</div>
                 <Location doctorInfo={doctorInfo} />
-            </Row>
-            <Row>
+            </div>
+            <div className="row">
                 <button className="button green " onClick={updateInfo}>Save</button>
-            </Row>
-        </Container>
+            </div>
+        </div>
     )
 }
 

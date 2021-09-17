@@ -3,7 +3,7 @@ import ChatRoom from "./ChatRoom";
 import { GlobalState } from "../GlobalState";
 import axios from 'axios'
 
-const api = "https://chat-app-test-lwk.herokuapp.com"
+const api = "http://localhost:3000"
 
 export default function DocChatPatient(props) {
     const state = useContext(GlobalState)

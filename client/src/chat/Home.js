@@ -3,7 +3,7 @@ import axios from 'axios'
 import ChatRoom from "./ChatRoom";
 import { GlobalState } from "../GlobalState";
 
-const api = "https://chat-app-test-lwk.herokuapp.com"
+const api = "http://localhost:3000"
 
 const Home = () => {
     const state = useContext(GlobalState)

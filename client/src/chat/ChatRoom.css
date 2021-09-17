@@ -8,6 +8,7 @@
     border-radius: 50px;
 }
 
+
 /* chat room */
 
 .chat-room-container {
@@ -27,6 +28,7 @@
     /* overflow: hidden; */
     background-color: #fff;
     transition: 0.25s ease;
+    z-index: 15;
 }
 
 .chat-room-container.active {
@@ -122,6 +124,7 @@
     }
 }
 
+
 /* message box */
 
 .messages-container {
@@ -206,6 +209,7 @@
     font-size: 0.7rem;
     color: #a0a0a0;
 }
+
 
 /* input text field */
 
