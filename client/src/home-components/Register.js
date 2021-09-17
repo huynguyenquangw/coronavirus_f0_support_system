@@ -49,7 +49,7 @@ export default function Register() {
     const registerSubmit = async e => {
         // console.log(typeof user.email)
         e.preventDefault()
-        if (user.district === '' || user.district === 'Options') {
+        if (user.district === '' || user.district === 'Districts') {
             toast(("Please choose a district "))
             return false;
         }
@@ -104,7 +104,7 @@ export default function Register() {
                             <br />
                             {/* <input type="text"  className="no3" id="district" name="district"  placeholder="District.."value = {user.district} onChange = {onChangeValue} /> */}
                             <select name="district" id="district" className="no3" value={user.district} onChange={onChangeValue} >
-                                <option > Options </option>
+                                <option > Districts </option>
                                 {district.map(i =>
                                     <option value={i._id}>{i.name}</option>
                                 )}
