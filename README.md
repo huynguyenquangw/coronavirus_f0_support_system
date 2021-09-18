@@ -1,10 +1,10 @@
-# Coronavirus F0 Support System
+# Coronavirus F0 Support System ⚡
 
-## Application in [cloud](https://covid-f0-support-system.herokuapp.com/)
+## Application in cloud [☁☁☁](https://covid-f0-support-system.herokuapp.com/)
 
 The Coronavirus F0 Support System starter demonstrates a working application that uses a React frontend, with a backend build with NodeJS and ExpressJS, and using MongoDB for the database. This application is as a solution for the interaction between the citizen and doctor in Ho Chi Minh City.
 
-## Getting Started
+## Getting Started ✍
 
 There are steps to run a development environment.
 
@@ -21,7 +21,7 @@ There are steps to run a development environment.
     ```
 
  
-## Members
+## Who made this? ✔
 
   - [s3682365] - Mai Viet Cuong 
   - [s3697272] - Nguyen Quang Huy  
