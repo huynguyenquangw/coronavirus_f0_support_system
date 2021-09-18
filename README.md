@@ -1,6 +1,6 @@
 # Coronavirus F0 Support System ⚡
 
-The Coronavirus F0 Support System starter demonstrates a working application that uses a React frontend, with a backend build with NodeJS and ExpressJS, and using MongoDB for the database. This application is as a solution for the interaction between the citizen and doctor in Ho Chi Minh City.
+The Coronavirus F0 Support System uses a React frontend, a backend build with NodeJS and ExpressJS, and the database using MongoDB. This application is as a solution for the interaction between the citizen and doctor in Ho Chi Minh City.
 ### ☁ [Application in cloud](https://covid-f0-support-system.herokuapp.com/)
 ### ☀ [Demo video of the system](https://youtu.be/P_rKv6J2bfg)
 
