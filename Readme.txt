@@ -14,7 +14,7 @@
 
 ### Truong Quynh Anh s3795360
 
-### Luke s3845844
+### Tran Cong Nguyen Vo s3845844
 
 
 ## Contribution:
