@@ -21,7 +21,7 @@
 
 
 
-## URL of deployment system: http://localhost:3000/
+## URL of deployment system: https://covid-f0-support-system.herokuapp.com/
 
 ## Youtube URL demo: 
 
