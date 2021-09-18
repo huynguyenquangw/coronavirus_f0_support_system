@@ -37,7 +37,11 @@ const DistrictCtrl = {
         city,
       });
     } catch (error) {
+<<<<<<< HEAD
       console.log(error);
+=======
+      toast(error);
+>>>>>>> frontend
     }
   },
 
