@@ -3,7 +3,6 @@ import { useContext, useState } from 'react';
 import axios from "axios";
 import { toast } from 'react-toastify';
 import { GlobalState } from "../GlobalState";
-import { Container } from "../css-template/Input";
 
 export default function LoginPatient() {
     const endPoint = "http://localhost:3000"
@@ -70,7 +69,7 @@ export default function LoginPatient() {
                         <input className="editable" type="text" id="password" name="password" value={user.password} onChange={onChangeValue} placeholder="Password.." />
                         <br />
                         {/* <input type="submit" value="Log In" className="button blue" /> */}
-                        <button className="button blue" onClick={loginSubmit}>Login</button>
+                        <button id='patientlogin' className="button blue" onClick={loginSubmit}>Login</button>
                     </div>
                 </div>
             </div>

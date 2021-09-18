@@ -3,7 +3,6 @@ import ProfilePicture from './ProfilePicture'
 import Certificate from './Certificate'
 import PersonalInfo from './PersonalInfo'
 import Location from './Location'
-import { Container, Row, Header } from '../../css-template/DashboardMain'
 import { GlobalState } from '../../GlobalState'
 import { toast } from 'react-toastify';
 

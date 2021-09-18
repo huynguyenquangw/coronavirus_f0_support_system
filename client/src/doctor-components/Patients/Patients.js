@@ -17,11 +17,11 @@ function Patients(props) {
                     <tr>
                         <th>
                             {sort === '' || sort === 'sort=+name' || sort === undefined
-                                ? <button 
+                                ? <button
                                     value="sort=-name" onClick={e => setSort(e.target.value)}>
                                     Name <i className="fas fa-arrow-down"></i>
                                 </button>
-                                : <button 
+                                : <button
                                     value="sort=+name" onClick={e => setSort(e.target.value)}>
                                     Name <i className="fas fa-arrow-up"></i>
                                 </button>
@@ -41,11 +41,11 @@ function Patients(props) {
                         </th>
                         <th>
                             {sort === '' || sort === 'sort=+phone' || sort === undefined
-                                ? <button 
+                                ? <button
                                     value="sort=-phone" onClick={e => setSort(e.target.value)}>
                                     Phone <i className="fas fa-arrow-down"></i>
                                 </button>
-                                : <button 
+                                : <button
                                     value="sort=+phone" onClick={e => setSort(e.target.value)}>
                                     Phone <i className="fas fa-arrow-up"></i>
                                 </button>

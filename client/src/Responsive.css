@@ -28,7 +28,7 @@
         font-size: 1.8rem;
         width: 80%;
     }
-    .nav-container>* {
+    .nav-container > * {
         width: 100%;
         flex-basis: 100%;
     }
@@ -56,7 +56,8 @@
     .nav-container .hamburger-close {
         display: block;
     }
-    .nav-container .menu.desktop, .nav-container .button-container.desktop {
+    .nav-container .menu.desktop,
+    .nav-container .button-container.desktop {
         display: none;
     }
     /*Homepage Content*/
@@ -93,7 +94,7 @@
         font-size: 1.6rem;
     }
     .homepage-container .text-container .text2.desktop {
-        display: none
+        display: none;
     }
     .homepage-container .image-container {
         width: 150vw;
@@ -129,7 +130,7 @@
         justify-content: space-between;
         align-items: center;
         height: 10rem;
-        max-height: 10rem
+        max-height: 10rem;
     }
     .dashboard-container .heading-container h1 {
         font-size: 2rem;
@@ -140,6 +141,7 @@
     .dashboard-container .heading-container .menu {
         height: 4rem;
         display: block;
+        cursor: pointer;
     }
     /*Sidebar*/
     .sidebar-container {
@@ -147,6 +149,7 @@
         max-width: 100vw;
         min-width: 100vw;
         transition: 0.4s ease;
+        transform: translateX(-110%);
     }
     .sidebar-container .item {
         height: 10rem;
@@ -198,23 +201,29 @@
     .dashboardinput-container * {
         margin-left: 0;
     }
-    .dashboardinput-container>div {
+    .dashboardinput-container > div {
         flex-basis: 100% !important;
     }
     /*Patient List*/
-    .filter, .filter-section {
+    .filter,
+    .filter-section {
         flex-flow: column nowrap;
     }
-    .filter div, .filter-section div {
+    .filter div,
+    .filter-section div {
         flex-basis: 100%;
         width: 100%;
         display: flex;
         margin-bottom: 1rem;
     }
-    .search label, .filterring label, .filter-section .filter-by-status label {
+    .search label,
+    .filterring label,
+    .filter-section .filter-by-status label {
         flex-basis: 20%;
     }
-    .search input, .filterring select, .filter-section .filter-by-status select {
+    .search input,
+    .filterring select,
+    .filter-section .filter-by-status select {
         flex: 1;
     }
     .paginate * {
@@ -228,23 +237,25 @@
         width: 90%;
         padding: 1.5rem;
     }
-    .modal-content .symptoms>p {
+    .modal-content .symptoms > p {
         flex-basis: 40%;
         font-size: 1.2rem;
         line-height: 115%;
         margin-bottom: 1rem;
     }
     /*Prescriptioning*/
-    .fieldbig label, .fieldbig input {
+    .fieldbig label,
+    .fieldbig input {
         display: block;
     }
-    .fieldbig select, .medicine-controller select {
+    .fieldbig select,
+    .medicine-controller select {
         width: 100%;
     }
     .medicine-controller {
         flex-flow: column;
     }
-    .medicine-controller>* {
+    .medicine-controller > * {
         flex-basis: 100% !important;
     }
     .dashboardcheckbox-container input {
@@ -263,7 +274,7 @@
     .doctor-container .picture-container {
         flex-basis: 40%;
     }
-    .doctor-container>.picture-container>div {
+    .doctor-container > .picture-container > div {
         height: 10rem;
         width: 10rem;
         background-size: 110% 110%;
@@ -275,5 +286,21 @@
     }
     .doctor-container .info-container h1 {
         font-size: 1.7rem;
+    }
+    #savemedicineform {
+        margin-left: 0;
+    }
+    .home-container {
+        display: inline-block;
+    }
+}
+@media screen and (max-width: 1156px) {
+    .healthdeclare-container {
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .patients-container {
+        width: 100%;
+        overflow-x: scroll;
     }
 }

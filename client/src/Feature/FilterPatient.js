@@ -23,6 +23,8 @@ export default function FilterPatient() {
     const pageIncrease = () => {
         if (page > 0 && page !== totalPages) {
             setPage(i => i + 1)
+            setSearch('')
+            setFilter('')
         } else {
             toast("No more data available, please go back ")
         }

@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import ProfilePicture from './ProfilePicture'
 import PersonalInfo from './PersonalInfo'
 import HomeAddress from './HomeAddress'
-import { Container, Row, Header } from '../../css-template/DashboardMain'
 import { GlobalState } from '../../GlobalState';
 import { toast } from 'react-toastify';
 

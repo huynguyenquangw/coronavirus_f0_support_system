@@ -16,10 +16,10 @@ const ChatRoom = ({ doctors, isWho, currentPatient, roomId, setRoomId, pop, setP
         setNewMessage(event.target.value);
     };
 
-    const handleSendMessage = () => {
-        sendMessage(newMessage);
-        setNewMessage("");
-    };
+    // const handleSendMessage = () => {
+    //     sendMessage(newMessage);
+    //     setNewMessage("");
+    // };
 
     const handleKeyUp = e => {
         e.preventDefault()
@@ -47,6 +47,8 @@ const ChatRoom = ({ doctors, isWho, currentPatient, roomId, setRoomId, pop, setP
             messages.pop()
             setPop(false)
         }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [roomId, pop])
 
     useEffect(() => {

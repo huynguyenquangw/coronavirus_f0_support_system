@@ -2,8 +2,6 @@ import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { toast } from 'react-toastify'
-import { Container, Row, Header } from '../../css-template/DashboardMain'
-import { Container as Form, TextAreaField, FieldBig } from "../../css-template/Input"
 import { GlobalState } from '../../GlobalState'
 
 const medicineState = {
@@ -22,6 +20,7 @@ const initialState = {
 
 function Prescriptioning() {
     const state = useContext(GlobalState)
+    const [loading, setLoading] = state.loading
     const [doctorToken] = state.doctorToken
     const [doctorInfo] = state.doctorAPI.doctorInfo
     const [patients] = state.getAllPatientAPI.patients
@@ -92,6 +91,7 @@ function Prescriptioning() {
     //save medicine form
     const saveMedicineForm = async (e) => {
         e.preventDefault()
+        setLoading(!loading)
         try {
             const res = await axios.post('http://localhost:3000/form', { ...prescriptionForm }, {
                 headers: { Authorization: doctorToken }
@@ -102,6 +102,7 @@ function Prescriptioning() {
         } catch (error) {
             toast(error.response.data.msg)
         }
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -157,7 +158,7 @@ function Prescriptioning() {
                                 </select>
                             </div>
                             <div className="dashboardinput-container" style={{ flexBasis: "10%" }}>
-                                <div className="field" style={{flexBasis: "100%"}}>
+                                <div className="field" style={{ flexBasis: "100%" }}>
                                     <label htmlFor="quantity">Quantity</label>
                                     <input type="number" name="quantity"
                                         value={prescriptionMedicine.quantity}
@@ -167,13 +168,13 @@ function Prescriptioning() {
                                 </div>
                             </div>
                             <div className="dashboardinput-container" style={{ flexBasis: "35%" }}>
-                            <div className="field" style={{flexBasis: "100%"}}>
-                                <label htmlFor="frequency">Dosage</label>
-                                <input type="text" name="frequency"
-                                    value={prescriptionMedicine.frequency}
-                                    onChange={handleChangeMedicine}
-                                    onKeyUp={handleKeyUp}
-                                />
+                                <div className="field" style={{ flexBasis: "100%" }}>
+                                    <label htmlFor="frequency">Dosage</label>
+                                    <input type="text" name="frequency"
+                                        value={prescriptionMedicine.frequency}
+                                        onChange={handleChangeMedicine}
+                                        onKeyUp={handleKeyUp}
+                                    />
                                 </div>
                             </div>
                             <div style={{ flexBasis: "10%" }}>
@@ -208,7 +209,7 @@ function Prescriptioning() {
                         <textarea name="note" id="note" onChange={handleChange}></textarea>
                     </div>
                 </div>
-                <button className="button green " onClick={saveMedicineForm}>Save</button>
+                <button id='savemedicineform' className="button green" onClick={saveMedicineForm}>Save</button>
             </div>
         </div>
     )

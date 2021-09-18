@@ -114,7 +114,7 @@ export default function Register() {
                             <br />
                             <input type="text" className="no3" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password.." value={confirmPass} onChange={(e) => setConfirmPass(e.target.value)} />
                             <br />
-                            <input type="submit" value="Register" className="button green" />
+                            <input type="submit" id='registerbutton' value="Register" className="button green" />
                         </form>
                     </div>
                 </div>

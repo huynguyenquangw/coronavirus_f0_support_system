@@ -1,8 +1,5 @@
-
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
-import { Container, Row, Header } from '../../css-template/DashboardMain'
-import { Container as Form, CheckboxField, TextAreaField, FieldBig } from "../../css-template/Input"
 import { GlobalState } from '../../GlobalState';
 import { toast } from 'react-toastify';
 
@@ -103,7 +100,7 @@ function HealthStatus(props) {
             toast(error.response.data.msg)
         }
     }
-    
+
     return (
         <div class="patient-addhealth">
             <div className="dashboardmain-container">

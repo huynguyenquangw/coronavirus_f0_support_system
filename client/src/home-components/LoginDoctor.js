@@ -1,11 +1,9 @@
 import Navbar from "./Navbar"
 import { useContext, useState } from 'react';
-// import { useHistory } from 'react-router'
 import { toast } from 'react-toastify';
 import axios from "axios";
 import 'react-toastify/dist/ReactToastify.css';
 import { GlobalState } from "../GlobalState";
-import { Container } from "../css-template/Input";
 
 toast.configure()
 export default function LoginDoctor() {
@@ -60,7 +58,7 @@ export default function LoginDoctor() {
                         <input className="editable" type="text" id="password" name="password" value={doctor.password} onChange={onChangeValue} placeholder="Password.." />
                         <br />
                         {/* <input type="submit" value="Log In" className="button blue" /> */}
-                        <button className="button blue" onClick={loginSubmit}>Login</button>
+                        <button id='doctorlogin' className="button blue" onClick={loginSubmit}>Login</button>
                     </div>
                 </div>
             </div>

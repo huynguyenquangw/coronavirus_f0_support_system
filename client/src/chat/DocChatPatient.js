@@ -24,8 +24,10 @@ export default function DocChatPatient(props) {
 
     useEffect(() => {
         getUser()
-    }, [])
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    console.log(roomId);
     return (
         <>
             {isDoctor &&

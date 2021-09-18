@@ -5,7 +5,8 @@
     margin-bottom: 1rem;
 }
 
-button, select {
+button,
+select {
     cursor: pointer;
 }
 
@@ -13,7 +14,9 @@ label {
     font-weight: bold;
 }
 
-.search input, .filterByDistrict, .inputPage {
+.search input,
+.filterByDistrict,
+.inputPage {
     padding: 4px 8px;
     outline: none;
     border-radius: 10px;
@@ -38,9 +41,8 @@ label {
 
 .patients-container {
     width: 100%;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
 }
-
 
 /* .btn-prev {
     border-top-left-radius: 10px;
@@ -62,7 +64,8 @@ label {
     /* border-radius: 0px; */
 }
 
-.paginate input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+.paginate input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
     appearance: none;
     margin: 0;
 }

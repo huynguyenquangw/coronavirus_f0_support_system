@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import Sidebar from './sidebar/Sidebar'
 import PatientSidebarItems from './sidebar/PatientSidebarItems'
@@ -10,7 +10,7 @@ function Layout(props) {
     const location = useLocation();
     let HeadingTitle = ""
     let HeadingIcon = ""
-    const [toggle,setToggle] =useState(false)
+    const [toggle, setToggle] = useState(false)
 
     if (location.pathname.startsWith("/patient")) {
         for (let i = 0; i < PatientSidebarItems.length; i++) {
@@ -50,7 +50,7 @@ function Layout(props) {
                             <img className="heading-icon" src={HeadingIcon} alt='headingicon' />
                             <h1>{HeadingTitle}</h1>
                         </div>
-                        <img className="menu" src={menuIcon} alt="menu" onClick={()=>{setToggle(false)}}/>
+                        <img className="menu" src={menuIcon} alt="menu" onClick={() => { setToggle(true) }} />
                     </div>
                     {props.children}
                 </div>

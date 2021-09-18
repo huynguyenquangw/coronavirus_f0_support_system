@@ -25,7 +25,7 @@ function Patients(props) {
         "fever", "cough", "breathing", "sorethroat", "phlegm", "runnynose", "tiredness",
         "blocknose", "losssmell", "musclepain", "vaccinated", "covid", "status"
     ]
-    const totalPages = Math.ceil(realLength / 10)
+    const totalPages = Math.ceil(realLength / 5)
 
     const pageIncrease = () => {
         if (page > 0 && page !== totalPages) {
@@ -99,7 +99,7 @@ function Patients(props) {
                                 <td>{health.vaccinated ? 'approved' : 'disapproved'}</td>
                                 <td>{health.status ? 'got medicine' : 'no medicine'}</td>
                                 <td style={{ cursor: "pointer", textAlign: "center" }} >
-                                    <img onClick={() => { setModalDisplayHealth(health._id) }} className="hover icon" src={viewHealth} />
+                                    <img alt='display' onClick={() => { setModalDisplayHealth(health._id) }} className="hover icon" src={viewHealth} />
                                 </td>
                                 <td>
                                     {trueOrFalse === 'false' && filter === "status" &&
@@ -108,7 +108,7 @@ function Patients(props) {
                                         </Link>
                                     }
                                     {trueOrFalse === 'true' &&
-                                        <img onClick={() => { setModalDisplay(health._id) }} className="hover icon" src={prescriptions} />
+                                        <img alt='display' onClick={() => { setModalDisplay(health._id) }} className="hover icon" src={prescriptions} />
                                     }
                                 </td>
                                 {trueOrFalse == "true" && <td><MedicinePopup key={health._id + "medicineDoctor"} modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} healthData={health} medicineData={health.medicineform_id} /></td>}

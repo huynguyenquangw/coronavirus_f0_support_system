@@ -1,7 +1,4 @@
 import React from 'react'
-// import styled from 'styled-components'
-// import { info } from '../../api/PatientAPI'
-import { Container, Field } from "../../css-template/Input"
 import { useState, useEffect } from 'react'
 
 function PersonalInfo({ info }) {

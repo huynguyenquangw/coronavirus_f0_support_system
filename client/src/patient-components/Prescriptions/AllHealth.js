@@ -11,7 +11,7 @@ import axios from 'axios'
 
 function AllHealth(props) {
     const state = useContext(GlobalState)
-    const [healthDeclares, setHealthDeclares] = state.getHealthDeclareForPatient.healths
+    const [healthDeclares] = state.getHealthDeclareForPatient.healths
     const [filter, setFilter] = state.getHealthDeclareForPatient.filter
     const [trueOrFalse, setTrueOrFalse] = state.getHealthDeclareForPatient.trueOrFalse
     const [page, setPage] = state.getHealthDeclareForPatient.page
@@ -103,47 +103,47 @@ function AllHealth(props) {
             </div>
             {/* <div className="display"> */}
             <div className="healthdeclare-container">
-            <table className="display">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Health Declaration ID</th>
-                        <th>Doctor name</th>
-                        <th>Vaccinated</th>
-                        <th>Covid</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                {healthDeclares.map(health => (
-                    <tbody key={health._id}>
-                        <tr >
-
-                            <td>{health.createdAt.substring(0, 10)}</td>
-                            <td style={{ color: "#00A473", cursor: "pointer" }} onClick={() => { setModalDisplayHealth(health._id) }}>{health._id}</td>
-                            <td>{health.doctor_id?.name}</td>
-                            <td> {health.vaccinated ? "true" : "false"}</td>
-                            <td> {health.covid ? "true" : "false"}</td>
-                            <td style={{ cursor: "pointer", textAlign: "center" }} >
-                                {trueOrFalse == "true" && <img onClick={() => { setModalDisplay(health._id) }} className="hover icon" src={prescriptions} />}
-
-                                <img onClick={() => { setModalDisplayHealth(health._id) }} className="hover icon" style={{ marginLeft: "1rem" }} src={viewHealth} />
-                            </td>
-                            <td><button className="button-none" value={health._id} onClick={deleteHealth}>
-                                <img  className="icon hover" src={deleteIcon} alt="delete icon" />
-                            </button>
-                            </td>
-                            {trueOrFalse == "true" && <td><MedicinePopup key={health._id + "medicine"} modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} healthData={health} medicineData={health.medicineform_id} /></td>}
-                            <td><HealthPopup key={health._id} modalDisplayHealth={modalDisplayHealth} setModalDisplayHealth={setModalDisplayHealth} healthData={health} /></td>
-                            
+                <table className="display">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Health Declaration ID</th>
+                            <th>Doctor name</th>
+                            <th>Vaccinated</th>
+                            <th>Covid</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
                         </tr>
-                    </tbody>
+                    </thead>
+                    {healthDeclares.map(health => (
+                        <tbody key={health._id}>
+                            <tr >
 
-                ))}
+                                <td>{health.createdAt.substring(0, 10)}</td>
+                                <td style={{ color: "#00A473", cursor: "pointer" }} onClick={() => { setModalDisplayHealth(health._id) }}>{health._id}</td>
+                                <td>{health.doctor_id?.name}</td>
+                                <td> {health.vaccinated ? "true" : "false"}</td>
+                                <td> {health.covid ? "true" : "false"}</td>
+                                <td style={{ cursor: "pointer", textAlign: "center" }} >
+                                    {trueOrFalse == "true" && <img alt='hover icon' onClick={() => { setModalDisplay(health._id) }} className="hover icon" src={prescriptions} />}
 
-            </table>
-                    </div>
+                                    <img alt='hover icon' onClick={() => { setModalDisplayHealth(health._id) }} className="hover icon" style={{ marginLeft: "1rem" }} src={viewHealth} />
+                                </td>
+                                <td><button className="button-none" value={health._id} onClick={deleteHealth}>
+                                    <img className="icon hover" src={deleteIcon} alt="delete icon" />
+                                </button>
+                                </td>
+                                {trueOrFalse == "true" && <td><MedicinePopup key={health._id + "medicine"} modalDisplay={modalDisplay} setModalDisplay={setModalDisplay} healthData={health} medicineData={health.medicineform_id} /></td>}
+                                <td><HealthPopup key={health._id} modalDisplayHealth={modalDisplayHealth} setModalDisplayHealth={setModalDisplayHealth} healthData={health} /></td>
+
+                            </tr>
+                        </tbody>
+
+                    ))}
+
+                </table>
+            </div>
 
             {/* </div> */}
         </div>

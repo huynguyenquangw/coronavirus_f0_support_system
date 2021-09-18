@@ -16,7 +16,8 @@ app.use(fileUpload({
     useTempFiles: true
 }))
 
-const http = require('http').createServer(app)
+const http = require('http').Server(app)
+app.use(express.static('client/build'))
 const io = require('socket.io')(http, {
     cors: {
         origin: '*'
@@ -67,11 +68,15 @@ mongoose.connect(URL, {
     console.log('Connected to MongoDB.');
 })
 
-app.get('/', (req, res) => {
-    res.json({ msg: "ON AIR!!!" })
-})
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'))
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+    })
+}
 
 const PORT = process.env.PORT || 3000
-http.listen(PORT, '127.0.0.1', () => {
+http.listen(PORT, () => {
     console.log('Server is running on', PORT);
 })

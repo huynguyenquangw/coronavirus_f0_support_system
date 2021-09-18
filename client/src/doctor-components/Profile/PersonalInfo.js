@@ -1,5 +1,4 @@
 import React from 'react'
-import { Field, TextAreaField } from "../../css-template/Input"
 import { useState, useEffect } from 'react'
 
 function PersonalInfo({ doctorInfo }) {

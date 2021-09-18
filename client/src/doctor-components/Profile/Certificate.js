@@ -5,17 +5,6 @@ import photoEdit from '../../assets/icons/profile-picture-edit.svg'
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-const Container = styled.div`
-    input{
-        visibility: hidden;
-    }
-`
-
-const PhotoContainer = styled.div`
-    position: relative;
-    max-width: 35rem;
-`
-
 const Photo = styled.img`
     box-sizing: border-box;
     width: 100%;

@@ -5,20 +5,6 @@ import photoEdit from '../../assets/icons/profile-picture-edit.svg'
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
-const PhotoContainer = styled.div`
-    position: relative;
-    box-sizing: border-box;
-    max-width: 15rem;
-    max-height: 15rem;
-    height: 40vw;
-    width: 40vw;
-    border-radius: 15%;
-
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: 101% auto;
-`
-
 const ActionContainer = styled.label`
 `
 
