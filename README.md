@@ -8,7 +8,7 @@ The Coronavirus F0 Support System starter demonstrates a working application tha
 
 Follow these instructions to run a development environment.
 
-  - Download and unzip the file *covid-f0-support-system.zip*, then open with your IDE:
+  - Download and unzip the file *covid-f0-support-system.zip*, then open with your IDE
    
   - or Clone git repo:
 
