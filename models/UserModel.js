@@ -20,6 +20,7 @@ const UserSchema = new mongoose.Schema({
         default: 0
     },
     district: {
+<<<<<<< HEAD
         type: String,
         required: true,
         trim: true
@@ -28,11 +29,22 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
+=======
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Districts",
+        required: true
+>>>>>>> loadoutnguyen
     },
     phone: {
         type: String,
         required: true,
         trim: true
+<<<<<<< HEAD
+=======
+    },
+    img: {
+        type: Object
+>>>>>>> loadoutnguyen
     }
 }, {
     timestamps: true

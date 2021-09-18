@@ -2,7 +2,7 @@ const Users = require("../models/UserModel")
 
 const authAdmin = async (req, res, next) => {
     try {
-        //Get user infor by id
+        //Get user info by id
         const user = await Users.findOne({
             _id: req.user.id
         })

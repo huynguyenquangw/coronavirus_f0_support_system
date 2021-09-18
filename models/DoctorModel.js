@@ -20,6 +20,7 @@ const DoctorSchema = mongoose.Schema({
         default: 2
     },
     district: {
+<<<<<<< HEAD
         type: String,
         trim: true,
         default: ''
@@ -28,6 +29,10 @@ const DoctorSchema = mongoose.Schema({
         type: String,
         trim: true,
         default: ''
+=======
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Districts",
+>>>>>>> loadoutnguyen
     },
     phone: {
         type: String,
@@ -35,13 +40,23 @@ const DoctorSchema = mongoose.Schema({
         default: ''
     },
     certificate: {
+<<<<<<< HEAD
         type: Object,
         trim: true,
         default: {}
+=======
+        type: Object
+>>>>>>> loadoutnguyen
     },
     experience: {
         type: String,
         default: ''
+<<<<<<< HEAD
+=======
+    },
+    img: {
+        type: Object
+>>>>>>> loadoutnguyen
     }
 }, {
     timestamps: true
