@@ -61,7 +61,11 @@ const HealthDeclarationCtrl = {
 
             const doctor = await Doctors.findById({ _id: doctor_id })
             if (!doctor) return res.status(400).json({ msg: "The doctor does not exist." })
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> frontend
             // Objectid of User is automatically filled in when the user logs in
             const newHealthDeclaration = new HealthDeclaration(
                 {
@@ -72,8 +76,50 @@ const HealthDeclarationCtrl = {
             //Save to MongoDB
             await newHealthDeclaration.save()
 
+<<<<<<< HEAD
             res.json({
                 msg: `Health Declaration has been added!`,
+=======
+            // res.json({
+            //     msg: `Health Declaration has been added!`,
+            // })
+            res.json(newHealthDeclaration)
+
+        } catch (error) {
+            return res.status(500).json({ msg: error.message })
+        }
+    },
+
+    // Get a Health Declaration for Patient
+    getHealthDeclarationForPatient: async (req, res) => {
+        try {
+            const features = new APIfeatures(HealthDeclaration.find({ user_id: req.user.id })
+                .populate({
+                    path: "doctor_id",
+                    select: "-password"
+                })
+                .populate({
+                    path: "medicineform_id",
+                    select: "-__v",
+                    populate: {
+                        path: "prescriptions",
+                        populate: {
+                            path: "medicine"
+                        }
+                    }
+                }),
+                req.query)
+                .filter().sort().paginate()
+
+            const healthdeclaration = await features.query
+
+            if (!healthdeclaration) return res.status(400).json({ msg: 'Health Declaration does not exist.' })
+
+            res.json({
+                status: 'Success',
+                results: healthdeclaration.length,
+                data: healthdeclaration
+>>>>>>> frontend
             })
 
         } catch (error) {
@@ -81,6 +127,7 @@ const HealthDeclarationCtrl = {
         }
     },
 
+<<<<<<< HEAD
     // Get a Health Declaration by ID
     getHealthDeclaration: async (req, res) => {
         try {
@@ -89,6 +136,37 @@ const HealthDeclarationCtrl = {
             if (!healthdeclaration) return res.status(400).json({ msg: 'Health Declaration does not exist.' })
 
             res.json(healthdeclaration)
+=======
+    // Get a Health Declaration for Doctor
+    getHealthDeclarationForDoctor: async (req, res) => {
+        try {
+            const features = new APIfeatures(HealthDeclaration.find({ doctor_id: req.doctor.id })
+                .populate({
+                    path: "user_id",
+                })
+                .populate({
+                    path: "medicineform_id",
+                    select: "-__v",
+                    populate: {
+                        path: "prescriptions",
+                        populate: {
+                            path: "medicine"
+                        }
+                    }
+                }),
+                req.query)
+                .filter().sort().paginate()
+
+            const healthdeclaration = await features.query
+
+            if (!healthdeclaration) return res.status(400).json({ msg: 'Health Declaration does not exist.' })
+
+            res.json({
+                status: 'Success',
+                results: healthdeclaration.length,
+                data: healthdeclaration
+            })
+>>>>>>> frontend
 
         } catch (error) {
             return res.status(500).json({ msg: error.message })
@@ -114,6 +192,25 @@ const HealthDeclarationCtrl = {
         }
     },
 
+<<<<<<< HEAD
+=======
+    //Update medicine ID for health declaration
+    updateMedicineForHealthDeclaration: async (req, res) => {
+        try {
+            const { medicineform_id, status } = req.body
+
+            await HealthDeclaration.findByIdAndUpdate({ _id: req.params.id }, {
+                medicineform_id, status
+            })
+
+            res.json({ msg: `Medicine ${medicineform_id} has been transferred to Health Declaration ${req.params.id}.` })
+
+        } catch (error) {
+            return res.status(500).json({ msg: error.message })
+        }
+    },
+
+>>>>>>> frontend
     //Get All Health Declaration
     getAllHealthDeclaration: async (req, res) => {
         try {
@@ -133,7 +230,11 @@ const HealthDeclarationCtrl = {
             return res.status(500).json({ msg: error.message })
         }
     },
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> frontend
     //Delete by ID
     deleteHealthDeclarationByID: async (req, res) => {
         try {

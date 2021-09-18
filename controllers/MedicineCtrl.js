@@ -14,6 +14,7 @@ const MedicineCtrl = {
           .status(400)
           .json({ msg: "The medicine name is already existed!" });
 
+<<<<<<< HEAD
       const medicine = await Medicines.create({
         name,
         type,
@@ -26,6 +27,20 @@ const MedicineCtrl = {
       });
     } catch (error) {
       console.log(error);
+=======
+      const medicine = new Medicines({
+        name, type, link
+      })
+
+      await medicine.save()
+
+      res.json({
+        msg: `Medicine ${name} has successfully created!`,
+        medicine,
+      });
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+>>>>>>> frontend
     }
   },
 
@@ -38,8 +53,13 @@ const MedicineCtrl = {
       if (!medicines) return res.status(400).json({ msg: "NOT found!" });
 
       res.json(medicines);
+<<<<<<< HEAD
     } catch (e) {
       console.log(e);
+=======
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
+>>>>>>> frontend
     }
   },
 
