@@ -22,9 +22,9 @@ There are steps to run a development environment.
  
 ## Who made this ✍
 
-  - [s3682365] - Mai Viet Cuong 
-  - [s3697272] - Nguyen Quang Huy  
-  - [s3680599] - Tran Quang Huy  
-  - [s3795360] - Truong Quynh Anh 
-  - [s3618640] - Duong Minh Duc Anh  
-  - [s3845844] - Tran Cong Nguyen Vo
+  - s3682365 - Mai Viet Cuong 
+  - s3697272 - Nguyen Quang Huy  
+  - s3680599 - Tran Quang Huy  
+  - s3795360 - Truong Quynh Anh 
+  - s3618640 - Duong Minh Duc Anh  
+  - s3845844 - Tran Cong Nguyen Vo
